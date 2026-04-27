@@ -7,29 +7,48 @@ interface WhatsAppCTAProps {
   variant?: 'primary' | 'outline' | 'sticky';
 }
 
-export function WhatsAppCTA({ model = '[model]', service = '[service]', className = '', variant = 'primary' }: WhatsAppCTAProps) {
+export function WhatsAppCTA({ model = '[model]', service = 'detailing services', className = '', variant = 'primary' }: WhatsAppCTAProps) {
   const message = `Hi, I'd like a quote for detailing. My car is ${model}, and I'm interested in ${service}.`;
-  const whatsappUrl = `https://wa.me/something?text=${encodeURIComponent(message)}`;
+  const url = `https://wa.me/something?text=${encodeURIComponent(message)}`;
 
-  let baseStyles = "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background";
-  
-  if (variant === 'primary') {
-    baseStyles += " bg-success text-white hover:bg-green-700 h-10 py-2 px-4";
-  } else if (variant === 'outline') {
-    baseStyles += " border border-success text-success hover:bg-success hover:text-white h-10 py-2 px-4";
-  } else if (variant === 'sticky') {
-    baseStyles += " fixed bottom-4 right-4 z-50 bg-success text-white hover:bg-green-700 h-14 w-14 rounded-full shadow-lg shadow-success/20";
+  if (variant === 'sticky') {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`fixed bottom-5 right-5 z-50 h-13 w-13 rounded-full bg-green-600 hover:bg-green-500 text-white shadow-xl shadow-green-900/30 flex items-center justify-center transition-all hover:scale-105 ${className}`}
+        style={{ height: 52, width: 52 }}
+        aria-label="Chat on WhatsApp"
+      >
+        <Phone className="h-5 w-5" />
+      </a>
+    );
+  }
+
+  if (variant === 'outline') {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`inline-flex items-center gap-2 rounded-lg border border-green-600/40 text-green-400 hover:text-white hover:bg-green-600/20 hover:border-green-500/60 text-sm font-medium px-4 py-2 transition-all ${className}`}
+      >
+        <Phone className="h-3.5 w-3.5" />
+        WhatsApp
+      </a>
+    );
   }
 
   return (
-    <a 
-      href={whatsappUrl}
+    <a
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${baseStyles} ${className}`}
+      className={`inline-flex items-center gap-2 rounded-lg bg-green-600 hover:bg-green-500 text-white text-sm font-medium px-4 py-2 transition-all ${className}`}
     >
-      <Phone className={variant === 'sticky' ? 'h-6 w-6' : 'mr-2 h-4 w-4'} />
-      {variant !== 'sticky' && "WhatsApp"}
+      <Phone className="h-3.5 w-3.5" />
+      WhatsApp
     </a>
   );
 }

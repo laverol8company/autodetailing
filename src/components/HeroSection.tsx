@@ -1,5 +1,4 @@
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { WhatsAppCTA } from './WhatsAppCTA';
+import { ArrowRight } from 'lucide-react';
 
 interface HeroProps {
   onQuoteClick: () => void;
@@ -8,55 +7,68 @@ interface HeroProps {
 
 export function HeroSection({ onQuoteClick, onServiceClick }: HeroProps) {
   return (
-    <section className="relative w-full h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-card">
-      {/* Background sweep / Cinematic effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-card z-0"></div>
+    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-[#070A0F]">
+      {/* Subtle grid texture */}
+      <div className="absolute inset-0 subtle-grid-bg opacity-100 pointer-events-none" />
       
-      {/* Light sweep animation wrapper - simple CSS radial gradient moving */}
-      <div className="absolute inset-0 z-0 opacity-30 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/40 via-background to-background animate-pulse"></div>
-      
-      <div className="container relative z-10 px-4 text-center max-w-4xl mx-auto flex flex-col items-center">
-        <div className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-8 backdrop-blur-sm">
-          <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
-          Premium Booking & Lead System
+      {/* Light sweep */}
+      <div className="showroom-light-sweep" />
+
+      {/* Blue glow */}
+      <div className="blue-glow" />
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#070A0F] to-transparent pointer-events-none" />
+
+      <div className="relative z-10 premium-container text-center flex flex-col items-center pt-16 pb-20">
+
+        {/* Eyebrow */}
+        <div className="section-eyebrow mb-6">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#2563EB] animate-pulse" />
+          Premium Auto Care System
         </div>
-        
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6 drop-shadow-lg">
-          Master Your Vehicle's <br/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Perfect Finish</span>
+
+        {/* Headline */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-white max-w-4xl">
+          Your Vehicle Deserves<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#D8DEE9]">A Perfect Finish</span>
         </h1>
-        
-        <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto drop-shadow">
-          We restore gloss, protect paint, and deliver high-end automotive care. Experience the ultimate in vehicle refinement.
+
+        {/* Subheadline */}
+        <p className="mt-6 text-base md:text-lg text-[#6B7280] max-w-xl mx-auto leading-relaxed">
+          Premium detailing, paint correction & ceramic protection. Tell us about your car and get a structured quote in minutes.
         </p>
-        
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
-          <button 
-            onClick={onQuoteClick}
-            className="w-full sm:w-auto inline-flex items-center justify-center rounded-md bg-primary text-white h-12 px-8 font-medium hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20"
-          >
-            Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
+
+        {/* CTA block */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center gap-3 w-full justify-center">
+          <button onClick={onQuoteClick} className="premium-button-primary w-full sm:w-auto gap-2 px-8 py-3.5 text-sm">
+            Get a Quote <ArrowRight className="h-4 w-4" />
           </button>
-          
-          <button 
-            onClick={onServiceClick}
-            className="w-full sm:w-auto inline-flex items-center justify-center rounded-md border border-slate-700 bg-slate-800/50 backdrop-blur-sm text-white h-12 px-8 font-medium hover:bg-slate-700/50 hover:text-white transition-colors"
-          >
+          <button onClick={onServiceClick} className="premium-button-secondary w-full sm:w-auto px-8 py-3.5 text-sm">
             Choose a Service
           </button>
         </div>
 
-        <div className="mt-8 flex items-center justify-center gap-4 text-sm text-slate-400">
-          <span className="flex items-center"><CheckCircle2 className="mr-1 h-4 w-4 text-primary" /> Certified Experts</span>
-          <span className="flex items-center"><CheckCircle2 className="mr-1 h-4 w-4 text-primary" /> Premium Products</span>
-          <span className="flex items-center cursor-pointer hover:text-white transition-colors">
-             <WhatsAppCTA variant="outline" className="h-8 py-1 rounded-full text-xs" />
-          </span>
+        {/* WhatsApp tertiary */}
+        <p className="mt-6 text-xs text-[#6B7280]">
+          Or{' '}
+          <a
+            href={`https://wa.me/something?text=${encodeURIComponent("Hi, I'd like a quote for detailing.")}`}
+            target="_blank" rel="noopener noreferrer"
+            className="text-[#D8DEE9] hover:text-white underline underline-offset-2 transition-colors"
+          >
+            message us on WhatsApp
+          </a>
+        </p>
+
+        {/* Trust strip */}
+        <div className="mt-14 flex flex-wrap justify-center items-center gap-6 text-xs text-[#6B7280] border-t border-white/5 pt-8 w-full">
+          <span>✦ Certified Products</span>
+          <span>✦ Premium Facilities</span>
+          <span>✦ Expert Technicians</span>
+          <span>✦ Transparent Pricing</span>
         </div>
       </div>
-      
-      {/* Decorative glass bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-background to-transparent z-0 pointer-events-none"></div>
     </section>
   );
 }

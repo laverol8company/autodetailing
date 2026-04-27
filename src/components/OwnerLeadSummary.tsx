@@ -1,10 +1,10 @@
 import { generateSuggestedReply, followUpTemplates } from '../lib/suggestedReply';
-import { Copy, Phone, User, Car, Clock } from 'lucide-react';
+import { Copy, Phone, User, Car, Clock, Zap } from 'lucide-react';
 
 export function OwnerLeadSummary() {
   const sampleLead = {
-    source: "Smart Quiz",
-    name: "Alex",
+    source: "Smart Quote Advisor",
+    name: "Alex M.",
     phone: "+1 555-019-2342",
     car: "Porsche 911 GT3",
     service: "Ceramic Coating",
@@ -22,76 +22,81 @@ export function OwnerLeadSummary() {
   });
 
   return (
-    <div className="bg-[#0b101a] border border-border rounded-xl p-6 md:p-8 max-w-3xl mx-auto font-sans relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[50px] pointer-events-none"></div>
-      
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-border mb-6">
-        <div>
-          <span className="inline-flex items-center rounded-full bg-red-500/10 px-2.5 py-0.5 text-xs font-semibold text-red-500 mb-2">
-            🔥 {sampleLead.leadScore} Lead
-          </span>
-          <h2 className="text-2xl font-bold text-white">New Lead: {sampleLead.service}</h2>
-          <p className="text-sm text-muted flex items-center mt-1">Source: {sampleLead.source}</p>
+    <div className="max-w-3xl mx-auto space-y-4">
+      {/* Lead Alert Card (Telegram style) */}
+      <div className="glass-panel border border-red-500/20 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+              <Zap className="h-4 w-4 text-red-400" />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-red-400">Hot Lead</p>
+              <h3 className="text-base font-bold text-white">New: {sampleLead.service}</h3>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-lg font-extrabold text-green-400">{sampleLead.estimate}</p>
+            <p className="text-[10px] text-[#6B7280]">Estimated value</p>
+          </div>
         </div>
-        <div className="text-right mt-4 md:mt-0">
-          <p className="text-lg font-bold text-success">{sampleLead.estimate}</p>
-          <p className="text-xs text-slate-500">Estimated Value</p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="flex items-start gap-2.5">
+            <User className="h-4 w-4 text-[#6B7280] mt-0.5 shrink-0" />
+            <div>
+              <p className="text-[10px] uppercase text-[#6B7280] font-semibold mb-0.5">Client</p>
+              <p className="text-sm text-white font-medium">{sampleLead.name}</p>
+              <p className="text-xs text-[#6B7280]">{sampleLead.phone}</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-2.5">
+            <Car className="h-4 w-4 text-[#6B7280] mt-0.5 shrink-0" />
+            <div>
+              <p className="text-[10px] uppercase text-[#6B7280] font-semibold mb-0.5">Vehicle</p>
+              <p className="text-sm text-white font-medium">{sampleLead.car}</p>
+              <p className="text-xs text-[#6B7280]">{sampleLead.package}</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-2.5">
+            <Clock className="h-4 w-4 text-[#6B7280] mt-0.5 shrink-0" />
+            <div>
+              <p className="text-[10px] uppercase text-[#6B7280] font-semibold mb-0.5">Urgency</p>
+              <p className="text-sm text-white font-medium">{sampleLead.urgency}</p>
+              <p className="text-xs text-[#6B7280]">Source: {sampleLead.source}</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-        <div className="space-y-4">
-          <div className="flex items-start text-slate-300">
-            <User className="h-5 w-5 mr-3 text-slate-500 shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-semibold text-white">{sampleLead.name}</p>
-              <p className="text-sm">{sampleLead.phone}</p>
-            </div>
-          </div>
-          <div className="flex items-start text-slate-300">
-            <Car className="h-5 w-5 mr-3 text-slate-500 shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-semibold text-white">{sampleLead.car}</p>
-              <p className="text-sm">{sampleLead.package}</p>
-            </div>
-          </div>
-          <div className="flex items-start text-slate-300">
-            <Clock className="h-5 w-5 mr-3 text-slate-500 shrink-0 mt-0.5" />
-            <div>
-              <p className="text-sm font-semibold text-white">Urgency</p>
-              <p className="text-sm">{sampleLead.urgency}</p>
-            </div>
-          </div>
-        </div>
-        
-        <div className="bg-slate-900 border border-slate-800 rounded-lg p-5">
-          <h4 className="text-sm font-semibold text-white mb-2 flex items-center justify-between">
-            Suggested Reply
-            <button className="text-primary hover:text-primary-hover flex items-center text-xs">
-              <Copy className="h-3 w-3 mr-1" /> Copy
-            </button>
-          </h4>
-          <p className="text-sm text-slate-400 italic bg-slate-950 p-3 rounded-md mb-4 border border-slate-800/50">
-            "{reply}"
-          </p>
-          <button className="w-full bg-success hover:bg-green-700 text-white font-medium py-2 rounded transition-colors text-sm flex items-center justify-center">
-            <Phone className="h-4 w-4 mr-2" /> Message on WhatsApp
+      {/* Suggested Reply */}
+      <div className="glass-panel">
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-semibold text-white">Suggested Reply</p>
+          <button className="flex items-center gap-1 text-[10px] text-[#2563EB] hover:text-white transition-colors">
+            <Copy className="h-3 w-3" /> Copy
           </button>
         </div>
+        <p className="text-xs text-[#6B7280] leading-relaxed bg-[#0c111a] border border-white/5 px-4 py-3 rounded-xl mb-4 italic">
+          "{reply}"
+        </p>
+        <button className="w-full flex items-center justify-center gap-2 rounded-lg bg-green-600/90 hover:bg-green-600 text-white text-xs font-semibold py-2.5 transition-colors">
+          <Phone className="h-3.5 w-3.5" /> Send via WhatsApp
+        </button>
       </div>
 
-      <div className="border-t border-border pt-6 mt-6">
-        <h4 className="text-sm font-semibold text-white mb-4">Follow-Up Templates</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {followUpTemplates.map((template, idx) => (
-            <div key={idx} className="bg-slate-900 border border-slate-800 rounded-md p-3 group">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs font-semibold text-slate-300">{template.title}</span>
-                <button className="text-slate-500 hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Copy className="h-4 w-4" />
-                </button>
+      {/* Follow-up templates */}
+      <div className="glass-panel">
+        <p className="text-xs font-semibold text-white mb-4">Follow-Up Templates</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {followUpTemplates.map((t, i) => (
+            <div key={i} className="bg-[#0c111a] border border-white/5 rounded-xl p-3 group">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-[10px] font-semibold text-[#D8DEE9]">{t.title}</p>
+                <Copy className="h-3 w-3 text-[#6B7280] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" />
               </div>
-              <p className="text-xs text-slate-500 line-clamp-2">{template.text}</p>
+              <p className="text-[10px] text-[#6B7280] leading-relaxed line-clamp-2">{t.text}</p>
             </div>
           ))}
         </div>

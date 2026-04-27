@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { WhatsAppCTA } from './WhatsAppCTA';
 
 export function QuoteForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
@@ -7,103 +6,77 @@ export function QuoteForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const phone = formData.get('phone') as string;
-    
-    // Strict Validation
-    if (!name || name.trim().length < 2) {
-      setErrorMsg('Please enter a valid name.');
-      return;
-    }
-    if (!phone || phone.trim().length < 6) {
-      setErrorMsg('Please enter a valid phone number.');
-      return;
-    }
+    const fd = new FormData(e.currentTarget);
+    const name = fd.get('name') as string;
+    const phone = fd.get('phone') as string;
 
+    if (!name || name.trim().length < 2) { setErrorMsg('Please enter a valid name.'); return; }
+    if (!phone || phone.trim().length < 6) { setErrorMsg('Please enter a valid phone number.'); return; }
     setErrorMsg('');
     setStatus('submitting');
-    
-    // Mock integration - no real credentials should be used as per rules.
-    setTimeout(() => {
-      setStatus('success');
-    }, 1500);
+    setTimeout(() => setStatus('success'), 1400);
   };
 
-  if (status === 'success') {
-    return (
-      <div className="bg-card border border-success/30 rounded-xl p-8 max-w-lg mx-auto text-center">
-        <h3 className="text-2xl font-bold text-white mb-2">Request Received</h3>
-        <p className="text-slate-400 mb-6">Thank you. Our team will review your details and contact you shortly with a personalized quote.</p>
-        <button 
-          onClick={() => setStatus('idle')}
-          className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2 rounded-md font-medium"
-        >
-          Submit Another
-        </button>
-      </div>
-    );
-  }
+  if (status === 'success') return (
+    <div className="glass-panel text-center py-10">
+      <p className="text-2xl mb-2">✓</p>
+      <h3 className="text-lg font-bold text-white mb-2">Request Received</h3>
+      <p className="text-sm text-[#6B7280] mb-6">Our team will review your details and send a personalised quote shortly.</p>
+      <button onClick={() => setStatus('idle')} className="text-xs text-[#2563EB] hover:text-white transition-colors">Submit another</button>
+    </div>
+  );
 
   return (
-    <div className="bg-card border border-border rounded-xl p-8 max-w-lg mx-auto">
-      <h3 className="text-2xl font-bold text-white mb-6">Get a Custom Quote</h3>
-      
+    <div className="glass-panel">
+      <h3 className="text-lg font-bold text-white mb-1">Get a Custom Quote</h3>
+      <p className="text-xs text-[#6B7280] mb-6">We'll review your vehicle details and reply with an accurate estimate.</p>
+
       {errorMsg && (
-        <div className="bg-red-500/10 border border-red-500/50 text-red-500 text-sm p-3 rounded-md mb-6">
-          {errorMsg}
-        </div>
+        <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-xs p-3 rounded-lg mb-4">{errorMsg}</div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Name <span className="text-red-500">*</span></label>
-          <input name="name" type="text" className="w-full bg-slate-900 border border-border rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="John Doe" />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Phone Number <span className="text-red-500">*</span></label>
-          <input name="phone" type="tel" className="w-full bg-slate-900 border border-border rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="+1 (555) 000-0000" />
-        </div>
-        
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Car Brand</label>
-            <input name="brand" type="text" className="w-full bg-slate-900 border border-border rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Porsche" />
+            <label className="block text-[10px] uppercase tracking-widest font-semibold text-[#6B7280] mb-1.5">Name <span className="text-red-500">*</span></label>
+            <input name="name" type="text" placeholder="Alex" className="w-full bg-[#0c111a] border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB]/50 placeholder-[#6B7280]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Model</label>
-            <input name="model" type="text" className="w-full bg-slate-900 border border-border rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="911 GT3" />
+            <label className="block text-[10px] uppercase tracking-widest font-semibold text-[#6B7280] mb-1.5">Phone <span className="text-red-500">*</span></label>
+            <input name="phone" type="tel" placeholder="+1 555..." className="w-full bg-[#0c111a] border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB]/50 placeholder-[#6B7280]" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest font-semibold text-[#6B7280] mb-1.5">Car Brand</label>
+            <input name="brand" type="text" placeholder="Porsche" className="w-full bg-[#0c111a] border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder-[#6B7280]" />
+          </div>
+          <div>
+            <label className="block text-[10px] uppercase tracking-widest font-semibold text-[#6B7280] mb-1.5">Model</label>
+            <input name="model" type="text" placeholder="911 GT3" className="w-full bg-[#0c111a] border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder-[#6B7280]" />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Service Needed</label>
-          <select name="service" className="w-full bg-slate-900 border border-border rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+          <label className="block text-[10px] uppercase tracking-widest font-semibold text-[#6B7280] mb-1.5">Service</label>
+          <select name="service" className="w-full bg-[#0c111a] border border-white/10 rounded-lg px-3 py-2.5 text-[#D8DEE9] text-sm focus:outline-none focus:ring-1 focus:ring-[#2563EB]">
             <option>Ceramic Coating</option>
             <option>Paint Correction</option>
             <option>PPF / Protection</option>
             <option>Interior Detailing</option>
+            <option>Exterior Detailing</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Additional Notes</label>
-          <textarea name="message" rows={3} className="w-full bg-slate-900 border border-border rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Any specific issues or questions?"></textarea>
+          <label className="block text-[10px] uppercase tracking-widest font-semibold text-[#6B7280] mb-1.5">Notes</label>
+          <textarea name="message" rows={2} placeholder="Any specific issues or questions?" className="w-full bg-[#0c111a] border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-[#2563EB] placeholder-[#6B7280] resize-none" />
         </div>
-        
-        <button 
-          disabled={status === 'submitting'}
-          type="submit" 
-          className="w-full bg-primary hover:bg-primary-hover text-white font-medium py-3 rounded-md transition-colors mt-2"
-        >
-          {status === 'submitting' ? 'Submitting...' : 'Request Quote'}
-        </button>
 
-        <div className="mt-4 flex items-center justify-center gap-2">
-          <span className="text-sm text-slate-400">Or reach out directly:</span>
-          <WhatsAppCTA variant="outline" className="h-8 py-1 rounded text-xs" />
-        </div>
+        <button disabled={status === 'submitting'} type="submit" className="premium-button-primary w-full justify-center py-3 text-sm">
+          {status === 'submitting' ? 'Sending…' : 'Request Quote'}
+        </button>
       </form>
     </div>
   );

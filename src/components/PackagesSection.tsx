@@ -6,14 +6,14 @@ const packages = [
     id: "essential",
     level: "Essential",
     price: "From €150",
-    duration: "3-4 Hours",
-    bestFor: "Basic care and deep cleaning",
+    duration: "3–4 Hours",
+    bestFor: "Regular upkeep and refresh",
     features: [
       "Premium hand wash & dry",
-      "Wheels & tires deep clean",
-      "Interior vacuum & wipe down",
+      "Wheels & tyres deep clean",
+      "Interior vacuum & wipe",
       "Glass cleaning",
-      "Spray wax application"
+      "Spray sealant application"
     ],
     highlighted: false
   },
@@ -21,15 +21,15 @@ const packages = [
     id: "premium",
     level: "Premium",
     price: "From €450",
-    duration: "1 Day",
-    bestFor: "Deeper transformation & protection",
+    duration: "1 Full Day",
+    bestFor: "Deep restoration and protection",
     badge: "Most Popular",
     features: [
       "Everything in Essential",
       "1-Step Paint Correction",
-      "Engine bay detail",
-      "Leather/Alcantara treatment",
-      "6-Month sealant protection"
+      "Engine bay cleaning",
+      "Leather & alcantara care",
+      "6-Month protective sealant"
     ],
     highlighted: true
   },
@@ -37,8 +37,8 @@ const packages = [
     id: "signature",
     level: "Signature",
     price: "From €900",
-    duration: "2-3 Days",
-    bestFor: "High-end full reset & ceramic",
+    duration: "2–3 Days",
+    bestFor: "Full reset with ceramic coating",
     features: [
       "Everything in Premium",
       "Multi-stage Paint Correction",
@@ -52,57 +52,61 @@ const packages = [
 
 export function PackagesSection() {
   return (
-    <section id="packages" className="py-20 bg-slate-900 border-y border-border/20">
-      <div className="container px-4 mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Protection Packages</h2>
-          <p className="text-muted max-w-2xl mx-auto">Comprehensive solutions designed to elevate and preserve your vehicle's condition.</p>
+    <section id="packages" className="premium-section-graphite">
+      <div className="premium-container">
+        <div className="text-center max-w-xl mx-auto mb-14">
+          <span className="section-eyebrow justify-center">Protection Packages</span>
+          <h2 className="section-title">One Package, Total Peace of Mind</h2>
+          <p className="section-subtitle mx-auto">Bundled solutions designed to restore, protect, and preserve your vehicle's condition long-term.</p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           {packages.map(pkg => (
-            <div 
-              key={pkg.id} 
-              className={`rounded-2xl border p-8 flex flex-col relative ${
-                pkg.highlighted 
-                ? 'border-primary bg-card/80 shadow-2xl shadow-primary/10 scale-100 md:scale-105 z-10' 
-                : 'border-border bg-card'
+            <div
+              key={pkg.id}
+              className={`relative rounded-2xl border flex flex-col p-8 transition-all duration-300 ${
+                pkg.highlighted
+                  ? 'border-[#2563EB]/50 bg-[#0f1929] shadow-2xl shadow-[#2563EB]/10'
+                  : 'border-white/5 bg-[#0c111a]'
               }`}
             >
               {pkg.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2563EB] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                   {pkg.badge}
                 </div>
               )}
-              
-              <h3 className="text-2xl font-bold text-white mb-2">{pkg.level}</h3>
-              <p className="text-sm text-slate-400 mb-6">{pkg.bestFor}</p>
-              
+
+              <div className="mb-1 text-[10px] font-bold uppercase tracking-widest text-[#6B7280]">{pkg.bestFor}</div>
+              <h3 className="text-xl font-bold text-white mb-3">{pkg.level}</h3>
+
               <div className="mb-6">
-                <span className="text-4xl font-extrabold text-white">{pkg.price.replace('From ', '')}</span>
-                <span className="text-slate-400 text-sm ml-2">start</span>
+                <span className="text-3xl font-extrabold text-white">{pkg.price.replace('From ', '')}</span>
+                <span className="text-[#6B7280] text-xs ml-1.5">start</span>
               </div>
-              
-              <p className="text-sm border-b border-border/50 pb-4 mb-4 text-muted">Est. Duration: {pkg.duration}</p>
-              
+
+              <p className="text-xs text-[#6B7280] border-b border-white/5 pb-4 mb-5">Estimated: {pkg.duration}</p>
+
               <ul className="space-y-3 mb-8 flex-grow">
-                {pkg.features.map((feature, i) => (
-                  <li key={i} className="flex items-start text-sm text-slate-300">
-                    <CheckCircle2 className={`h-5 w-5 mr-3 shrink-0 ${pkg.highlighted ? 'text-primary' : 'text-slate-500'}`} />
-                    {feature}
+                {pkg.features.map((f, i) => (
+                  <li key={i} className="flex items-start gap-2.5 text-sm text-[#D8DEE9]">
+                    <CheckCircle2 className={`h-4 w-4 shrink-0 mt-0.5 ${pkg.highlighted ? 'text-[#2563EB]' : 'text-[#6B7280]'}`} />
+                    {f}
                   </li>
                 ))}
               </ul>
-              
-              <div className="flex flex-col gap-3 mt-auto">
-                <button className={`w-full py-3 rounded-lg font-medium transition-colors ${
-                  pkg.highlighted 
-                  ? 'bg-primary text-white hover:bg-primary-hover shadow-lg shadow-primary/25' 
-                  : 'bg-slate-800 text-white hover:bg-slate-700'
-                }`}>
+
+              <div className="flex flex-col gap-2.5 mt-auto">
+                <a
+                  href="#quote"
+                  className={`w-full text-center py-3 rounded-lg text-sm font-semibold transition-colors ${
+                    pkg.highlighted
+                      ? 'bg-[#2563EB] text-white hover:bg-[#1D4ED8] shadow-lg shadow-[#2563EB]/20'
+                      : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
+                  }`}
+                >
                   Select {pkg.level}
-                </button>
-                <WhatsAppCTA variant="outline" className="w-full text-xs" service={`${pkg.level} Package`} />
+                </a>
+                <WhatsAppCTA variant="outline" className="w-full justify-center py-2 text-xs" service={`${pkg.level} Package`} />
               </div>
             </div>
           ))}

@@ -5,65 +5,82 @@ const services = [
   {
     id: "exterior",
     title: "Exterior Detailing",
-    description: "Deep clean and restoration of exterior surfaces, removing contaminants.",
-    duration: "2-3 hours",
+    description: "Deep clean and decontamination restoring your paint's clarity and shine.",
+    duration: "2–3 hrs",
     price: "From €100",
     bestFor: "Regular Maintenance"
   },
   {
     id: "paint-correction",
     title: "Paint Correction",
-    description: "Restore gloss and remove swirl marks for a deeper, cleaner finish.",
-    duration: "6-8 hours",
+    description: "Remove swirl marks, oxidation, and hazing for a deep gloss finish.",
+    duration: "6–8 hrs",
     price: "From €300",
-    bestFor: "Swirl Marks & Haze"
+    bestFor: "Swirl & Scratch Removal"
   },
   {
     id: "ceramic",
     title: "Ceramic Coating",
-    description: "Long-lasting hydrophobic protection against elements and minor scratches.",
-    duration: "8-12 hours",
+    description: "Long-lasting hydrophobic protection. Self-cleaning, UV resistant, lasting 2–5 years.",
+    duration: "8–12 hrs",
     price: "From €500",
-    bestFor: "Long-term Protection"
+    bestFor: "Long-Term Protection"
   },
   {
     id: "ppf",
-    title: "Paint Protection Film",
-    description: "Invisible shield against rock chips, scratches, and road debris.",
-    duration: "10-24 hours",
+    title: "PPF / Paint Protection",
+    description: "Invisible armor against stone chips, road debris, and fine scratches.",
+    duration: "10–24 hrs",
     price: "From €800",
-    bestFor: "New Vehicles"
-  }
+    bestFor: "New or High-Value Cars"
+  },
+  {
+    id: "interior",
+    title: "Interior Detailing",
+    description: "Deep vacuum, leather conditioning, and full cabin refresh.",
+    duration: "3–5 hrs",
+    price: "From €150",
+    bestFor: "Comfort Restoration"
+  },
+  {
+    id: "tinting",
+    title: "Window Tinting",
+    description: "Block UV, reduce heat, and enhance privacy with premium films.",
+    duration: "3–4 hrs",
+    price: "From €200",
+    bestFor: "Comfort & Privacy"
+  },
 ];
 
 export function ServicesSection() {
   return (
-    <section id="services" className="py-20 bg-background">
-      <div className="container px-4 mx-auto max-w-6xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Our Premium Services</h2>
-          <p className="text-muted max-w-2xl mx-auto">Select the perfect treatment to restore and protect your vehicle.</p>
+    <section id="services" className="premium-section-dark">
+      <div className="premium-container">
+        <div className="max-w-xl mb-12">
+          <span className="section-eyebrow">What we do</span>
+          <h2 className="section-title">Premium Services</h2>
+          <p className="section-subtitle">Each service is focused on a specific outcome for your vehicle. Choose one or combine them into a package.</p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map(service => (
-            <div key={service.id} className="rounded-xl border border-border bg-card p-6 flex flex-col hover:border-primary/50 transition-colors group">
-              <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-primary">
+            <div key={service.id} className="premium-card-dark group flex flex-col">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#2563EB] mb-3">
                 {service.bestFor}
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">{service.title}</h3>
-              <p className="text-sm text-slate-400 mb-6 flex-grow">{service.description}</p>
-              
-              <div className="flex items-center justify-between text-sm mb-6 border-t border-border pt-4">
-                <span className="text-white font-medium">{service.price}</span>
-                <span className="text-muted">{service.duration}</span>
+              <h3 className="text-base font-bold text-white mb-2">{service.title}</h3>
+              <p className="text-sm text-[#6B7280] mb-6 flex-grow leading-relaxed">{service.description}</p>
+
+              <div className="flex items-center justify-between border-t border-white/5 pt-4 mb-4">
+                <span className="text-white font-semibold text-sm">{service.price}</span>
+                <span className="text-[#6B7280] text-xs">{service.duration}</span>
               </div>
-              
+
               <div className="flex flex-col gap-2 mt-auto">
-                <button className="w-full flex items-center justify-center text-sm font-medium bg-slate-800 hover:bg-slate-700 text-white rounded-md py-2 transition-colors">
-                  Get Quote <ChevronRight className="ml-1 h-4 w-4 text-slate-400 group-hover:text-white" />
-                </button>
-                <WhatsAppCTA variant="outline" className="w-full h-9 py-1 text-xs" service={service.title} />
+                <a href="#quote" className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#2563EB]/30 text-white text-xs font-medium py-2 transition-all">
+                  Get Quote <ChevronRight className="h-3.5 w-3.5 text-[#6B7280] group-hover:text-white" />
+                </a>
+                <WhatsAppCTA variant="outline" className="w-full py-2 text-xs justify-center" service={service.title} />
               </div>
             </div>
           ))}
