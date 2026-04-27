@@ -53,8 +53,20 @@ export default function Services() {
     <div className="bg-[#050505]">
 
       {/* Header */}
-      <section className="pt-40 pb-20 border-b border-[rgba(255,255,255,0.06)]">
-        <div className="site-container">
+      <section className="relative pt-40 pb-20 border-b border-[rgba(255,255,255,0.06)] overflow-hidden">
+        {/* Visual Background */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=1920" 
+            alt="Premium Detailing" 
+            className="w-full h-full object-cover opacity-20 mix-blend-luminosity"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
+          <div className="grain-overlay" />
+        </div>
+        
+        <div className="site-container relative z-10">
           <span className="eyebrow">Our Disciplines</span>
           <h1 className="display-xl max-w-4xl">
             Mastery in<br />
@@ -80,6 +92,7 @@ export default function Services() {
               <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-px bg-[rgba(255,255,255,0.06)]">
                 {cat.services.map(svc => (
                   <div key={svc.name} className="service-card bg-[#050505] group flex flex-col">
+                    <div className="luxury-image-panel w-full h-32 mb-6" />
                     <div className="flex-grow">
                       <div className="label-xs mb-4 flex items-center gap-2">
                         <span className="w-4 h-px bg-[rgba(255,255,255,0.15)]" />

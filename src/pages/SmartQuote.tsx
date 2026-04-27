@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { calculateQuoteEstimate, QuoteEstimateResult } from '../lib/quoteEstimate';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { WhatsAppCTA } from '../components/WhatsAppCTA';
+import { MagneticCTA } from '../components/MagneticCTA';
 
 interface Step { id: string; question: string; options: string[]; }
 const STEPS: Step[] = [
@@ -112,9 +113,11 @@ export default function SmartQuote() {
             </p>
 
             <div className="flex flex-col gap-3">
-              <Link to="/booking" className="btn-primary justify-center cta-glow">
-                Request Appointment
-              </Link>
+              <MagneticCTA strength={10}>
+                <Link to="/booking" className="btn-primary justify-center cta-glow cta-magnetic w-full">
+                  Request Appointment
+                </Link>
+              </MagneticCTA>
               <WhatsAppCTA
                 variant="ghost"
                 className="justify-center"

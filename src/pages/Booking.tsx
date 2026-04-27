@@ -25,33 +25,41 @@ export default function Booking() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
           {/* ─── LEFT: Info ─── */}
-          <div className="lg:col-span-4">
-            <span className="eyebrow">Reserve</span>
-            <h1 className="display-md mb-6">Request an appointment.</h1>
-            <p className="body-lead mb-12">
-              We operate strictly by appointment. Each vehicle receives uninterrupted, meticulous attention from our lead technician.
-            </p>
+          <div className="lg:col-span-4 relative">
+            <div className="absolute -inset-x-8 -top-40 bottom-12 overflow-hidden z-0 hidden lg:block opacity-30 mix-blend-luminosity">
+              <img src="https://images.unsplash.com/photo-1550340499-a6c60fc8287c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Booking" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/70 to-[#050505]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]" />
+            </div>
+            
+            <div className="relative z-10">
+              <span className="eyebrow">Reserve</span>
+              <h1 className="display-md mb-6">Request an appointment.</h1>
+              <p className="body-lead mb-12">
+                We operate strictly by appointment. Each vehicle receives uninterrupted, meticulous attention from our lead technician.
+              </p>
 
-            <div className="flex flex-col gap-8">
-              <div className="flex gap-4">
-                <Shield className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="text-white text-sm font-semibold mb-1">What comes next</h3>
-                  <p className="body-sm text-xs">We review your request and contact you within 24 hours to confirm availability and finalise the details.</p>
+              <div className="flex flex-col gap-8">
+                <div className="flex gap-4">
+                  <Shield className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-white text-sm font-semibold mb-1">What comes next</h3>
+                    <p className="body-sm text-xs">We review your request and contact you within 24 hours to confirm availability and finalise the details.</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-4">
-                <Clock className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="text-white text-sm font-semibold mb-1">Slots fill up fast</h3>
-                  <p className="body-sm text-xs">Multi-day ceramic and correction services are often booked 2–3 weeks in advance. Submit early.</p>
+                <div className="flex gap-4">
+                  <Clock className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-white text-sm font-semibold mb-1">Slots fill up fast</h3>
+                    <p className="body-sm text-xs">Multi-day ceramic and correction services are often booked 2–3 weeks in advance. Submit early.</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-4">
-                <MapPin className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="text-white text-sm font-semibold mb-1">Location</h3>
-                  <p className="body-sm text-xs">Premium Auto Sector<br />Bucharest, Romania<br />By appointment only.</p>
+                <div className="flex gap-4">
+                  <MapPin className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-white text-sm font-semibold mb-1">Location</h3>
+                    <p className="body-sm text-xs">Premium Auto Sector<br />Bucharest, Romania<br />By appointment only.</p>
+                  </div>
                 </div>
               </div>
             </div>

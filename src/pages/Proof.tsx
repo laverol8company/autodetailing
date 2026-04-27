@@ -5,29 +5,32 @@ const cases = [
   {
     vehicle: 'Porsche 911 GT3',
     color: 'Guards Red',
-    issue: 'Track day debris, light swirl marks, dull clearcoat from improper washing over years.',
-    service: 'Multi-Stage Paint Correction + 5yr Ceramic Coating',
-    result: 'Flawless mirror finish with fully restored red saturation. Hydrophobic ceramic layer added for ongoing protection.',
+    issue: 'Track day debris, light swirl marks, dull clearcoat from improper washing.',
+    service: 'Multi-Stage Paint Correction + 5yr Ceramic',
+    result: 'Flawless mirror finish with fully restored red saturation. Hydrophobic ceramic layer added.',
     days: '3',
     tag: 'Restoration + Protection',
+    img: 'https://images.unsplash.com/photo-1503371476100-9bf725b801de?auto=format&fit=crop&q=80&w=800',
   },
   {
     vehicle: 'Range Rover Autobiography',
     color: 'Santorini Black',
-    issue: 'Severe hologramming from dealership preparation. Heavy water spots on glass and paint surfaces.',
-    service: 'Gloss Enhancement + Glass & Panel Ceramic Coating',
-    result: '95% of imperfections removed. Intense black depth fully restored. Glass sealed and bead-rolling within 48hrs.',
+    issue: 'Severe hologramming from dealership prep. Heavy water spots on glass.',
+    service: 'Gloss Enhancement + Glass Ceramic',
+    result: 'Intense black depth fully restored. Glass sealed and bead-rolling.',
     days: '2',
     tag: 'Enhancement + Protection',
+    img: 'https://images.unsplash.com/photo-1550340499-a6c60fc8287c?auto=format&fit=crop&q=80&w=800',
   },
   {
     vehicle: 'Mercedes G63 AMG',
     color: 'Matte Magno Black',
-    issue: 'Fingerprints embedded in matte texture. UV exposure beginning to break down factory finish.',
-    service: 'Matte-Safe Preparation + Ceramic Coating (Matte Formula)',
-    result: 'Factory satin texture preserved. UV protection locked in. Self-cleaning properties added without altering sheen.',
+    issue: 'Fingerprints embedded in matte texture. UV exposure breaking down finish.',
+    service: 'Matte-Safe Prep + Matte Ceramic',
+    result: 'Factory satin texture preserved. Self-cleaning properties added without altering sheen.',
     days: '2',
     tag: 'Matte Protection',
+    img: 'https://images.unsplash.com/photo-1611821064430-0d402241afe4?auto=format&fit=crop&q=80&w=800',
   },
 ];
 
@@ -36,10 +39,19 @@ export default function Proof() {
     <div className="bg-[#050505]">
 
       {/* Header */}
-      <section className="pt-40 pb-20 border-b border-[rgba(255,255,255,0.06)]">
-        <div className="site-container">
+      <section className="relative pt-40 pb-20 border-b border-[rgba(255,255,255,0.06)] overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1920" 
+            alt="Proof" 
+            className="w-full h-full object-cover opacity-15 mix-blend-luminosity"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
+          <div className="grain-overlay" />
+        </div>
+        <div className="site-container relative z-10">
           <span className="eyebrow">Portfolio</span>
-          <h1 className="display-xl">The Proof.</h1>
+          <h1 className="display-xl text-white">The Proof.</h1>
         </div>
       </section>
 
@@ -54,16 +66,26 @@ export default function Proof() {
                 <div className={`${i % 2 === 1 ? 'lg:order-2' : ''}`}>
                   <div className="aspect-[4/3] bg-[#171717] border border-[rgba(255,255,255,0.06)] flex items-end relative overflow-hidden group">
                     <div className="absolute inset-0 flex">
-                      <div className="flex-1 flex items-center justify-center border-r border-[rgba(255,255,255,0.06)]">
-                        <span className="text-[#232323] text-6xl font-black">B</span>
+                      {/* Before (Left, muted/dull) */}
+                      <div className="flex-1 relative border-r border-[rgba(255,255,255,0.06)] overflow-hidden">
+                        <img src={c.img} alt="Before" className="absolute inset-0 w-[200%] max-w-none h-full object-cover opacity-30 grayscale blur-[2px]" />
+                        <div className="absolute inset-0 bg-[#050505]/40" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-[#8A8A8A] text-xl font-black opacity-30">BEFORE</span>
+                        </div>
                       </div>
-                      <div className="flex-1 bg-[#0D0D0D] flex items-center justify-center">
-                        <span className="text-[#232323] text-6xl font-black">A</span>
+                      {/* After (Right, clean/rich) */}
+                      <div className="flex-1 relative overflow-hidden">
+                        <img src={c.img} alt="After" className="absolute inset-0 w-[200%] max-w-none h-full object-cover -translate-x-1/2 opacity-80" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] to-transparent opacity-80" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-white text-xl font-black opacity-70 drop-shadow-md">AFTER</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="relative z-10 w-full flex justify-between px-5 pb-5">
-                      <span className="label-xs text-[#8A8A8A]/50">Before</span>
-                      <span className="label-xs text-[#8A8A8A]/50">After</span>
+                    <div className="relative z-10 w-full flex justify-between px-5 pb-5 pointer-events-none">
+                      <span className="label-xs text-[#8A8A8A]/50 bg-[#050505]/40 px-2 py-1 rounded backdrop-blur">Before</span>
+                      <span className="label-xs text-white/70 bg-[#050505]/40 px-2 py-1 rounded backdrop-blur">After</span>
                     </div>
                   </div>
                 </div>
