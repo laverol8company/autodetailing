@@ -390,77 +390,73 @@
    ===================================================== */
 
 /* ── FLOATING AMBIENT LINES ────────────────────────── */
-
-/* A single animated ambient line element */
+/* VISIBLE ice-blue and violet lines — like BMW ambient lighting strips */
 .float-line {
   position: absolute;
   pointer-events: none;
-  height: 1px;
+  z-index: 2; /* above dark overlays */
+  height: 2px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(180, 210, 255, 0.0) 10%,
-    rgba(180, 210, 255, 0.25) 40%,
-    rgba(220, 235, 255, 0.40) 55%,
-    rgba(180, 210, 255, 0.25) 70%,
-    rgba(180, 210, 255, 0.0) 90%,
+    rgba(160, 210, 255, 0.0) 5%,
+    rgba(160, 210, 255, 0.65) 30%,
+    rgba(200, 235, 255, 0.90) 50%,
+    rgba(160, 210, 255, 0.65) 70%,
+    rgba(160, 210, 255, 0.0) 95%,
     transparent 100%
   );
-  filter: blur(0.5px);
+  filter: blur(1px);
 }
 
-/* Each line gets its own sweep animation */
 .float-line-1 {
-  width: 60%;
-  animation: float-line-move-1 18s ease-in-out infinite alternate;
+  width: 55%;
+  animation: float-line-move-1 12s ease-in-out infinite alternate;
 }
 .float-line-2 {
-  width: 45%;
-  opacity: 0.7;
-  animation: float-line-move-2 23s ease-in-out infinite alternate-reverse;
+  width: 40%;
+  animation: float-line-move-2 16s ease-in-out infinite alternate-reverse;
 }
 .float-line-3 {
-  width: 30%;
-  opacity: 0.5;
-  animation: float-line-move-3 28s ease-in-out infinite alternate;
+  width: 35%;
+  animation: float-line-move-3 20s ease-in-out infinite alternate;
 }
 .float-line-4 {
-  width: 70%;
-  opacity: 0.4;
+  width: 65%;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(200, 180, 255, 0.0) 10%,
-    rgba(200, 180, 255, 0.20) 40%,
-    rgba(220, 200, 255, 0.35) 55%,
-    rgba(200, 180, 255, 0.20) 70%,
-    transparent 100%
+    rgba(200, 160, 255, 0.0) 5%,
+    rgba(200, 160, 255, 0.55) 30%,
+    rgba(220, 190, 255, 0.80) 50%,
+    rgba(200, 160, 255, 0.55) 70%,
+    transparent 95%
   );
-  animation: float-line-move-4 20s ease-in-out infinite alternate-reverse;
+  animation: float-line-move-4 14s ease-in-out infinite alternate-reverse;
 }
 
 @keyframes float-line-move-1 {
-  0%   { transform: translate(-5%, 0px) scaleX(0.8); opacity: 0.5; }
-  30%  { opacity: 0.85; }
-  60%  { transform: translate(10%, -4px) scaleX(1.1); opacity: 0.7; }
-  100% { transform: translate(5%, 3px) scaleX(0.95); opacity: 0.6; }
+  0%   { transform: translate(-8%, 0px) scaleX(0.85); opacity: 0.7; }
+  50%  { opacity: 1.0; }
+  100% { transform: translate(12%, -6px) scaleX(1.1); opacity: 0.8; }
 }
 @keyframes float-line-move-2 {
-  0%   { transform: translate(20%, 2px) scaleX(0.9); opacity: 0.4; }
-  40%  { opacity: 0.7; }
-  100% { transform: translate(-8%, -3px) scaleX(1.2); opacity: 0.5; }
+  0%   { transform: translate(15%, 3px) scaleX(0.9); opacity: 0.6; }
+  50%  { opacity: 0.95; }
+  100% { transform: translate(-10%, -4px) scaleX(1.15); opacity: 0.75; }
 }
 @keyframes float-line-move-3 {
-  0%   { transform: translate(5%, 1px); opacity: 0.3; }
-  50%  { opacity: 0.6; }
-  100% { transform: translate(-12%, -2px); opacity: 0.4; }
+  0%   { transform: translate(3%, 2px); opacity: 0.55; }
+  50%  { opacity: 0.90; }
+  100% { transform: translate(-15%, -3px); opacity: 0.65; }
 }
 @keyframes float-line-move-4 {
-  0%   { transform: translate(-15%, 0px) scaleX(0.7); opacity: 0.3; }
-  100% { transform: translate(5%, 5px) scaleX(1.1); opacity: 0.5; }
+  0%   { transform: translate(-12%, 0px) scaleX(0.8); opacity: 0.55; }
+  100% { transform: translate(8%, 6px) scaleX(1.1); opacity: 0.75; }
 }
 
 /* ── HERO DYNAMIC MESH ──────────────────────────────── */
 
 /* Slow-moving diagonal gradient mesh behind hero content */
+/* Visible slow-moving light mesh over hero */
 .hero-mesh {
   position: absolute;
   inset: -50%;
@@ -468,73 +464,93 @@
   height: 200%;
   background:
     linear-gradient(135deg,
-      rgba(100, 140, 255, 0.03) 0%,
-      transparent 40%
+      rgba(100, 150, 255, 0.10) 0%,
+      transparent 35%
     ),
     linear-gradient(225deg,
-      rgba(160, 110, 255, 0.02) 0%,
-      transparent 50%
+      rgba(160, 110, 255, 0.08) 0%,
+      transparent 45%
     ),
-    radial-gradient(ellipse 70% 50% at 70% 40%,
-      rgba(255, 255, 255, 0.015) 0%,
-      transparent 70%
+    radial-gradient(ellipse 60% 50% at 75% 35%,
+      rgba(200, 230, 255, 0.09) 0%,
+      transparent 60%
     );
-  animation: mesh-drift 40s linear infinite alternate;
+  animation: mesh-drift 20s ease-in-out infinite alternate;
   pointer-events: none;
+  z-index: 1;
 }
 @keyframes mesh-drift {
-  0%   { transform: translate(0%, 0%) rotate(0deg) scale(1); }
-  25%  { transform: translate(2%, -1.5%) rotate(0.5deg) scale(1.01); }
-  50%  { transform: translate(-1%, 2%) rotate(-0.3deg) scale(1.02); }
-  75%  { transform: translate(1.5%, 1%) rotate(0.2deg) scale(1.01); }
-  100% { transform: translate(-2%, -0.5%) rotate(-0.5deg) scale(1); }
+  0%   { transform: translate(0%, 0%) scale(1); opacity: 0.7; }
+  33%  { transform: translate(4%, -3%) scale(1.03); opacity: 1.0; }
+  66%  { transform: translate(-3%, 4%) scale(1.02); opacity: 0.8; }
+  100% { transform: translate(3%, -1%) scale(0.98); opacity: 0.9; }
 }
 
 /* ── MAGNETIC CTA RING ──────────────────────────────── */
 
-/* Pulse ring that appears on hover of primary CTAs */
+/* Always-visible glow + stronger hover ring for primary CTAs */
 .cta-magnetic {
   position: relative;
   isolation: isolate;
+  /* Always-on subtle ambient glow */
+  box-shadow:
+    0 0 18px rgba(130, 190, 255, 0.18),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
 }
 .cta-magnetic::after {
   content: '';
   position: absolute;
-  inset: -4px;
-  border: 1px solid rgba(180, 210, 255, 0.0);
+  inset: -3px;
+  border: 1px solid rgba(180, 210, 255, 0.20);
   transition:
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    inset 0.35s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    inset 0.3s ease;
   pointer-events: none;
+  animation: cta-pulse 3s ease-in-out infinite;
 }
 .cta-magnetic:hover::after {
-  inset: -6px;
-  border-color: rgba(180, 210, 255, 0.22);
+  inset: -7px;
+  border-color: rgba(180, 210, 255, 0.45);
   box-shadow:
-    0 0 20px rgba(150, 190, 255, 0.10),
-    inset 0 0 12px rgba(150, 190, 255, 0.04);
+    0 0 28px rgba(150, 195, 255, 0.25),
+    inset 0 0 16px rgba(150, 195, 255, 0.08);
 }
 .cta-magnetic:hover {
   box-shadow:
-    0 0 35px rgba(130, 175, 255, 0.15),
-    0 8px 24px rgba(0, 0, 0, 0.5);
+    0 0 50px rgba(130, 180, 255, 0.30),
+    0 12px 32px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+@keyframes cta-pulse {
+  0%, 100% { border-color: rgba(180, 210, 255, 0.15); box-shadow: 0 0 10px rgba(150,195,255,0.08); }
+  50%       { border-color: rgba(180, 210, 255, 0.35); box-shadow: 0 0 22px rgba(150,195,255,0.18); }
 }
 
 /* ── WORD EMPHASIS ──────────────────────────────────── */
 
-/* Subtle italic + platinum colour for specific accent words */
+/* Strong italic + near-white for key accent words */
 .word-accent {
   font-style: italic;
-  color: #CFCFCF;
+  color: #E8E8E8;
+  text-shadow: 0 0 20px rgba(200, 230, 255, 0.20);
 }
 
-/* Hairline underline for key proof words */
+/* Visible underline for key words — platinum with slight glow */
 .word-underline {
   text-decoration: underline;
-  text-decoration-color: rgba(255,255,255,0.18);
-  text-underline-offset: 6px;
+  text-decoration-color: rgba(180, 215, 255, 0.45);
+  text-underline-offset: 8px;
   text-decoration-thickness: 1px;
+  text-shadow: 0 0 20px rgba(160, 205, 255, 0.15);
+}
+
+/* Emphasis word — used for single premium key words */
+.emphasis-word {
+  color: #FFFFFF;
+  font-weight: 600;
+  text-shadow: 0 0 24px rgba(200,230,255,0.25);
 }
 
 /* ── REDUCED MOTION GUARD ───────────────────────────── */
