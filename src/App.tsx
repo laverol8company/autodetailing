@@ -121,7 +121,7 @@ function App() {
         <Footer />
 
         {/* Sticky WhatsApp — mobile only for less clutter on desktop */}
-        <WhatsAppCTA variant="sticky" />
+        <WhatsAppCTA variant="sticky" className="md:hidden" />
       </div>
     </BrowserRouter>
   );

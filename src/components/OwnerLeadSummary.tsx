@@ -70,6 +70,37 @@ export function OwnerLeadSummary() {
         </div>
       </div>
 
+      {/* Google Sheets / Pipeline Preview */}
+      <div className="glass-panel overflow-x-auto">
+        <p className="text-[10px] uppercase text-[#6B7280] font-semibold tracking-widest mb-3">Google Sheets / CRM Sync Tracking</p>
+        <div className="min-w-[600px] border border-white/5 rounded text-xs bg-[#0c111a] overflow-hidden">
+          <div className="grid grid-cols-6 border-b border-white/10 bg-[#111827] text-[#6B7280] p-2 font-medium">
+            <div>Date Added</div>
+            <div>Client Name</div>
+            <div>Service</div>
+            <div>Value</div>
+            <div>Priority</div>
+            <div>Status</div>
+          </div>
+          <div className="grid grid-cols-6 border-b border-white/5 p-2 items-center text-[#D8DEE9]">
+            <div className="text-[10px] text-[#6B7280]">Just now</div>
+            <div className="font-semibold text-white">{sampleLead.name}</div>
+            <div>{sampleLead.service.split(' ')[0]}</div>
+            <div className="text-green-400 font-medium tracking-tight">€800+</div>
+            <div><span className="bg-red-500/20 text-red-400 px-2 py-0.5 rounded uppercase text-[9px] font-bold">Hot</span></div>
+            <div><span className="bg-[#2563EB]/20 text-[#2563EB] px-2 py-0.5 rounded text-[9px] font-medium">New Lead</span></div>
+          </div>
+          <div className="grid grid-cols-6 p-2 items-center text-[#6B7280] bg-[#070A0F]/50">
+            <div className="text-[10px]">Yesterday</div>
+            <div>Michael B.</div>
+            <div>Exterior Detailing</div>
+            <div className="tracking-tight">€150</div>
+            <div><span className="bg-orange-500/10 text-orange-400 px-2 py-0.5 rounded uppercase text-[9px] font-bold">Warm</span></div>
+            <div><span className="bg-green-500/10 text-green-400 px-2 py-0.5 rounded text-[9px] font-medium">Booked</span></div>
+          </div>
+        </div>
+      </div>
+
       {/* Suggested Reply */}
       <div className="glass-panel">
         <div className="flex items-center justify-between mb-3">
