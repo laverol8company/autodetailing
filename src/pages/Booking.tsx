@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CheckCircle2, Clock, MapPin, Shield } from 'lucide-react';
+import { MagneticCTA } from '../components/MagneticCTA';
 
 const SERVICES = ['Ceramic Coating (5yr)', 'Paint Correction', 'PPF — Front Impact', 'Maintenance Wash', 'Interior Detail', 'Pre-Sale Preparation'];
 const TIMES = ['Morning (09:00–12:00)', 'Afternoon (12:00–16:00)', 'Late afternoon (16:00–18:00)'];
@@ -129,9 +130,11 @@ export default function Booking() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <button type="submit" disabled={status === 'pending'} className="btn-primary">
-                    {status === 'pending' ? 'Sending…' : 'Request Appointment'}
-                  </button>
+                  <MagneticCTA strength={10}>
+                    <button type="submit" disabled={status === 'pending'} className="btn-primary cta-magnetic px-10">
+                      {status === 'pending' ? 'Sending…' : 'Request Appointment'}
+                    </button>
+                  </MagneticCTA>
                   <p className="text-[#8A8A8A] text-[10px] uppercase tracking-widest self-center">
                     No payment until inspection
                   </p>

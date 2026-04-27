@@ -49,7 +49,7 @@ export default function Home() {
           <img
             src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=1920"
             alt="Premium Detailing"
-            className="w-full h-full object-cover opacity-35"
+            className="w-full h-full object-cover opacity-35 kinetic-pan"
             loading="eager"
           />
           {/* Dark overlay for readability */}
@@ -79,9 +79,9 @@ export default function Home() {
           </p>
 
           <h1 className="display-xl mb-8 max-w-3xl">
-            Premium <span className="word-underline">Detailing</span><br />
+            <span className="emphasis-word">Premium</span> <span className="word-underline">Detailing</span><br />
             <span className="word-accent">& Protection</span><br />
-            Without <span className="word-underline">Compromise.</span>
+            Without <span className="emphasis-word">Compromise.</span>
           </h1>
 
           <p className="body-lead max-w-lg mb-12">
@@ -160,7 +160,7 @@ export default function Home() {
                   <img
                     src={s.img}
                     alt={s.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
+                    className="w-full h-full object-cover brightness-90 saturate-[0.85] group-hover:saturate-100 group-hover:brightness-110 transition-all duration-700 scale-100 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
@@ -207,7 +207,7 @@ export default function Home() {
                   <img
                     src="https://images.unsplash.com/photo-1616789916666-4f2f80ed5360?auto=format&fit=crop&q=80&w=600"
                     alt="Before"
-                    className="absolute inset-0 w-full h-full object-cover grayscale brightness-50"
+                    className="absolute inset-0 w-full h-full object-cover brightness-[0.4]"
                     loading="lazy"
                   />
                   <div className="absolute bottom-3 left-3">
@@ -246,7 +246,7 @@ export default function Home() {
           <span className="eyebrow">Guided System</span>
           <h2 className="display-md mb-6">Not sure <span className="word-accent">where to start?</span></h2>
           <p className="body-lead mb-10">
-            Our Smart Quote advisor guides you through 4 quick questions — returning a <span className="word-underline">recommended service</span>, package, and instant price estimate.
+            Our <span className="emphasis-word">Smart Quote</span> advisor guides you through 4 quick questions — returning a <span className="word-underline">recommended service</span>, package, and instant price estimate.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-[#8A8A8A] text-xs uppercase tracking-widest font-medium mb-12">
             {['Car', 'Condition', 'Service', 'Quote'].map((step, i, arr) => (
@@ -282,7 +282,7 @@ export default function Home() {
         <div className="float-line float-line-2" style={{ top: '65%', left: '25%', opacity: 0.4 }} />
         <div className="site-container text-center relative z-10">
           <h2 className="display-lg mb-4 max-w-2xl mx-auto">
-            Ready to give your car the <span className="word-accent">attention it deserves?</span>
+            Ready to give your car the <span className="emphasis-word">attention it deserves?</span>
           </h2>
           <p className="body-lead mb-10">Book an appointment or start with our Smart Quote for an instant estimate.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

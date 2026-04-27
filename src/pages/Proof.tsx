@@ -68,7 +68,7 @@ export default function Proof() {
                     <div className="absolute inset-0 flex">
                       {/* Before (Left, muted/dull) */}
                       <div className="flex-1 relative border-r border-[rgba(255,255,255,0.06)] overflow-hidden">
-                        <img src={c.img} alt="Before" className="absolute inset-0 w-[200%] max-w-none h-full object-cover opacity-30 grayscale blur-[2px]" />
+                        <img src={c.img} alt="Before" className="absolute inset-0 w-[200%] max-w-none h-full object-cover opacity-35 blur-[2px]" />
                         <div className="absolute inset-0 bg-[#050505]/40" />
                         <div className="absolute inset-0 flex items-center justify-center">
                           <span className="text-[#8A8A8A] text-xl font-black opacity-30">BEFORE</span>

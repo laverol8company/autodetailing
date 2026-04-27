@@ -89,7 +89,7 @@ export default function Services() {
             <img
               src={cat.img}
               alt={cat.title}
-              className="w-full h-full object-cover opacity-45 grayscale"
+              className="w-full h-full object-cover opacity-60 saturate-[0.85]"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
