@@ -1,0 +1,2793 @@
+SECURE 
+VIBE 
+CODING
+Whitepaper
+SECURE 
+VIBE 
+CODING
+SECURE 
+VIBE 
+CODING
+The 
+Complete 
+New Guide
+2
+Executive 
+Summary
+25% 55%
+Vibe coding marks a revolutionary leap in software development, enabling 
+rapid code generation through natural language prompts. This paradigm shift 
+dramatically accelerates prototyping, democratizes software creation for both 
+developers and non-technical users, and allows a sharper focus on creative 
+problem-solving over intricate syntax. Early adoption rates are significant: 
+However, the speed and accessibility of AI-generated code come with a caveat: 
+it often lacks built-in security. Large Language Models (LLMs) are trained 
+for completion, not protection, and can introduce subtle, high-impact 
+vulnerabilities. A deeper analysis of these risks is provided in Section 4. 
+This guide serves as an essential resource for navigating the complexities of 
+vibe coding, emphasizing that its transformative potential can only be realized 
+responsibly through a robust "human-in-the-loop" methodology. It outlines the 
+imperative for:
+By embracing these strategies, organizations can effectively mitigate the 
+inherent security risks, leverage vibe coding as a powerful augmentation to 
+traditional development, and foster a future where innovation is both rapid and 
+secure.
+Secure Prompt Engineering:  
+Crafting explicit and security-aware prompts to guide AI models towards 
+generating safer code from inception. 
+Integrated Security Workflows:
+Implementing continuous security validation pipelines, comprehensive 
+human code reviews, and advanced automated testing (SAST, DAST, SCA) 
+throughout the development lifecycle.
+Proactive Governance: 
+Establishing clear organizational policies, audit models, and continuous 
+monitoring to manage risks and ensure compliance with evolving 
+regulatory frameworks like the EU AI Act and NIST AI Risk Management 
+Framework.
+of Y Combinator startups leveraging 
+AI for core codebase development by 
+2025 [2]
+Developer productivity is increasing 
+overall by up to
+[24] 
+3
+Table of 
+Contents
+4
+4
+4
+4
+6
+6
+6
+7
+8 
+9
+10 
+11
+11
+12
+12
+13
+13
+14
+18
+18
+18
+19
+19
+19
+19
+20
+20
+20
+20
+20
+21
+23
+23
+24
+24
+24
+28
+28
+28
+29
+29
+29
+30
+30
+1. Introduction to Vibe Coding........................................................................... 
+    1.1 Defining Vibe Coding: Natural Language to Code Generation.................  
+    1.2 The Genesis and Core Philosophy.................................................................
+    1.3 How Vibe Coding Works in Practice.............................................................. 
+2. The Evolving Scope and Applications of Vibe Coding.............................. 
+    2.1 Key Advantages and Use Cases.................................................................... 
+    2.2 Current Limitations and Challenges ............................................................
+    2.3 Tool-Specific Analysis: AI Coding Systems Comparison............................. 
+            2.3.1 Comparative Analysis of Leading Vibe Coding AI Systems............ 
+            2.3.2 Tool-Specific Security Behavior Analysis........................................... 
+            2.3.3 Tool-Specific Secure Prompting Strategies....................................... 
+3. Vibe Coding Trends and Future Trajectories.............................................. 
+    3.1 Current Adoption and Industry Impact........................................................ 
+    3.2 Redefining Developer Roles........................................................................... 
+    3.3 The Future of Human-AI Co-Agency in Software Development................
+4. Understanding Security Vulnerabilities in Vibe Coding......................... 
+    4.1 Why AI-Generated Code Isn't Inherently Secure ....................................... 
+    4.2 Common Security Flaws and Attack Vectors .............................................. 
+5. Emerging Standards and Governance for AI-Generated Code ............ 
+    5.1 Regulatory Landscape and Compliance Considerations........................... 
+            5.1.1 Evolving Regulatory Frameworks ..................................................... 
+            5.1.2 Industry-Specific Compliance Considerations  ...........................  
+    5.2 Emerging Standards and Certification Approaches .................................. 
+            5.2.1 AI Code Generation Standards Development ................................. 
+            5.2.2 Voluntary Certification Programs  .................................................... 
+            5.3 Governance Models for Vibe Coding Implementation ...................... 
+            5.3.1 Organizational Governance Structures  ........................................... 
+            5.3.2 Audit and Assurance Models ............................................................. 
+6. Crafting Prompts for Secure Vibe Coding .................................................. 
+    6.1 Identifying Insecure Prompting Patterns ...................................................
+    6.2 Strategies for Secure Prompt Engineering ................................................. 
+7. Best Practices for Secure Vibe Coding Implementation ....................... 
+    7.1 Implementation Workflow ........................................................................... 
+    7.2 Technical Implementation Standards ......................................................... 
+    7.3 Organizational Implementation .................................................................. 
+    7.4 Addressing Ethical and Legal Considerations ............................................ 
+8. Conclusion and Recommendations ............................................................. 
+    8.1 Key Recommendations for Organizations .................................................
+    8.2 Key Recommendations for Developers ...................................................... 
+    8.3 Strategies for Addressing the Accessibility-Security Paradox .................. 
+            8.3.1 Tiered Development Models ............................................................. 
+            8.3.2 Technological Solutions ..................................................................... 
+            8.3.3 Organizational Implementation .......................................................
+            8.3.4 Progressive Risk Management Framework .....................................
+4
+1. Introduction to Vibe Coding
+1.1 Defining Vibe Coding: 
+Natural Language to 
+Code Generation
+1.2 The Genesis and Core 
+Philosophy
+1.3 How Vibe Coding 
+Works in Practice
+Vibe coding is an emerging and revolutionary approach to software 
+development where users communicate their desired application functionality 
+to AI tools using natural language, rather than engaging in manual code writing. 
+The AI then assumes responsibility for the technical implementation, translating 
+plain speech into executable code. This methodology fundamentally redefines 
+programming as an "intent-based outcome specification," where the user 
+articulates the desired end result, and the AI determines the precise technical 
+steps to achieve it.   
+This approach marks a significant departure from traditional, manual coding 
+paradigms, ushering in a more flexible and AI-powered development process. 
+The emphasis shifts from meticulous syntax and intricate technical details 
+to articulating the "vibe" or essence of the desired outcome, allowing for a 
+more intuitive and creative development experience. The process is inherently 
+iterative; users provide feedback to the AI on the generated code, describing 
+issues or requesting changes until the desired functionality is achieved. This 
+conversational, back-and-forth interaction is a central characteristic of vibe 
+coding.   
+This shift means the democratization of software creation. The fundamental 
+move from syntax-driven coding to natural language interaction inherently 
+lowers the barrier to entry for software development. This is not merely about 
+enhancing efficiency for existing coders; it is about empowering a much 
+broader audience, including non-programmers, domain experts, entrepreneurs, 
+and designers, to create functional applications. The ability to describe an 
+application's behavior in plain language, rather than writing lines of code, 
+removes many traditional technical barriers. This means that individuals who 
+possess deep knowledge in a specific domain but lack coding proficiency 
+can now directly contribute to digital solutions, addressing their personal or 
+organizational needs. This broadening of participation is evident in various 
+sectors, including government, where employees can create custom applications 
+without extensive IT expertise, and in education, where students can focus 
+on creative exploration rather than being bogged down by complex coding 
+requirements. This expansion of access suggests a future where ideation is no 
+longer confined to technical teams, leading to a potentially more diverse and 
+innovative array of applications.  
+The term "vibe coding" was coined by Andrej Karpathy, co-founder of OpenAI, in 
+February 2025, describing it as "giving in to the vibes, embrace exponentials, and 
+forget that the code even exists."[1]
+This philosophy prioritizes rapid experimentation over structural perfection, 
+with AI agents functioning as real-time coding assistants that automate tedious 
+processes. The approach shifts developer focus from syntax minutiae to higher-
+level intent and creative problem-solving.
+However, the core tenet of "forget that the code even exists" creates significant 
+security challenges. When users are encouraged to abstract away from code 
+mechanics, they inherently bypass critical understanding of how and why the 
+code functions. This abstraction gap makes it difficult to identify vulnerabilities, 
+maintain complex systems, or critically evaluate AI-generated output—
+establishing a direct link between vibe coding's accessibility philosophy and its 
+security risks.
+Vibe coding is characterized by a conversational, back-and-forth interaction with 
+AI agents. Users describe their requirements, the AI generates corresponding 
+code, and users then provide feedback on errors or desired changes, initiating 
+an iterative refinement loop.  
+5
+The practical application of vibe coding typically follows a structured, step-by-
+step process:
+The tools utilized in vibe coding are predominantly large language models 
+(LLMs) such as ChatGPT, Claude, OpenAI's Codex, GPT-4, and DeepSeek, which 
+are capable of conversational code generation and structured code tasks. 
+Additionally, integrated AI coding assistants like GitHub Copilot, Cursor AI, 
+and Amazon CodeWhisperer play a crucial role, often functioning as "pair 
+programmers" that offer real-time suggestions, fix bugs, and enhance code 
+structure.   
+A significant implication of vibe coding is the evolving definition of a 
+"programming language." This approach suggests that natural human 
+language, such as English, is becoming a de facto programming language, 
+abstracting away the need for traditional, formal syntax. This concept carries 
+profound implications for how future developers are trained and how software 
+is conceptualized. If natural language is sufficient to generate functional 
+code, then the conventional understanding of a programming language – a 
+formal, artificial language designed to communicate precise instructions to a 
+machine – is being fundamentally challenged. The interface to computation 
+is shifting from rigid, formal syntax to the more fluid and semantic nuances 
+of human expression. This suggests a future where "coding" may involve less 
+memorization of specific syntax rules and more precise articulation of intent, 
+potentially leading to a convergence of roles traditionally separated, such 
+as product management, design, and development. It also raises complex 
+questions about the robustness and expressiveness of natural language as a 
+programming interface for highly complex and mission-critical systems.  
+1. Identify 
+Problem or Goal 
+Every vibe 
+coding session 
+commences with 
+a clear need or a 
+defined idea for a 
+software solution.
+3. AI Generates 
+Code 
+  
+Large Language 
+Models (LLMs) 
+interpret the 
+natural language 
+prompts and 
+subsequently 
+produce 
+functional code 
+based on the 
+instructions 
+provided. 
+2. Write Clear 
+Prompt  
+Users articulate 
+their intention 
+using natural 
+language 
+prompts. The 
+effectiveness of 
+the AI's output is 
+highly dependent 
+on the clarity, 
+specificity, and 
+contextual 
+richness of these 
+prompts.
+4. Review and 
+Refine  
+Users review 
+the generated 
+output, test its 
+functionality, 
+and then iterate 
+by providing 
+further prompts 
+to address any 
+issues, refine 
+existing features, 
+or add new 
+functionalities.
+6
+2. The Evolving Scope and Applications of Vibe Coding
+2.1 Key Advantages and 
+Use Cases
+2.2 Current Limitations 
+and Challenges
+Vibe coding offers compelling advantages that are reshaping software 
+development:
+Practical Applications  
+Vibe coding excels in building internal tools, automation scripts, simple web 
+applications, chatbots, and lightweight integrations. It's particularly valuable for 
+government process automation, educational projects, and helping experienced 
+developers learn new frameworks through scaffolding and sample generation. 
+Strategic Positioning  
+Most teams adopt a hybrid approach—using vibe coding for rapid prototyping 
+and repetitive tasks while maintaining traditional coding for complex, mission-
+critical systems. This suggests vibe coding functions best as augmentation rather 
+than replacement, requiring new strategies for integrating AI-generated code 
+into existing CI/CD pipelines and development workflows.
+Despite its numerous benefits, vibe coding is not without its limitations and 
+challenges: 
+Technical Complexity: While vibe coding can handle basic standard 
+frameworks, it often becomes challenging for real-world applications with novel 
+or complex technical requirements. The AI may generate basic or incomplete 
+code for highly specific or intricate functionalities. 
+Rapid 
+Prototyping 
+Build MVPs in 
+hours rather 
+than weeks, 
+enabling fast 
+idea validation 
+and iterative 
+development 
+cycles
+Creative 
+Problem-Solving 
+Frees developers 
+from syntax 
+details to focus 
+on architecture, 
+user experience, 
+and complex 
+challenges
+Productivity 
+Gains  
+Up to 55% faster 
+completion times 
+by automating 
+repetitive tasks 
+like boilerplate 
+code, basic data 
+operations, and 
+standard patterns 
+[24]
+Democratized 
+Development 
+Empowers non-
+programmers, 
+domain 
+experts, and 
+entrepreneurs to 
+create functional 
+applications 
+by describing 
+desired 
+functionality in 
+plain language
+Experimentation 
+Ideal for side 
+projects, concept 
+validation, 
+and rapid 
+iteration without 
+significant time 
+investment
+Speed and Accessibility
+Enhanced Focus and Innovation
+7
+Code Quality and Performance Issues: AI-generated code frequently requires 
+optimization and refinement to maintain high quality. It can be inefficient, 
+difficult to comprehend, or stylistically inconsistent. It is generally not an ideal 
+choice for distributed applications, which demand structured architecture and 
+sophisticated optimization strategies.  
+Debugging Challenges: Code generated by AI can be challenging to debug due 
+to its dynamic nature, lack of architectural structure, opaque underlying logic, 
+and absence of clear documentation or intent. Errors can compound rapidly if 
+not addressed and fixed early in the development process.  
+Maintainability and Long-Term Reliability: The speed and convenience 
+offered by vibe coding often come at the cost of flexibility and long-term 
+maintainability, particularly for complex or large-scale projects where fine-
+grained control over every system component is essential.  
+Over-reliance on AI / Knowledge Gaps: There is a notable potential for users 
+to become overly dependent on AI tools, which can hinder the development of 
+their own fundamental coding skills and lead to knowledge gaps regarding the 
+underlying "why" of the code. If issues arise, users may struggle to resolve them 
+due to a lack of foundational understanding of how the code operates. This can 
+become a critical issue in professional settings where a deep understanding of 
+the system is paramount for long-term success. 
+ 
+Prompt Dead-Ends: Developers may encounter situations where the AI fails to 
+adequately understand or fulfill complex or nuanced requests. In such cases, 
+users must often reframe their prompts, break down the problem into smaller, 
+more manageable parts, or even switch to different tools.  
+The rapid generation of code through vibe coding, coupled with potential issues 
+in quality, consistency, and a lack of clear logic or documentation, creates a 
+significant risk of accumulating "hidden technical debt". This debt may not be 
+immediately apparent during initial development but can lead to increased 
+maintenance load, longer debugging times, and scalability issues as projects 
+evolve. The speed of generation can inadvertently mask underlying structural 
+and quality issues. Without proper human review and refinement, these issues 
+can compound over time, creating a burden that will eventually slow down 
+development or lead to system failures, much like traditional technical debt but 
+potentially harder to identify due to the opaque nature of AI-generated code. 
+Organizations must therefore factor in the ongoing cost of "refactoring and 
+maintaining AI-generated code" and invest in tools and processes that help 
+visualize, document, and manage this new form of technical debt, rather than 
+solely prioritizing initial generation speed. 
+8
+2.3 Tool-Specific Analysis: 
+2.3.1 Comparative Analysis 
+of Leading Vibe Coding AI 
+Systems
+OpenAI Codex / GPT-4
+Key Strengths:  
+Versatile, strong conceptual 
+understanding
+Code vulnerability 
+detection in 
+Copilot; Context 
+window allows 
+for architectural 
+understanding
+May suggest 
+deprecated 
+libraries; 
+Occasional 
+hallucination 
+of non-existent 
+functions
+Full-stack web 
+development; 
+Complex 
+algorithmic 
+challenges
+Tendency to 
+generate verbose 
+code that may 
+obscure security 
+issues; Strong at 
+syntax but weaker 
+at system-level 
+security
+Claude
+Key Strengths:  
+Strong explanations, 
+natural language focus
+Risk-aware 
+prompting 
+capabilities; 
+Strong 
+documentation 
+generation
+Less specialized 
+for certain 
+programming 
+domains; 
+Newer to code 
+generation
+Documentation-
+heavy projects; 
+Security-critical 
+applications 
+where 
+explanations 
+matter
+Excels at 
+explaining 
+security 
+implications; 
+Conservative 
+approach 
+to security 
+recommendations
+DeepSeek Coder
+Key Strengths:  
+Specialized for coding 
+tasks; Deep knowledge of 
+repositories
+Repository-aware 
+code suggestions; 
+Built-in linting 
+capabilities
+More limited 
+general 
+knowledge 
+outside coding 
+domain
+Performance-
+critical 
+applications; 
+System-level 
+programming
+Strong static 
+analysis 
+integration; 
+Weaker at 
+detecting logical 
+security flaws
+GitHub Copilot
+Key Strengths:  
+IDE integration; Repository 
+context awareness
+Real-time security 
+scanning; OWASP 
+vulnerability 
+detection
+Over-reliance 
+on context; 
+Suggestions 
+based on patterns 
+not security
+Rapid prototyping 
+within existing 
+codebases; 
+Augmenting 
+developer 
+workflow
+Rapid prototyping 
+within existing 
+codebases; 
+Augmenting 
+developer 
+workflow
+Amazon CodeWhisperer
+Key Strengths:  
+AWS service integration; 
+Policy-compliant code 
+generation
+Security 
+scan feature; 
+Compliance 
+detection
+AWS-centric 
+solutions; 
+Less effective 
+for non-AWS 
+environments
+Cloud 
+infrastructure 
+code; Compliant 
+environments
+Strong in 
+generating 
+compliant code; 
+Service-specific 
+security features
+AI  
+System
+Security 
+Features
+Notable 
+Limitations
+Optimal  
+Use Cases
+Security 
+Considerations
+This section will provide a detailed comparison of major AI coding systems, 
+analyzing their specific security features, limitations, and best use cases. 
+Comparative Analysis of Leading Vibe Coding AI Systems:
+AI Coding Systems Comparison
+9
+Cursor AI
+Key Strengths:  
+Focused on natural 
+language editing of existing 
+code; Context-aware 
+refactoring
+BASE44
+Key Strengths:  
+Complete no-code 
+application builder; 
+Conversational AI interface; 
+Integrated deployment and 
+hosting
+Integrated 
+security linting 
+and vulnerability 
+highlighting 
+within the editor
+Built-in 
+authentication 
+and authorization; 
+Secure 
+infrastructure 
+with one-click 
+deployment; 
+Integration 
+security with 
+trusted services 
+(AWS S3, GitHub, 
+Supabase)
+Relies heavily 
+on existing 
+codebase context; 
+Less suited 
+for generating 
+entirely new, large 
+codebases from 
+scratch
+No direct code 
+access or 
+customization; 
+Limited to 
+platform 
+capabilities; 
+Dependency on 
+platform vendor
+Iterative code 
+refinement; 
+Security auditing 
+of existing 
+projects; 
+Collaborative 
+secure 
+development
+Rapid MVP 
+development; 
+Non-technical 
+users building 
+full-stack 
+apps; Business 
+automation tools; 
+Custom internal 
+applications
+Can identify and 
+suggest fixes for 
+vulnerabilities 
+in existing code; 
+Effectiveness tied 
+to the quality 
+of the provided 
+context; Good 
+for human-in-
+the-loop security 
+review
+Platform-
+managed security 
+reduces individual 
+responsibility but 
+creates vendor 
+dependency; 
+Limited visibility 
+into underlying 
+security 
+implementations; 
+Requires trust 
+in platform's 
+security practices
+2.3.2 Tool-Specific Security 
+Behavior Analysis
+Each AI system exhibits distinctive patterns when handling security-critical code 
+generation: 
+GPT-4/Codex
+Tends to prioritize completeness and elegance over security when not 
+explicitly prompted. Requires specific security directives but offers the most 
+comprehensive code generation capabilities. Security vulnerabilities often 
+appear in edge cases handling. 
+Claude
+More cautious with potentially risky operations. Often includes explanatory 
+comments about security implications and tends to suggest conservative 
+approaches. Provides more verbose documentation of security considerations 
+but may generate less optimized code. 
+GitHub Copilot 
+Leverages GitHub's security datasets to flag common vulnerability patterns. 
+Particularly strong at identifying issues present in public repositories but may 
+struggle with novel security patterns. Benefits significantly from IDE-integrated 
+security scanning. 
+Amazon CodeWhisperer 
+Optimized for secure AWS service integration. Includes built-in detectors for 
+security and compliance issues related to AWS services. Security strengths are 
+significantly AWS-centric. 
+DeepSeek Coder 
+Emphasizes performance and algorithmic correctness. Security approach 
+focuses on static analysis rather than architectural security patterns. Strong at 
+identifying syntax-level vulnerabilities but weaker at system-level security design.
+10
+Cursor AI 
+Excels at identifying and suggesting improvements for security vulnerabilities 
+within existing code by leveraging its deep contextual understanding of the 
+codebase. It often highlights potential security issues as part of its editing and 
+refactoring suggestions, enabling developers to address them proactively. 
+BASE44 
+Takes a fundamentally different approach by abstracting security 
+implementation entirely away from users. Security is managed at the platform 
+level through built-in authentication, authorization, and secure infrastructure 
+rather than through code-level controls. Users rely on the platform's security 
+implementations and trusted third-party integrations (AWS S3, Supabase, 
+GitHub) rather than implementing custom security measures. This approach 
+eliminates many common coding vulnerabilities but creates dependency on the 
+platform vendor's security practices and limits visibility into underlying security 
+implementations. Security risks shift from code-level vulnerabilities to platform 
+trust, configuration management, and vendor security posture.
+2.3.3 Tool-Specific Secure 
+Prompting Strategies
+Different AI systems respond optimally to different prompting patterns:
+For GPT-4/Codex: 
+"Generate [functionality] with explicit 
+OWASP Top 10 protections. Include 
+robust input validation for [specific 
+attack vectors]. Follow zero-trust 
+principles and explain your security 
+reasoning." 
+For GitHub Copilot:
+"// Security-critical function
+// Requirements: Must validate all 
+inputs, use parameterized queries, and 
+implement proper error handling 
+// Potential threats: SQL injection, XSS, 
+IDOR 
+function..." 
+For DeepSeek Coder:
+"/* Performance-critical and security-
+sensitive function 
+* Constraints: No dynamic memory 
+allocation, bounds checking required 
+* Security: All inputs must be validated, 
+no buffer overflows
+*/ 
+Void..."
+For Claude: 
+"Please create [functionality] that 
+prioritizes security over convenience. 
+Implement defense-in-depth patterns 
+including [specific security controls]. 
+After generating the code, identify any 
+potential security weaknesses that 
+remain." 
+For Amazon CodeWhisperer: 
+"# Secure AWS Lambda function 
+# Must comply with: least privilege, 
+encryption in transit/at rest 
+# Handle sensitive data according to 
+compliance requirements
+def..." 
+For Cursor AI: 
+"// Analyze the following code for 
+potential security vulnerabilities, focusing 
+on [specific attack vectors like SQL 
+injection or XSS]. Suggest refactorings to 
+improve security, adhering to [security 
+standard like OWASP Top 10]."
+11
+For BASE44: 
+"Build a [application type] that handles 
+[sensitive data type]. Requirements: 
+Implement multi-factor authentication 
+for all users, role-based access control 
+with [specific role definitions], data 
+encryption at rest, audit logging for all 
+user actions, and GDPR-compliant data 
+handling. Ensure the application follows 
+principle of least privilege and includes 
+session management with automatic 
+timeout. Integrate with [specific secure 
+services] and configure secure backup 
+procedures."
+3. Vibe Coding Trends and Future Trajectories
+3.1 Current Adoption and 
+Industry Impact
+Vibe coding has experienced rapid adoption since its emergence in early 2025. 
+Key metrics demonstrate significant industry impact:
+This acceleration enables startups to validate concepts in hours rather than 
+weeks, dramatically shortening time-to-market. Notable successes include Pieter 
+Levels' flight simulator game, which grossed $1 million in under 20 days using 
+largely AI-generated code.
+Beyond efficiency gains, vibe coding is democratizing software creation 
+by expanding access to non-technical domain experts, entrepreneurs, and 
+designers. This shift represents a fundamental acceleration in innovation 
+cycles—Karpathy's "embrace exponentials" philosophy combined with rapid 
+prototyping capabilities suggests we're entering an era of unprecedented 
+application proliferation and faster market disruption.
+25% 44%
+Up to 55%
+of Y Combinator startups are building 
+core codebases with AI assistance [2]
+of developers had integrated AI 
+coding tools into workflows by 2023 
+[23]
+faster completion times reported 
+across projects using vibe coding [24]
+12
+3.2 Redefining Developer 
+Roles
+3.3 The Future of Human-
+AI Co-Agency
+Vibe coding is fundamentally reshaping developer responsibilities, shifting 
+focus from manual code crafting to guiding, testing, and refining AI output. 
+Developers are becoming "conductors, guiding an orchestra of AI tools." 
+Emerging Core Skills:
+Vibe coding marks the beginning of human-AI co-agency, where humans and 
+intelligent systems collaborate to achieve outcomes neither could accomplish 
+alone. This future emphasizes intuitive, human-centered development with AI 
+adapting to human expression rather than forcing conformity to machine logic. 
+Key Developments:
+This continuous adaptation and learning will be crucial for navigating the 
+evolving landscape of human-AI collaboration in software development.
+Success Strategies for Professionals:
+This evolution suggests the rise of a "product engineer" archetype—blending 
+software engineering with product management skills. These professionals 
+must understand both user needs and technical implementation, translating 
+product vision into precise AI prompts while critically evaluating outputs. The 
+core competency shifts from writing efficient code to effectively orchestrating AI 
+capabilities and ensuring quality outcomes.
+Prompt 
+Engineering: 
+Articulating 
+requirements 
+precisely to 
+yield effective AI 
+responses
+Evolution of 
+Development 
+Environments: 
+Tools like Cursor 
+AI enable 
+seamless natural 
+language-to-code 
+workflows
+Cultivate clear 
+communication 
+and prompting 
+skills
+Critical 
+Evaluation: 
+Assessing and 
+integrating AI-
+generated output
+Voice-to-Code 
+Interfaces: 
+Developers can 
+literally speak 
+solutions into 
+existence
+Balance AI 
+productivity gains 
+with foundational 
+coding knowledge
+System 
+Architecture: 
+Focusing on 
+higher-level 
+design while 
+AI handles 
+implementation 
+details
+Adaptive 
+AI Systems: 
+Technology 
+increasingly 
+conforms to 
+human modes of 
+expression
+Actively explore 
+the expanding 
+AI development 
+ecosystem
+Prioritize ethical 
+considerations 
+and quality 
+control in 
+AI-assisted 
+development
+13
+4. Understanding Security Vulnerabilities in Vibe Coding
+4.1 Why AI-Generated 
+Code Isn't Inherently 
+Secure
+Despite being functionally correct, AI-generated code often omits essential 
+security safeguards. This is not due to malice or error — it stems from the core 
+design of LLMs and certain prompting patterns:
+The fact that AI prioritizes functional correctness over security and often lacks 
+architectural awareness means it can generate code that appears to work 
+perfectly but contains subtle, deeply embedded vulnerabilities. These can be 
+termed "silent killer" vulnerabilities because they are difficult to detect through 
+basic functional testing and can often bypass traditional Static Application 
+Security Testing (SAST) tools, potentially surviving CI/CD pipelines and reaching 
+production. The deceptive nature of these flaws, where the code functions as 
+requested despite its underlying insecurity, creates a false sense of security, 
+making them particularly insidious and challenging to identify until exploited. 
+This necessitates a shift from reactive security (fixing obvious bugs) to proactive, 
+threat-modeling-driven security reviews and advanced testing specifically 
+designed to uncover these subtle, logic-based vulnerabilities that AI might 
+introduce. This also underscores the irreplaceable role of human security 
+expertise in the AI-driven development landscape. 
+Security Reality Check 
+AI treats security like 
+an optional feature—it 
+won't include protections 
+unless explicitly requested. 
+Think of it as "security 
+by invitation only." Every 
+prompt is a security 
+decision: include security 
+requirements or accept 
+insecure defaults.
+LLM Limitations and Pattern Completion Over Intent: LLMs primarily 
+function by predicting the next most probable token in a sequence, 
+rather than applying deep security engineering principles. They prioritize 
+fulfilling functional requirements over security considerations and often 
+lack the contextual understanding of an application's specific security 
+requirements or an organization's established best practices. This means 
+that AI can generate code that appears functional but omits critical 
+security measures simply because they were not explicitly requested in 
+the prompt. 
+Lack of Architectural Awareness: Current LLMs typically generate code 
+at the function or module level without a comprehensive understanding of 
+system-level architectural constraints, such as session state, inter-service 
+interactions, or permission enforcement. This can lead to the introduction 
+of vulnerabilities like broken access controls, missing state checks, or 
+logic flaws that only become apparent when the code is integrated into a 
+broader system. 
+Training Data Flaws: AI models are trained on vast datasets of existing 
+code, which may unfortunately include inherent flaws, outdated security 
+practices, or even biased human-created code. This means that the AI can 
+perpetuate or inadvertently introduce known vulnerabilities present in its 
+training data. Research indicates that LLM-generated code is "inherently 
+insecure.”A Stanford University study suggested that 36% of participants 
+with access to AI assistants wrote solutions vulnerable to SQL injection 
+compared to 7% of the control group [22].
+Rapid Deployment vs. Security Review Capacity: The speed at which 
+AI can generate code often outpaces the capacity of human security 
+teams to review it thoroughly. This can lead to vulnerable code being 
+pushed into production environments without adequate scrutiny. 
+Insecure Prompting Patterns: As further discussed in Section 6.1, the 
+quality and security of AI-generated code are profoundly influenced by 
+the prompts provided by the user. Vague instructions, the omission of 
+explicit security requirements, implicit trust in AI outputs without human 
+validation, and a sole focus on speed over quality significantly increase the 
+likelihood of introducing vulnerabilities. The AI's default behavior, unless 
+otherwise nudged, is to prioritize functional completion over security.
+14
+4.2 Common Security 
+Flaws and Attack Vectors
+AI-generated code can introduce a range of common security flaws and attack 
+vectors, often due to the AI's focus on functionality over security or its lack of 
+contextual understanding. These include: 
+Data Security Vulnerabilities:
+DataHub Connect's junior developer Alex used AI to generate code for fetching 
+stock market data. Using the prompt "Generate Python code to fetch stock prices 
+from 'MarketData API' for given symbols," the AI produced:
+Alex, unaware of the security implications, pushed this code to their private 
+repository. 
+The Impact:
+API Abuse  
+Risk: 
+Exposed keys 
+could enable 
+unauthorized 
+calls, incurring 
+overage charges 
+or depleting 
+quotas
+Operational 
+Disruption:  
+Key rotation 
+would require 
+downtime for the 
+internal tool
+Reputational 
+Damage:  
+Security incidents 
+erode client trust
+Python
+import requests 
+def   get_stock_price(symbol):
+         api_key = "YOUR_HARDCODED_API_KEY_12345" # AI inserted this for     
+         immediate functionality
+         url = f"https://api.marketdata.com/v1/quotes/{symbol}?apiKey={api_  
+         key}"
+         response = requests.get(url)
+         return response.json()
+Hardcoded Credentials and Exposed 
+Secrets: AI tools frequently suggest 
+embedding sensitive information 
+such as API keys, secrets, or database 
+passwords directly within the source 
+code. This makes credentials visible to 
+anyone with access to the codebase 
+and risks their persistence in version 
+control history. The GitGuardian's 
+State of Secrets Sprawl Report 2025 
+indicated that nearly 24 million secrets 
+were inadvertently exposed on GitHub 
+in one year, with repositories using AI 
+coding tools showing a 40% higher 
+rate of secret exposure [3].  
+Sensitive Information Exposure: 
+Debug or error messages generated 
+by AI might inadvertently reveal 
+internal system details or sensitive 
+information.  
+        Case Study 
+The Exposed API Key
+15
+Key Lessons:
+This example illustrates the "security by omission" problem—AI omits security 
+measures unless explicitly instructed, making human oversight essential.
+Unsafe Data Handling and Injection Attacks:
+Weak Security Controls:
+Missing Input Validation:  
+AI-generated code often lacks proper 
+input validation, which is crucial for 
+preventing various injection attacks. 
+Cross-Site Scripting (XSS):  
+AI tools may reflect user input unsafely 
+in web pages, enabling attackers to 
+inject malicious scripts that can expose 
+sensitive data or compromise user 
+sessions.  
+Command Injection:  
+Improper handling of system 
+commands in AI-generated code can 
+allow attackers to execute arbitrary 
+commands on the server. 
+Insufficient Error Handling:  
+Poorly implemented error handling 
+can inadvertently leak sensitive system 
+information to attackers.  
+Outdated Cryptographic Methods: 
+The AI might suggest or implement 
+weak or deprecated cryptographic 
+algorithms (e.g., MD5, SHA1, DES), 
+compromising data security.
+SQL Injection:  
+Direct insertion of unsanitized user 
+input into database queries can allow 
+attackers to manipulate or steal 
+data from the database. A Stanford 
+University study suggests that 
+approximately 36% of AI-generated 
+database queries are vulnerable to 
+SQL injection].   
+Path Traversal: 
+This vulnerability arises when file paths 
+are constructed from unchecked user 
+input, potentially allowing attackers 
+to access or manipulate arbitrary files 
+outside the intended directory.
+Missing or Weak Authentication 
+and Authorization:  
+AI-generated code may omit critical 
+authentication and authorization 
+checks, leading to unauthorized access 
+to sensitive data or functionality, or 
+allowing attackers to bypass business 
+logic. 
+Timing-Based Side-Channel Attacks: 
+Subtle vulnerabilities, such as using 
+non-constant-time comparisons for 
+cryptographic operations (e.g., == 
+for HMAC comparison), can enable 
+attackers to gradually brute-force 
+secrets by observing response times.
+1.	 Mandatory Security Review: Even simple AI-generated code needs 
+human security validation 
+2.	 Secure Prompting: Include explicit security directives: "Generate 
+Python code to fetch stock prices. Ensure API keys are loaded from 
+environment variables, not hardcoded." 
+3.	 Automated Detection: Implement tools like GitGuardian to scan for 
+exposed credentials before deployment
+16
+Configuration Issues:  
+AI-generated code might include development features enabled in production 
+environments, overly permissive Cross-Origin Resource Sharing (CORS) settings, 
+or unnecessary services enabled by default, creating potential attack vectors. 
+Prompt Injection:  
+This is a newer class of attack specific to LLMs, where attackers manipulate 
+language model instructions to bypass security defenses or extract sensitive 
+information, sometimes by "jailbreaking" the LLM to behave outside its intended 
+parameters. This can also lead to "Prompt Leak," where the LLM inadvertently 
+reveals its internal system instructions or proprietary logic, or "Denial of Wallet" 
+attacks, where excessive engagement with the LLM leads to substantial resource 
+consumption and financial implications.   
+Supply Chain Vulnerabilities: 
+AI tools may automatically add unvetted or vulnerable third-party libraries and 
+packages, introducing supply chain risks into the codebase.  
+Data Poisoning Attacks: 
+Malicious actors could manipulate the training data used for AI models by 
+injecting malicious samples, potentially creating backdoors or vulnerabilities in 
+the generated code.  
+Feedback Loops: 
+Insecure AI-generated code, if used as training data for newer AI models, can 
+create a feedback loop that perpetuates and even spreads vulnerabilities across 
+future code generations.  
+Common Vibe Coding 
+Security Vulnerabilities 
+and Examples
+Vulnerability 
+Category
+Data Security
+Unsafe Data 
+Handling
+Description
+Embedding 
+sensitive data (API 
+keys, passwords, 
+tokens) directly in 
+source code.
+Failure to validate 
+or sanitize user 
+input before 
+processing.
+Debug or error 
+messages 
+revealing internal 
+system details.
+Direct insertion 
+of user input 
+into SQL queries 
+without proper 
+sanitization, 
+allowing malicious 
+commands.
+Specific 
+Vulnerability
+Hardcoded 
+Credentials
+Missing Input 
+Validation
+Sensitive Info 
+Exposure
+SQL Injection
+Illustrative 
+Example
+password: 
+'admin123' in 
+a database 
+connection string.
+Accepting any 
+file type in an 
+upload, leading 
+to executable file 
+uploads.
+An error message 
+displaying 
+full database 
+connection details.
+SELECT * FROM 
+users WHERE name 
+= 'admin'; DROP 
+TABLE users; --'
+17
+Reflecting 
+unsanitized user 
+input in web 
+pages, allowing 
+malicious scripts 
+to execute in 
+users' browsers.
+Constructing 
+file paths from 
+unchecked user 
+input, allowing 
+access to arbitrary 
+files.
+Improper 
+handling 
+of system 
+commands, 
+allowing 
+attackers to 
+execute arbitrary 
+commands.
+Cross-Site 
+Scripting (XSS)
+Path Traversal
+Command 
+Injection
+Displaying 
+user-submitted 
+<script>alert('XSS'); 
+</script> directly.
+fs.readFile(file.
+originalname) 
+where file.
+originalname is 
+../../../etc/passwd.
+AI generating code 
+that executes user 
+input directly as a 
+shell command.
+Weak Security 
+Controls
+Missing or 
+inadequate 
+checks to restrict 
+user access to 
+sensitive data or 
+functionality.
+Error messages 
+revealing 
+sensitive system 
+information.
+Use of outdated 
+or insecure 
+cryptographic 
+algorithms/
+practices.
+Using non-
+constant-time 
+comparisons 
+for sensitive 
+data, allowing 
+attackers to infer 
+information 
+by measuring 
+response times.
+Broken Access 
+Control
+Insufficient Error 
+Handling
+Weak 
+Cryptography
+Timing Side-
+Channel Attacks
+An API endpoint 
+allowing any 
+user to download 
+any document 
+by guessing its 
+filename.
+A generic server 
+error message 
+showing stack 
+traces or internal 
+paths.
+Using MD5 for 
+password hashing 
+or reusing 
+Initialization 
+Vectors (IVs).
+if (signature == 
+expected) for 
+HMAC verification.
+Configuration 
+Issues
+Development 
+features enabled 
+in production, 
+overly permissive 
+settings.
+Insecure Defaults
+Overly permissive 
+CORS settings 
+or debug mode 
+enabled in 
+production.
+18
+AI-Specific 
+Vulnerabilities
+Manipulating 
+LLM instructions 
+to bypass 
+defenses or 
+extract sensitive 
+information.
+AI adding 
+unvetted or 
+vulnerable third-
+party libraries.
+Malicious 
+manipulation 
+of AI training 
+data to inject 
+vulnerabilities.
+Prompt Injection
+Supply Chain 
+Risks
+Data Poisoning
+A user prompt 
+designed to make 
+the AI reveal its 
+internal system 
+prompt.
+AI suggesting a 
+dependency with 
+known CVEs.
+Training data 
+containing 
+intentionally 
+flawed code 
+patterns.
+5. Emerging Standards and Governance for AI-Generated Code 
+5.1 Regulatory Landscape 
+and Compliance 
+Considerations
+5.1.1 Evolving Regulatory 
+Frameworks
+The AI Act in the European Union has introduced significant compliance 
+requirements for AI systems, with potential implications for vibe coding 
+tools classified as high-risk AI systems, particularly when deployed in critical 
+infrastructure, healthcare, or financial services [4].  
+Organizations must consider:
+In the United States, the National Institute of Standards and Technology (NIST) AI 
+Risk Management Framework provides voluntary guidelines that organizations 
+can adopt. The NIST framework emphasizes [5]:
+Risk 
+Classification: 
+Determining 
+whether their 
+vibe coding 
+implementations 
+fall under high-
+risk categories 
+requiring 
+conformity 
+assessments
+Governance: 
+Establishing clear 
+oversight of AI 
+systems
+Transparency 
+Requirements: 
+Documenting AI 
+involvement in 
+code generation, 
+especially for 
+systems that 
+impact human 
+safety or rights
+Mapping: 
+Identifying and 
+documenting 
+contexts where 
+AI-generated 
+code is used
+Documentation 
+Burden: 
+Maintaining 
+records of 
+prompts, 
+generated code, 
+human review 
+processes, 
+and validation 
+procedures
+Measurement: 
+Quantifying the 
+performance 
+and risks of vibe 
+coding practices
+Management: 
+Implementing 
+controls to 
+address identified 
+risks
+19
+5.1.2 Industry-
+Specific Compliance 
+Considerations
+Industry
+Healthcare
+ISO/IEC JTC 1/
+SC 42 [12] is 
+developing 
+standards for 
+AI systems that 
+include specific 
+provisions for AI 
+code generation 
+systems, 
+focusing on 
+trustworthiness, 
+quality 
+assessment, and 
+bias detection.
+AI Code Safety Certification (ACSC): 
+A proposed industry consortium 
+program requiring: 
+•	 Documentation of human review 
+processes 
+•	 Proof of security testing specific to 
+AI-generated code 
+•	 Implementation of continuous 
+security monitoring
+Secure AI 
+Development 
+Lifecycle (SAIDL): 
+A framework 
+adapting 
+traditional secure 
+development 
+lifecycle 
+practices to AI-
+assisted coding 
+environments.
+IEEE P2864 (under 
+development) 
+aims to establish 
+standard metrics 
+for measuring 
+the reliability and 
+performance 
+of AI-assisted 
+software 
+development 
+tools.
+OWASP AI Security and Privacy Guide 
+[13] has expanded to include specific 
+guidance on securing applications built 
+with AI-generated code, including: 
+•	 AI-specific testing methodologies 
+•	 Verification procedures for AI-
+generated components 
+•	 Special considerations for prompt 
+injection attacks
+Financial Services
+Critical 
+Infrastructure
+Government
+Relevant 
+Regulations
+HIPAA [6], FDA 
+Software as 
+Medical Device [7]
+Basel Committee 
+on Banking 
+Supervision AI 
+guidelines [8]
+NIST 
+Cybersecurity 
+Framework [9]
+FedRAMP [10], 
+CMMC [11]
+Vibe Coding Compliance 
+Requirements
+Validation and verification 
+documentation; Deterministic behavior 
+proof; Human oversight evidence
+Explicit risk management for AI-
+generated code; Auditability of code 
+generation process
+Supply chain risk management for 
+AI-generated components; Increased 
+security testing requirements
+Documentation of AI involvement; 
+Enhanced review procedures for AI-
+generated code
+5.2 Emerging Standards 
+and Certification 
+Approaches
+5.2.1 AI Code Generation 
+Standards Development
+5.2.2 Voluntary 
+Certification Programs
+Several standards organizations are developing frameworks specifically 
+addressing AI-generated code:
+Industry-led certification programs are emerging to validate secure vibe coding 
+practices:
+20
+5.3 Governance 
+Models for Vibe Coding 
+Implementation
+5.3.1 Organizational 
+Governance Structures
+5.3.2 Audit and Assurance 
+Models
+Effective governance of vibe coding practices requires dedicated oversight roles 
+and clear accountability structures:
+Emerging best practices for assurance of AI-generated code include:
+AI Code Ethics 
+Committee: 
+Cross-functional 
+team responsible 
+for establishing 
+organizational 
+policies, reviewing 
+high-risk 
+implementations, 
+and ensuring 
+compliance 
+with emerging 
+regulations.
+AI Code 
+Provenance 
+Tracking: 
+Maintaining 
+immutable 
+records linking 
+generated code to 
+specific prompts, 
+models, and 
+human reviewers.
+AI Security 
+Architects: 
+Specialized role 
+focusing on the 
+intersection of 
+AI capabilities 
+and security 
+architecture, 
+responsible for 
+defining secure 
+prompt libraries 
+and validation 
+protocols.
+Differential 
+Testing 
+Frameworks: 
+Comparing 
+outputs of 
+multiple AI 
+systems for 
+the same 
+functionality to 
+identify potential 
+security issues.
+Prompt 
+Engineering 
+Governance: 
+Establishing 
+review processes 
+for prompts used 
+in production 
+code generation, 
+including 
+mandatory 
+security 
+requirements.
+Security-
+Focused Red 
+Teaming: 
+Dedicated 
+exercises 
+where security 
+professionals 
+attempt to 
+craft prompts 
+that generate 
+vulnerable code, 
+helping identify 
+weaknesses 
+in prompt 
+engineering 
+practices.
+6. Crafting Prompts for Secure Vibe Coding
+6.1 Identifying Insecure 
+Prompting Patterns
+The quality and security of AI-generated code are profoundly influenced by 
+the prompts provided by the user. Building on the AI limitations outlined in 
+Section 4.1, specific prompting  patterns significantly increase the likelihood 
+of introducing vulnerabilities because current AI models focus on functional 
+output unless specifically instructed to include security controls. This "pull-only" 
+model means developers must actively specify protections — security won't be 
+embedded by default. 
+Key insecure prompting patterns include:
+Vague or Naive Instructions: Simply asking the AI to "generate code for 
+a specific application" without any explicit security requirements often leads 
+to insecure outputs. The AI's default behavior, unless otherwise nudged, is to 
+prioritize functional completion over security.
+21
+Omission of Security Requirements: Failing to explicitly request crucial 
+security measures, such as proper input validation, robust authentication, 
+comprehensive authorization, or secure error handling, means these 
+critical components will likely be absent from the generated code. The 
+AI will focus on the requested functionality and may not proactively 
+implement best practices if they are not part of the explicit directive. 
+Implicit Trust: A high-risk pattern involves developers who "prompt 
+an LLM, accept the output wholesale, and proceed without validation or 
+threat modeling." This implicit trust in the AI's output, without critical 
+human review, is a primary pathway for vulnerabilities to enter production 
+systems.
+Speed-only Focus: Prioritizing rapid code generation without security 
+considerations in prompts introduces numerous vulnerabilities.
+To mitigate the "security by omission" problem, developers must adopt strategic 
+prompt engineering techniques: 
+Explicit Security Directives Always specify security requirements within prompts, 
+including input validation, parameterized queries, and access controls. 
+Example:  
+"Create a user authentication system using industry-standard secure practices. Store 
+passwords using Argon2 [14] hashing, implement multi-factor authentication, and ensure 
+secure session management with token expiration."
+Multi-Stage Prompting Prompt the AI twice: first to implement the feature, then to 
+review its own output for security issues.
+Example Sequence:
+Negative Constraints Explicitly prohibit insecure practices: "Never hardcode 
+secrets," "Avoid unsafe functions like exec or eval," or "Prohibit .env files in the 
+codebase." 
+Challenge Testing Proactively test AI responses with problematic inputs: "How 
+would this code handle a user input of: admin'; DROP TABLE users; --?" or "What 
+happens if a file upload contains a .php executable?" 
+Request Security Explanations Ask the AI to identify potential vulnerabilities: 
+"What security risks exist in this code?" or "How can we improve error handling to 
+prevent information leakage?"
+1. 
+"Generate a Python Flask API endpoint 
+for user profile updates."
+2. 
+"Review this Flask endpoint for security 
+vulnerabilities. Identify issues with 
+input validation, authentication, and 
+authorization. Suggest production-ready 
+improvements."
+Security Reality Check: Prompting without security context is like 
+compiling without error handling, it works until it breaks. Unless you 
+explicitly guide the LLM to consider secure patterns, it will default to 
+functional, not defensive, code. Always assume security is opt-in,  
+not built-in.
+6.2 Strategies for Secure 
+Prompt Engineering
+22
+Secure vs. Insecure 
+Prompting
+Feature/Task
+File Upload 
+Insecure Prompt 
+Example: "Build a 
+file upload server."
+Database 
+Connection 
+Insecure Prompt 
+Example: 
+"Connect to 
+my PostgreSQL 
+database."
+API Endpoint
+Insecure Prompt 
+Example: "Build 
+an API to download 
+documents."
+User 
+Authentication 
+Insecure Prompt 
+Example: "Create 
+a login form for my 
+app."
+Secure Prompt 
+Example
+"Build a file 
+upload server 
+using Express and 
+Multer. Ensure 
+rigorous file type 
+validation (only 
+JPEG, PNG, GIF), 
+sanitize filenames 
+to prevent path 
+traversal, and 
+implement a 
+max file size of 
+5MB. Store files 
+securely."
+"Connect to 
+a PostgreSQL 
+database using 
+environment 
+variables for 
+credentials 
+(DB_USER, DB_
+HOST, DB_NAME, 
+DB_PASSWORD, 
+DB_PORT). Use a 
+connection pool."
+"Build an API 
+endpoint to allow 
+authenticated 
+users to download 
+their own uploaded 
+documents. 
+Implement robust 
+authentication 
+and authorization 
+checks to ensure 
+only the document 
+owner can access 
+it."
+"Create a user 
+authentication 
+system for a 
+web app. Store 
+passwords 
+using strong, 
+salted hashes 
+(e.g., Argon2). 
+Implement 
+multi-factor 
+authentication 
+(MFA) and 
+secure session 
+management with 
+token expiration."
+Potential 
+Vulnerability
+No file type 
+validation, 
+filename 
+sanitization, or 
+size limits; allows 
+malicious uploads 
+(RCE, Path 
+Traversal).
+Hardcoded 
+credentials 
+directly in the 
+code.
+No user context, 
+authentication, 
+authorization, 
+or ownership 
+verification.
+Weak password 
+storage (plain 
+text), no MFA, 
+insecure session 
+management.
+Security 
+Outcome
+Prevents 
+malicious file 
+uploads, path 
+traversal, 
+and ensures 
+controlled 
+storage.
+Prevents 
+exposure of 
+sensitive database 
+credentials in 
+source code.
+Enforces proper 
+access control 
+and prevents 
+unauthorized 
+data access.
+Stronger 
+password 
+security, 
+enhanced 
+user identity 
+verification, and 
+reduced session 
+hijacking risks.
+23
+Data Processing 
+Insecure Prompt 
+Example: "Process 
+user input for my 
+web form."
+Error Handling 
+Insecure Prompt 
+Example: "Show 
+error messages if 
+something goes 
+wrong."
+"Process user input 
+from the web form. 
+Validate all inputs 
+for correct format 
+and sanitize them 
+to prevent SQL 
+injection and 
+Cross-Site Scripting 
+(XSS) attacks. Use 
+parameterized 
+queries for 
+database 
+interactions."
+"Implement robust 
+error handling that 
+provides user-
+friendly messages 
+without exposing 
+sensitive internal 
+details or stack 
+traces. Log detailed 
+errors securely 
+on the server-side 
+only."
+No input 
+sanitization, 
+vulnerable to XSS 
+or SQL injection.
+Error messages 
+revealing internal 
+system details or 
+stack traces.
+Mitigates 
+injection attacks 
+and ensures data 
+integrity.
+Prevents 
+information 
+leakage that 
+attackers could 
+exploit.
+7. Best Practices for Secure Vibe Coding Implementation
+7.1 Implementation 
+Workflow
+Code Review 
+Process
+Automated 
+Security 
+Integration
+Security Testing 
+Requirements
+Security Reality 
+Check
+Treat all AI-
+generated code 
+as potentially 
+vulnerable
+Integrate SAST/
+DAST tools 
+(SonarQube, Snyk, 
+Veracode) into CI/
+CD pipelines
+Write security-
+specific unit 
+tests verifying 
+unauthorized 
+access denial
+Speed without oversight is just fast failure. AI can generate 
+a thousand lines of code in minutes, but it takes human 
+expertise to determine if those lines should exist in 
+production. The bottleneck isn't code generation—it's 
+security validation.
+Conduct peer 
+reviews focusing 
+on business logic 
+and edge cases
+Implement 
+dependency 
+scanning 
+with OWASP 
+Dependency-
+Check [15] 
+or GitHub 
+Dependabot
+Include input 
+sanitization tests 
+for known attack 
+vectors
+Refactor verbose 
+AI output for 
+clarity and 
+consistency with 
+project standards
+Deploy secrets 
+detection tools 
+(GitGuardian) to 
+scan codebases 
+and Git history
+Implement DAST 
+methods like fuzz 
+testing for critical 
+endpoints
+24
+7.2 Technical 
+Implementation 
+Standards
+7.3 Organizational 
+Implementation
+7.4 Addressing Ethical 
+and Legal Considerations
+Data Handling
+Governance 
+Structure
+The adoption of AI-generated code also brings forth a complex array of ethical 
+and legal considerations that organizations must proactively address.
+Bias Mitigation: AI models are trained on historical data, which may 
+inherently contain and perpetuate biases (e.g., gender, racial, cultural). If 
+this biased data is used to train AI code generation systems, the resulting 
+code could also exhibit biases, potentially leading to discrimination 
+or unfair outcomes for certain groups of people. It is crucial to check 
+for harmful data values, ensure data inclusivity in training datasets, 
+and actively evaluate the generated code for biases throughout the 
+development process.  
+Compliance 
+and Legal 
+Framework
+Continuous 
+Monitoring
+Access Control 
+Implementation
+Use environment 
+variables or 
+dedicated secret 
+management 
+tools (AWS Secrets 
+Manager [16], 
+HashiCorp Vault 
+[17])
+Establish AI Code 
+Ethics Committee 
+for policy and 
+high-risk review
+Document AI 
+tool usage 
+for regulatory 
+compliance (EU 
+AI Act [4], NIST 
+Framework [5])
+Deploy runtime 
+monitoring with 
+log analysis 
+(Elastic Stack [19], 
+CloudWatch [20])
+Create 
+transparency 
+frameworks 
+linking code to 
+specific prompts 
+and reviewers
+Deploy robust 
+authentication 
+(OAuth [18], 
+MFA) and RBAC 
+authorization
+Implement 
+parameterized 
+queries; 
+utilize ORMs 
+for database 
+interactions
+Create AI Security 
+Architect role for 
+prompt libraries 
+and validation 
+protocols
+Establish IP 
+ownership 
+policies for AI-
+generated code
+Establish 
+feedback loops 
+from monitoring 
+insights 
+to prompt 
+refinement
+Configure 
+CORS settings 
+restrictively
+Encrypt sensitive 
+data at rest; use 
+HTTPS for all 
+transmissions
+Implement 
+prompt 
+engineering 
+governance 
+with mandatory 
+security 
+requirements
+Implement 
+bias detection 
+processes in 
+generated 
+outputs
+Conduct regular 
+security audits 
+of AI-generated 
+codebases
+Implement CSRF 
+tokens in all 
+forms
+25
+Intellectual Property Rights and Copyright: The legal landscape 
+surrounding the ownership and copyright of AI-generated code is 
+complex and largely unsettled. Traditional copyright law typically 
+requires human authorship, and AI-generated works may not be eligible 
+for copyright protection without clear evidence of substantial human 
+creative input. This ambiguity can lead to unclear intellectual property 
+rights and ownership issues. Furthermore, AI-generated code frequently 
+incorporates or references existing open-source libraries, many of which 
+come with specific licensing requirements. This "license contamination" 
+can inadvertently expose companies to significant legal liabilities if not 
+properly managed. Transparency regarding the AI tools used to generate 
+code is recommended, as it can help clarify potential sources and 
+associated legal implications.   
+Accountability and Responsibility: As AI systems increasingly 
+operate autonomously in code generation, questions arise regarding 
+accountability for errors, security vulnerabilities, or system failures that 
+may result from AI-generated code. To address this, developers need to 
+be able to trace the logic and decisions that influenced the AI's outputs, 
+ensuring a clear chain of responsibility. 
+Privacy and Data Protection: AI-based development tools often rely 
+on large datasets for training and operation, raising concerns about 
+privacy and data protection. These datasets must comply with relevant 
+privacy regulations, such as GDPR [21]. Rigorous oversight is necessary to 
+prevent AI systems from inadvertently exposing private information or 
+creating vulnerabilities that could be exploited by malicious actors. Users 
+should exercise caution when submitting content, especially sensitive or 
+proprietary data they did not create, to AI platforms, as terms of service 
+may grant the AI tool rights to reuse or distribute this content. 
+Environmental Impact: The building, training, and ongoing use of 
+generative AI models require significant energy consumption and water 
+for cooling, contributing to carbon emissions. Organizations should 
+consider the environmental impact of their AI usage and strive for 
+efficient deployment and operation of these tools. 
+Secure Vibe Coding Best 
+Practices Checklist
+Category
+Prompt 
+Engineering
+Best Practice
+Explicit Security 
+Directives 
+Multi-Stage 
+Prompting 
+Negative 
+Constraints
+Description/
+Action
+Always include 
+specific security 
+requirements 
+(e.g., input 
+validation, auth, 
+OWASP) in 
+prompts. 
+Prompt AI to 
+generate code, 
+then prompt it 
+again to review 
+its own output for 
+security flaws. 
+Explicitly forbid 
+insecure practices 
+(e.g., hardcoding 
+secrets, eval()) in 
+prompts.
+Key Benefit
+Nudges AI to 
+generate safer 
+code from the 
+start. 
+Catches 
+vulnerabilities by 
+forcing AI to self-
+assess security. 
+Establishes 
+non-negotiable 
+security 
+boundaries for AI.
+26
+Automated 
+Tools
+SAST/DAST 
+Integration
+Dependency 
+Scanning
+Secrets Detection
+Integrate Static 
+(SAST) and 
+Dynamic (DAST) 
+Application 
+Security Testing 
+into CI/CD 
+pipelines.
+Use tools to 
+scan third-
+party libraries 
+for known 
+vulnerabilities.
+Employ tools to 
+scan codebases 
+and Git history 
+for exposed 
+credentials.
+Flags common 
+vulnerabilities 
+early; tests 
+runtime behavior. 
+Prevents supply 
+chain attacks 
+from insecure 
+dependencies.
+Prevents 
+accidental 
+leakage of 
+sensitive 
+information.
+Code Review
+Critical Human 
+Review
+Refactoring for 
+Clarity
+Assume AI-
+generated code is 
+insecure; conduct 
+thorough peer 
+reviews for subtle 
+vulnerabilities.
+Clean up verbose/
+inconsistent AI 
+code; improve 
+variable names; 
+align with project 
+standards.
+Identifies 
+nuanced issues 
+missed by 
+automated tools; 
+ensures business 
+logic security.
+Enhances 
+correctness, 
+maintainability, 
+and security.
+Data Handling
+Input Validation/
+Sanitization
+Secure Secrets 
+Management 
+Database Security
+Rigorously 
+validate and 
+sanitize all user 
+inputs to prevent 
+injection attacks 
+(SQL, XSS, Path 
+Traversal).
+Use environment 
+variables or 
+dedicated secret 
+management 
+tools; never 
+hardcode 
+credentials.
+Protect data 
+with encryption, 
+parameterized 
+queries, and least 
+privilege access; 
+hash and salt 
+sensitive data.
+Protects against 
+common web 
+application 
+vulnerabilities. 
+Prevents 
+catastrophic 
+security breaches 
+if code becomes 
+public.
+Safeguards 
+sensitive 
+information in the 
+database.
+27
+Compliance & 
+Ethics
+General 
+Practices
+IP Due Diligence
+Bias Mitigation
+Transparency & 
+Accountability
+Version Control
+Continuous 
+Monitoring
+Secure API Design
+Understand 
+and manage 
+intellectual 
+property rights 
+and licensing 
+for AI-generated 
+code and its 
+components.
+Actively check 
+for and address 
+biases in training 
+data and AI-
+generated code.
+Document AI tool 
+usage; ensure 
+traceability 
+of AI outputs; 
+establish clear 
+accountability 
+frameworks.
+Use Git religiously 
+for snapshots 
+and easy 
+reverts; commit 
+frequently. 
+Implement 
+proactive 
+monitoring and 
+log analysis to 
+detect runtime 
+vulnerabilities 
+and anomalies.
+Implement robust 
+authentication 
+(MFA, OAuth) and 
+authorization 
+(RBAC, least 
+privilege) for all 
+APIs.
+Mitigates legal 
+risks related 
+to ownership 
+and license 
+contamination.
+Ensures fairness 
+and prevents 
+perpetuation of 
+discrimination.
+Promotes 
+responsible AI 
+development and 
+helps address 
+issues.
+Prevents data 
+loss; enables 
+fearless 
+experimentation 
+and easier 
+debugging. 
+Identifies issues 
+not caught during 
+static analysis; 
+provides real-time 
+alerts.
+Controls access to 
+sensitive data and 
+functionality.
+28
+8. Conclusion and Recommendations
+8.1 Key 
+Recommendations for 
+Organizations:
+8.2 Key Recommendations 
+for Developers:
+Vibe coding represents a transformative leap in software creation — blending speed, creativity, and 
+accessibility. Yet, as discussed throughout this guide, it introduces new risks that demand a proactive security-
+first mindset. AI can amplify innovation, but it cannot substitute sound engineering judgment.
+Invest in Training and Upskilling: Prioritize continuous training for developers 
+and security teams. This training should focus on secure prompt engineering, 
+critical code review of AI-generated output, and a deep understanding of 
+underlying AI limitations and potential failure modes.  
+Establish Robust Security Workflows: Integrate automated security testing 
+tools, including Static Application Security Testing (SAST), Dynamic Application 
+Security Testing (DAST), and Software Composition Analysis (SCA), into all CI/CD 
+pipelines. Complement these automated checks with rigorous, human-led code 
+review processes for all AI-generated code, especially for critical functionalities 
+and edge cases.  
+Standardize Secure Prompting: Develop and enforce internal guidelines and 
+potentially tools for crafting secure prompts. These guidelines should explicitly 
+include security requirements, constraints, and forbidden behaviors to guide 
+AI models toward generating safer code from the outset. This makes prompt 
+engineering a critical security control point, enabling "security by design" at the 
+earliest stage.  
+Implement Strong Data and Access Controls: Enforce strict secrets 
+management practices, ensuring sensitive data is never hardcoded. Design 
+and implement secure API endpoints with robust authentication (e.g., MFA) and 
+authorization (e.g., Role-Based Access Control, least privilege) mechanisms.  
+Address Legal and Ethical Implications: Develop clear internal policies 
+and frameworks for intellectual property ownership, license compliance, bias 
+mitigation, and data privacy specifically related to AI-generated code. Foster 
+transparency about AI tool usage and establish clear accountability for AI-
+generated outputs.
+  
+Adopt a Hybrid Development Model: Strategically leverage vibe coding 
+for rapid prototyping, idea validation, and automation of repetitive tasks. 
+Simultaneously, maintain and invest in traditional coding expertise for 
+developing complex, mission-critical, and legacy systems, ensuring a seamless 
+and secure integration between both approaches.  
+Never Trust, Always Verify: Approach all AI-generated code with a critical 
+mindset, assuming it may contain vulnerabilities. Thoroughly review and test 
+every piece of AI-generated output before integration. 
+ 
+Master Prompt Engineering: Develop strong skills in crafting clear, specific, 
+and security-aware prompts. Understand how to provide sufficient context and 
+explicit security directives to guide the AI effectively.  
+Maintain Foundational Knowledge: Continuously deepen your understanding 
+of core coding principles, secure coding best practices, and system architecture. 
+This fundamental knowledge is crucial for identifying and rectifying issues that 
+AI might miss or introduce.
+Utilize Security Tools: Integrate and effectively use automated security testing 
+tools (SAST, DAST, SCA) in your development workflow. Leverage AI-assisted 
+debugging and code auditing tools where available. 
+29
+Practice Secure Coding Habits: Apply principles like rigorous input validation, 
+secure secrets management, proper error handling, and robust authentication/
+authorization consistently, regardless of whether the code was human- or AI-
+generated. 
+8.3 Strategies for 
+Addressing the 
+Accessibility-Security 
+Paradox 
+8.3.1 Tiered Development 
+Framework
+8.3.2 Technological 
+Solutions
+Organizations can balance democratized access with security controls through 
+structured tiers: 
+Implementation Framework:
+Tier 1: 
+Supervised
+User Profile
+Permitted 
+Applications
+Security 
+Controls
+Oversight
+Non-technical 
+domain experts
+Internal 
+tools; Process 
+automation
+Pre-approved 
+prompt 
+templates; 
+Automated 
+scanning; 
+Mandatory expert 
+review
+Dedicated 
+security reviewer; 
+Restricted 
+deployment
+Technical domain 
+experts; Citizen 
+developers
+Departmental 
+applications; 
+Integration 
+components
+Semi-automated 
+validation; 
+Security-
+enhanced 
+prompts
+Security 
+champion pairing; 
+Periodic reviews
+Experienced 
+developers; 
+Security-trained 
+engineers
+Critical systems; 
+Customer-facing 
+applications
+Self-certification; 
+Advanced security 
+testing
+Spot checks; Risk-
+based reviews
+Tier 2:  
+Guided
+Tier 3:  
+Expert
+Security 
+Guardrails:
+Continuous 
+Validation 
+Pipelines:
+AI Security Co-
+Pilots: Specialized 
+LLMs trained to 
+analyze code for 
+vulnerabilities, 
+serving as 
+automated 
+security reviewers
+Prompt-to-
+Production 
+Security Gates: 
+Automated 
+checkpoints 
+validating code at 
+each stage with 
+risk-appropriate 
+security 
+complexity
+Security-
+Enhanced 
+Prompt 
+Libraries: Pre-
+vetted prompt 
+collections with 
+built-in security 
+controls for non-
+experts
+Security Drift 
+Detection: 
+Monitoring 
+systems 
+identifying when 
+AI code deviates 
+from expected 
+security patterns
+Automated 
+Security 
+Verification: 
+Static and 
+dynamic analysis 
+tools calibrated 
+for AI-generated 
+code patterns
+Compliance 
+Verification: 
+Tools mapping AI-
+generated code 
+against regulatory 
+requirements and 
+organizational 
+policies
+30
+8.3.3 Organizational 
+Implementation
+8.3.4 Progressive Risk 
+Management
+Upskilling 
+Programs:
+Risk-Based 
+Approach:
+Collaborative 
+Models:
+Prompt 
+Engineering 
+Security 
+Certification: 
+Training 
+developers on 
+security-focused 
+prompt design 
+and validation
+Graduated 
+Security 
+Requirements: 
+Tailoring controls 
+based on 
+application risk 
+level—higher-
+risk applications 
+require more 
+extensive security 
+measures 
+and expert 
+involvement
+This framework enables organizations to harness vibe coding's democratization 
+benefits while maintaining robust security posture through appropriate controls, 
+training, and technological safeguards.
+Security-
+Developer-AI 
+Triads: Cross-
+functional 
+teams where 
+security experts, 
+developers, and 
+AI specialists 
+collaborate
+Security 
+Champion 
+Networks: 
+Embedding 
+security-trained 
+individuals within 
+development 
+teams for 
+guidance and 
+first-line review
+Proportional 
+Resource 
+Allocation: 
+Directing security 
+resources based 
+on project risk, 
+ensuring critical 
+applications 
+receive 
+appropriate 
+attention without 
+overburdening 
+low-risk projects
+Expert Advisory 
+Panels: On-
+demand security 
+expert access 
+for high-risk 
+applications 
+without creating 
+development 
+bottlenecks
+AI-Security 
+Fusion Roles: 
+New positions 
+blending AI 
+expertise 
+with security 
+knowledge
+Continuous 
+Feedback 
+Integration: 
+Capturing security 
+lessons learned 
+and feeding 
+them back into 
+prompting 
+practices and 
+security controls
+Communities 
+of Practice: 
+Organization-
+wide knowledge 
+sharing focused 
+on secure vibe 
+coding
+31
+Sources
+[1]
+[2]
+[3]
+[4]
+[5]
+[6]
+[7]
+[8]
+[9]
+[10]
+[11]
+[12]
+[13]
+[14]
+[15]
+[16]
+[17]
+[18]
+[19]
+[20]
+[21]
+Karpathy, Andrej. "vibe coding," X (Twitter), February 6, 2025.
+Y Combinator. "Vibe Coding Is The Future," YC Startup Library, March 5, 
+2025. 
+GitGuardian. "The Hidden Breach: Secrets Leaked Outside the Codebase 
+Pose a Serious Threat," GitGuardian Blog, March 31, 2025.
+European Parliament and Council. "Regulation (EU) 2024/1689 on Artificial 
+Intelligence (AI Act)," Official Journal of the European Union, Article 1, July 
+12, 2024. 
+National Institute of Standards and Technology. "AI Risk Management 
+Framework (AI RMF 1.0)," NIST, January 2023. 
+U.S. Department of Health and Human Services. "Health Insurance 
+Portability and Accountability Act of 1996 (HIPAA)," Public Law 104-191, 
+August 21, 1996.
+U.S. Food and Drug Administration. "Digital Health Center of Excellence," 
+FDA.gov, accessed June 2025. 
+U.S. Department of the Treasury. "Managing Artificial Intelligence-Specific 
+Cybersecurity Risks in the Financial Services Sector," March 2024. 
+National Institute of Standards and Technology. "Framework for 
+Improving Critical Infrastructure Cybersecurity (Version 1.1)," April 16, 
+2018.
+General Services Administration. "FedRAMP Security Controls Baseline," 
+FedRAMP.gov, accessed June 2025. 
+U.S. Department of Defense. "Cybersecurity Maturity Model Certification 
+(CMMC) Model Overview," CMMC-COE, Version 2.0, November 2021. 
+International Organization for Standardization. "ISO/IEC JTC 1/SC 42 
+Artificial Intelligence," ISO.org, accessed June 2025. 
+OWASP Foundation. "OWASP AI Security and Privacy Guide," accessed June 
+2025. 
+Biryukov, Alex, Daniel Dinu, and Dmitry Khovratovich. "Argon2: New 
+Generation of Memory-Hard Functions for Password Hashing and Other 
+Applications," IEEE European Symposium on Security and Privacy, 2016. 
+OWASP Foundation. "OWASP Dependency-Check," accessed June 2025. 
+Amazon Web Services. "AWS Secrets Manager Developer Guide," accessed 
+June 2025. 
+HashiCorp. "Vault Documentation," accessed June 2025. 
+Hardt, D., Ed. "The OAuth 2.0 Authorization Framework," RFC 6749, 
+Internet Engineering Task Force, October 2012. 
+Elastic N.V. "Elasticsearch Guide: Manage Compute Resources," Elastic 
+Documentation, accessed June 2025. 
+Amazon Web Services. "Amazon CloudWatch User Guide," accessed June 
+2025.
+European Parliament and Council. "Regulation (EU) 2016/679 on the 
+General Data Protection Regulation (GDPR)," Official Journal of the 
+European Union, April 27, 2016. 
+32
+[22]
+[23]
+[24]
+Perry, Neil, Megha Srivastava, Deepak Kumar, and Dan Boneh. "Do 
+Users Write More Insecure Code with AI Assistants?" arXiv preprint, 
+arXiv:2211.03622, November 7, 2022.
+Stack Overflow. "2023 Developer Survey Results," Stack Overflow, 2023. 
+Kalliamvakou, Eirini. "Research: quantifying GitHub Copilot's impact on 
+developer productivity and happiness," GitHub Blog, September 7, 2022.
+
+
+--- TABLE.PDF ---
+
+Сравнение LLM в кибербезопасности
+AI система
+Сильные
+стороны
+Функции
+безопасности
+Известные
+ограничения
+Оптимально для
+Соображения
+безопасности
+OpenAI Codex
+/ GPT-4
+Универсальная
+система, проявляет
+глубокое
+концептуальное
+понимание
+Контекстное окно
+позволяет лучше
+понять
+архитектуру
+Может указывать
+на устаревшие
+библиотеки;
+Иногда возникают
+галлюцинации о
+несуществующих
+функциях
+Комплексная веб-
+разработка;
+Сложные
+алгоритмические
+задачи
+Склонность к
+созданию подробного
+кода, который может
+скрывать проблемы
+безопасности; Силен
+в синтаксисе, но
+слабее в
+безопасности на
+системном уровне
+Claude
+Убедительные
+объяснения,
+ориентация на
+естественный язык
+Возможности
+создания
+подсказок с
+учетом рисков;
+Надежная
+система
+подготовки
+документации
+Менее
+специализирован
+для определённых
+областей
+программирования;
+Более новый
+подход к генерации
+кода
+Проекты, требующие
+большого объёма
+документации;
+Приложения,
+критически важные
+для безопасности, в
+которых важны
+пояснения
+Превосходно
+объясняет
+последствия для
+безопасности;
+Консервативный
+подход к
+рекомендациям по
+безопасности
+DeepSeek
+Coder
+Специализирован
+для задач
+программирования;
+Глубокие знания
+репозиториев
+Предлагает код с
+учетом структуры
+репозитория;
+Встроенные
+возможности
+линтинга
+Более
+ограниченные
+общие знания вне
+области
+программирования
+Приложения с
+высокими
+требованиями к
+производительности;
+Системное
+программирование
+Сильная интеграция
+статического
+анализа; Слабее
+выявляет логические
+уязвимости в
+безопасности
+GitHub Copilot
+Осведомлённость
+о контексте
+репозитория
+Сканирование
+безопасности в
+реальном
+времени;
+Обнаружение
+уязвимостей
+OWASP
+Чрезмерная
+зависимость от
+контекста;
+Предложения
+основаны на
+шаблонах, а не на
+безопасности
+Быстрое
+прототипирование в
+существующих
+кодовых базах;
+Усиление рабочего
+процесса
+разработчика
+Быстрое
+прототипирование в
+существующих
+кодовых базах;
+Усиление рабочего
+процесса
+разработчика
+Amazon
+CodeWhisperer
+Интеграция с
+сервисами AWS;
+Генерация кода,
+соответствующего
+политикам
+Функция
+сканирования
+безопасности;
+Обнаружение
+соответствия
+требованиям
+Решения,
+ориентированные
+на AWS; Менее
+эффективен для
+не-AWS сред
+Код для облачной
+инфраструктуры;
+Соответствующие
+требованиям среды
+Силен в генерации
+кода,
+соответствующего
+требованиям;
+Специализированные
+функции
+безопасности для
+сервисов
+Cursor AI
+Ориентирован на
+редактирование
+существующего
+кода на
+естественном
+языке; Контекстно-
+осознанный
+рефакторинг
+Интегрированный
+линтинг
+безопасности и
+выделение
+уязвимостей
+прямо в
+редакторе
+Сильно зависит от
+контекста
+существующей
+кодовой базы;
+Менее подходит
+для генерации
+полностью новых,
+больших кодовых
+баз с нуля
+Итеративное
+совершенствование
+кода; Аудит
+безопасности
+существующих
+проектов;
+Совместная
+безопасная
+разработка
+Может выявлять и
+предлагать
+исправления
+уязвимостей в
+существующем коде;
+Эффективность
+зависит от качества
+предоставленного
+контекста; Хорош для
+проверки
+безопасности с
+участием человека
