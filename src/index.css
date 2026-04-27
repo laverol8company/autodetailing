@@ -3,55 +3,55 @@
 @tailwind utilities;
 
 /* ============================================
-   PREMIUM DESIGN SYSTEM — General Cars
+   V2 PREMIUM DESIGN SYSTEM (Topaz/Esoteric inspired)
    ============================================ */
 
 @layer base {
   :root {
-    --color-bg: #070A0F;
-    --color-graphite: #111827;
+    --color-bg-dark: #05070A;
+    --color-graphite: #0B0F14;
+    --color-charcoal: #111827;
     --color-ice: #F8FAFC;
     --color-card: #FFFFFF;
     --color-blue: #2563EB;
     --color-blue-hover: #1D4ED8;
     --color-platinum: #D8DEE9;
-    --color-muted: #6B7280;
-    --color-border: #E5E7EB;
+    --color-muted: #9CA3AF;
+    --color-border: rgba(255,255,255,0.12);
   }
 
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-[#070A0F] text-[#F8FAFC] antialiased overflow-x-hidden;
+    @apply antialiased overflow-x-hidden;
+    background-color: var(--color-bg-dark);
+    color: var(--color-ice);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   ::selection {
-    background-color: #2563EB33;
-    color: #F8FAFC;
+    background-color: rgba(37, 99, 235, 0.2);
+    color: #FFFFFF;
   }
 }
 
 @layer components {
 
   /* ─── SECTION WRAPPERS ─── */
-
   .premium-section-dark {
-    @apply py-20 md:py-28 bg-[#070A0F];
+    background-color: var(--color-bg-dark);
+    @apply py-20 md:py-28;
   }
 
   .premium-section-graphite {
-    @apply py-20 md:py-28 bg-[#111827];
+    background-color: var(--color-graphite);
+    @apply py-20 md:py-28;
   }
 
   .premium-section-light {
-    @apply py-20 md:py-28 bg-[#F8FAFC];
+    background-color: var(--color-ice);
+    @apply py-20 md:py-28;
   }
 
   .premium-container {
@@ -59,75 +59,87 @@
   }
 
   /* ─── TYPOGRAPHY ─── */
-
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#2563EB] mb-4;
+    @apply inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#D8DEE9] mb-4 opacity-70;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white;
-  }
-
-  .section-title-dark {
-    @apply text-3xl md:text-4xl font-bold tracking-tight text-[#111827];
+    @apply text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.1];
   }
 
   .section-subtitle {
-    @apply text-base md:text-lg text-[#6B7280] mt-4 max-w-2xl;
-  }
-
-  .section-subtitle-light {
-    @apply text-base text-[#6B7280] mt-4 max-w-2xl;
+    @apply text-base md:text-lg text-[#9CA3AF] mt-4 max-w-2xl leading-relaxed font-light;
   }
 
   /* ─── CARDS ─── */
-
   .premium-card {
-    @apply rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm
-           hover:shadow-md hover:border-[#2563EB]/30 transition-all duration-300;
+    @apply rounded-xl border p-6 bg-white shadow-sm transition-all duration-300;
   }
 
   .premium-card-dark {
-    @apply rounded-2xl border border-white/5 bg-[#111827] p-6
-           hover:border-[#2563EB]/30 transition-all duration-300;
+    background-color: var(--color-charcoal);
+    border: 1px solid var(--color-border);
+    @apply rounded-xl p-8 hover:border-[#2563EB]/40 transition-all duration-300;
   }
 
   .glass-panel {
-    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6;
+    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    @apply rounded-2xl p-6 md:p-8;
+  }
+
+  .service-card-premium {
+    background-color: var(--color-bg-dark);
+    border: 1px solid var(--color-border);
+    @apply flex flex-col p-8 rounded-xl transition-all duration-300 hover:border-[#2563EB]/50;
+  }
+
+  .smart-flow-card {
+    background-color: var(--color-graphite);
+    border: 1px solid var(--color-border);
+    @apply rounded-2xl p-8 max-w-xl mx-auto shadow-2xl;
+  }
+
+  .proof-card {
+    background-color: var(--color-charcoal);
+    border: 1px solid var(--color-border);
+    @apply overflow-hidden rounded-xl group hover:border-[#2563EB]/30 transition-colors;
   }
 
   /* ─── BUTTONS ─── */
-
   .premium-button-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#2563EB] text-white 
-           font-semibold text-sm px-6 py-3 transition-all duration-200
-           hover:bg-[#1D4ED8] hover:shadow-lg hover:shadow-[#2563EB]/25
-           active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB];
+    background-color: var(--color-blue);
+    @apply inline-flex items-center justify-center gap-2 rounded-md text-white 
+           font-semibold text-sm px-8 py-3.5 transition-all duration-300
+           hover:bg-[#1D4ED8] hover:shadow-[0_4px_20px_rgba(37,99,235,0.3)]
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB];
   }
 
   .premium-button-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 
-           bg-white/5 backdrop-blur-sm text-white font-semibold text-sm px-6 py-3 
-           transition-all duration-200 hover:bg-white/10 hover:border-white/30
-           active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30;
+    border: 1px solid var(--color-border);
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-transparent
+           text-[#D8DEE9] font-medium text-sm px-8 py-3.5 transition-all duration-300
+           hover:border-white hover:text-white
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white;
   }
 
   /* ─── DECORATIVE ─── */
-
   .blue-glow {
     @apply absolute inset-0 pointer-events-none;
-    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
   }
 
   .platinum-divider {
-    @apply w-12 h-[2px] bg-[#D8DEE9]/40 rounded-full;
+    background-color: var(--color-platinum);
+    @apply w-12 h-px opacity-30 my-6;
   }
 
   .subtle-grid-bg {
     background-image: 
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
+      linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 
   .showroom-light-sweep {
@@ -137,12 +149,12 @@
   .showroom-light-sweep::after {
     content: '';
     @apply absolute inset-0;
-    background: conic-gradient(from 180deg at 50% -20%, transparent 60deg, rgba(37,99,235,0.08) 120deg, transparent 180deg);
-    animation: sweep 8s ease-in-out infinite alternate;
+    background: conic-gradient(from 180deg at 50% -20%, transparent 60deg, rgba(255,255,255,0.03) 120deg, transparent 180deg);
+    animation: sweep 12s ease-in-out infinite alternate;
   }
 
   @keyframes sweep {
-    0%   { transform: rotate(-5deg) scale(1.1); opacity: 0.6; }
-    100% { transform: rotate(5deg) scale(1.15); opacity: 1; }
+    0%   { transform: rotate(-8deg) scale(1.1); opacity: 0.4; }
+    100% { transform: rotate(8deg) scale(1.2); opacity: 0.8; }
   }
 }
