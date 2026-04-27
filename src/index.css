@@ -254,4 +254,133 @@
   .progress-bar-fill {
     @apply h-full bg-white transition-all duration-500 ease-out;
   }
+
+  /* ====================================================
+     AMBIENT LIGHTING SYSTEM
+     Subtle premium interior-lighting accents
+     10-15% of overall design — monochrome preserved
+     ==================================================== */
+
+  /* Ambient orb — soft glowing blob, use as absolute child */
+  .ambient-orb-blue {
+    @apply absolute pointer-events-none rounded-full;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(120,160,255,0.06) 0%, transparent 70%);
+    filter: blur(40px);
+    animation: orb-drift 20s ease-in-out infinite alternate;
+  }
+  .ambient-orb-violet {
+    @apply absolute pointer-events-none rounded-full;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(160,100,255,0.05) 0%, transparent 70%);
+    filter: blur(50px);
+    animation: orb-drift 25s ease-in-out infinite alternate-reverse;
+  }
+  .ambient-orb-ice {
+    @apply absolute pointer-events-none rounded-full;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(200,230,255,0.04) 0%, transparent 70%);
+    filter: blur(30px);
+    animation: orb-drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes orb-drift {
+    0%   { transform: translate(0px, 0px) scale(1); }
+    33%  { transform: translate(30px, -20px) scale(1.05); }
+    66%  { transform: translate(-20px, 15px) scale(0.97); }
+    100% { transform: translate(15px, -10px) scale(1.03); }
+  }
+
+  /* Ambient gradient line — horizontal glow divider */
+  .ambient-line {
+    @apply w-full h-px;
+    background: linear-gradient(90deg, transparent 0%, rgba(120,160,255,0.15) 30%, rgba(200,230,255,0.25) 50%, rgba(160,100,255,0.15) 70%, transparent 100%);
+    animation: line-pulse 8s ease-in-out infinite alternate;
+  }
+  @keyframes line-pulse {
+    0%   { opacity: 0.4; }
+    100% { opacity: 1; }
+  }
+
+  /* Subtle film grain overlay */
+  .grain-overlay {
+    @apply absolute inset-0 pointer-events-none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+    opacity: 0.4;
+  }
+
+  /* Cinematic edge vignette */
+  .cinematic-vignette {
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.7) 100%);
+  }
+
+  /* CTA glow — applied to primary CTA elements */
+  .cta-glow {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .cta-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(120,160,255,0.0), rgba(200,230,255,0.12), rgba(160,100,255,0.0));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .cta-glow:hover::before {
+    opacity: 1;
+  }
+  .cta-glow:hover {
+    box-shadow: 0 0 30px rgba(120,160,255,0.12), 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  /* Ambient border — border that subtly glows */
+  .ambient-border-hover {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .ambient-border-hover:hover {
+    border-color: rgba(120,160,255,0.25) !important;
+    box-shadow: 0 0 20px rgba(120,160,255,0.06);
+  }
+
+  /* Step selected state for Smart Quote */
+  .step-selected {
+    background-color: #171717 !important;
+    border-color: rgba(255,255,255,0.3) !important;
+    box-shadow: 0 0 16px rgba(200,230,255,0.06);
+  }
+
+  /* Luxury image panel placeholder */
+  .luxury-image-panel {
+    background: linear-gradient(135deg, #0D0D0D 0%, #171717 50%, #0D0D0D 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    @apply relative overflow-hidden;
+  }
+  .luxury-image-panel::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.015) 50%, transparent 70%);
+    animation: shimmer 6s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* ── prefers-reduced-motion ─────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .ambient-orb-blue,
+    .ambient-orb-violet,
+    .ambient-orb-ice,
+    .studio-sweep::before,
+    .ambient-line,
+    .luxury-image-panel::after { animation: none !important; }
+    * { transition-duration: 0.01ms !important; }
+  }
 }
+

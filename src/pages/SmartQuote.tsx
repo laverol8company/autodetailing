@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { calculateQuoteEstimate, QuoteEstimateResult } from '../lib/quoteEstimate';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
@@ -27,35 +27,61 @@ function normaliseCondition(s: string): string {
 export default function SmartQuote() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [selected, setSelected] = useState<string | null>(null);
   const [estimate, setEstimate] = useState<QuoteEstimateResult | null>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  function handleSelect(val: string) {
-    const next = { ...answers, [STEPS[step].id]: val };
-    setAnswers(next);
-    if (step < STEPS.length - 1) {
-      setStep(step + 1);
-    } else {
-      try {
-        const result = calculateQuoteEstimate({
-          serviceType: next['service'],
-          vehicleSize: normaliseSize(next['size']) as any,
-          condition: normaliseCondition(next['condition']) as any,
-          packageLevel: next['package'] as any,
-        });
-        setEstimate(result);
-      } catch {
-        setEstimate({ estimatedPriceRange: 'Custom Quote', estimatedDuration: 'TBD', note: 'Contact us for an accurate estimate.' });
-      }
-    }
+  function scrollCardIntoView() {
+    setTimeout(() => {
+      cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   }
 
-  function reset() { setStep(0); setAnswers({}); setEstimate(null); }
+  function handleSelect(val: string) {
+    setSelected(val);
+    const next = { ...answers, [STEPS[step].id]: val };
+    setAnswers(next);
+
+    setTimeout(() => {
+      if (step < STEPS.length - 1) {
+        setStep(step + 1);
+        setSelected(null);
+        scrollCardIntoView();
+      } else {
+        try {
+          const result = calculateQuoteEstimate({
+            serviceType: next['service'],
+            vehicleSize: normaliseSize(next['size']) as any,
+            condition: normaliseCondition(next['condition']) as any,
+            packageLevel: next['package'] as any,
+          });
+          setEstimate(result);
+        } catch {
+          setEstimate({ estimatedPriceRange: 'Custom Quote', estimatedDuration: 'TBD', note: 'Contact us for an accurate estimate.' });
+        }
+        scrollCardIntoView();
+      }
+    }, 180);
+  }
+
+  function goBack() {
+    setStep(step - 1);
+    setSelected(null);
+    scrollCardIntoView();
+  }
+
+  function reset() { setStep(0); setAnswers({}); setSelected(null); setEstimate(null); scrollCardIntoView(); }
 
   const pct = Math.round(((step + 1) / STEPS.length) * 100);
 
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center py-32 px-4">
-      <div className="w-full max-w-xl">
+    <div className="min-h-screen bg-[#050505] relative overflow-hidden flex items-center justify-center py-32 px-4">
+      {/* Ambient background */}
+      <div className="ambient-orb-ice" style={{ top: '10%', right: '-5%' }} />
+      <div className="ambient-orb-violet" style={{ bottom: '5%', left: '-5%' }} />
+      <div className="grain-overlay" />
+
+      <div className="relative z-10 w-full max-w-lg" ref={cardRef}>
 
         {estimate ? (
           /* ─── RESULT CARD ─── */
@@ -64,8 +90,11 @@ export default function SmartQuote() {
               <CheckCircle2 className="w-5 h-5 text-[#CFCFCF] flex-shrink-0" />
               <span className="label-xs">Recommendation ready</span>
             </div>
+
             <h2 className="display-md mb-2">{answers['package']} {answers['service']}</h2>
-            <p className="body-sm mb-10">Based on your {normaliseSize(answers['size'])} vehicle in {normaliseCondition(answers['condition'])} condition.</p>
+            <p className="body-sm mb-10">
+              Based on your <span className="text-[#CFCFCF]">{normaliseSize(answers['size'])}</span> vehicle in <span className="text-[#CFCFCF]">{normaliseCondition(answers['condition'])}</span> condition.
+            </p>
 
             <div className="grid grid-cols-2 gap-px bg-[rgba(255,255,255,0.06)] mb-10">
               <div className="bg-[#050505] p-6">
@@ -83,7 +112,7 @@ export default function SmartQuote() {
             </p>
 
             <div className="flex flex-col gap-3">
-              <Link to="/booking" className="btn-primary justify-center">
+              <Link to="/booking" className="btn-primary justify-center cta-glow">
                 Request Appointment
               </Link>
               <WhatsAppCTA
@@ -106,15 +135,22 @@ export default function SmartQuote() {
                 <span className="label-xs">Step {step + 1} of {STEPS.length}</span>
                 <span className="label-xs">{pct}%</span>
               </div>
-              <div className="progress-bar-track">
-                <div className="progress-bar-fill" style={{ width: `${pct}%` }} />
+              {/* Progress bar with subtle glow */}
+              <div className="progress-bar-track relative">
+                <div
+                  className="progress-bar-fill"
+                  style={{
+                    width: `${pct}%`,
+                    boxShadow: '0 0 8px rgba(200,230,255,0.3)',
+                  }}
+                />
               </div>
             </div>
 
             {/* Back */}
             {step > 0 && (
               <button
-                onClick={() => setStep(step - 1)}
+                onClick={goBack}
                 className="flex items-center gap-2 text-[#8A8A8A] hover:text-white transition-colors text-xs uppercase tracking-widest font-medium mb-8"
               >
                 <ArrowLeft className="w-3 h-3" /> Back
@@ -130,10 +166,15 @@ export default function SmartQuote() {
                 <button
                   key={opt}
                   onClick={() => handleSelect(opt)}
-                  className="flex items-center justify-between px-5 py-4 bg-[#171717] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.25)] hover:bg-[#232323] text-white text-sm font-medium text-left transition-all duration-200 group"
+                  disabled={selected !== null}
+                  className={`flex items-center justify-between px-5 py-4 border text-white text-sm font-medium text-left transition-all duration-200 group ${
+                    selected === opt
+                      ? 'step-selected'
+                      : 'bg-[#171717] border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.25)] hover:bg-[#232323]'
+                  }`}
                 >
                   <span className="text-[#CFCFCF] group-hover:text-white transition-colors">{opt}</span>
-                  <ArrowRight className="w-4 h-4 text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-all ${selected === opt ? 'text-white translate-x-1' : 'text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1'}`} />
                 </button>
               ))}
             </div>
