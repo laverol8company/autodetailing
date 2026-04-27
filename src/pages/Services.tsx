@@ -19,7 +19,7 @@ const catalog = [
     title: 'Protect',
     headline: 'Preserve the Investment Long-Term',
     desc: 'Ceramic and film-based protection systems that lock in perfection and guard against the harshest road conditions.',
-    img: 'https://images.unsplash.com/photo-1611821064430-0d402241afe4?auto=format&fit=crop&q=80&w=1200&h=500',
+    img: 'https://images.unsplash.com/photo-1600706432502-77a0e2e32790?auto=format&fit=crop&q=80&w=1200&h=500',
     services: [
       { name: 'Ceramic Coating (5yr)', desc: 'Nano-ceramic protection permanently bonded to paint. Extreme hydrophobics and UV stability.', price: 'From €800', duration: '2 Days', bestFor: 'Long-Term Protection' },
       { name: 'PPF — Front Impact', desc: 'Optically clear film protecting the most vulnerable impact zones. Self-healing in sunlight.', price: 'From €1,200', duration: '2–3 Days', bestFor: 'Highway & Stone Chips' },
@@ -43,7 +43,7 @@ const catalog = [
     title: 'Restore',
     headline: 'Bring Back What Was Lost',
     desc: 'Deep rehabilitation for heavily neglected interiors, contaminated surfaces, and vehicles needing a complete reset.',
-    img: 'https://images.unsplash.com/photo-1548092372-0d1bd40894a3?auto=format&fit=crop&q=80&w=1200&h=500',
+    img: 'https://images.unsplash.com/photo-1562141961-b8e6b67b3e5e?auto=format&fit=crop&q=80&w=1200&h=500',
     services: [
       { name: 'Deep Interior Extraction', desc: 'Hot water extraction of carpets and upholstery. Removes embedded stains and organic odors.', price: 'From €200', duration: '4–6 hrs', bestFor: 'Spills, Odors, Kids' },
       { name: 'Headlight Restoration', desc: 'Multi-stage sanding, polishing, and ceramic sealing for oxidized headlights.', price: 'From €150', duration: '2 hrs', bestFor: 'Cloudy / Yellowed Lights' },

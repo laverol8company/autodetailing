@@ -21,7 +21,7 @@ const SERVICES = [
     name: 'Protect',
     sub: 'Coating & Film',
     examples: ['Ceramic Coating', 'PPF', 'Glass Coating'],
-    img: 'https://images.unsplash.com/photo-1611821064430-0d402241afe4?auto=format&fit=crop&q=80&w=600&h=400',
+    img: 'https://images.unsplash.com/photo-1600706432502-77a0e2e32790?auto=format&fit=crop&q=80&w=600&h=400',
   },
   {
     name: 'Maintain',
@@ -33,7 +33,7 @@ const SERVICES = [
     name: 'Restore',
     sub: 'Deep Rehabilitation',
     examples: ['Interior Extraction', 'Odor Removal', 'Headlight Restoration'],
-    img: 'https://images.unsplash.com/photo-1548092372-0d1bd40894a3?auto=format&fit=crop&q=80&w=600&h=400',
+    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=400',
   },
 ];
 
