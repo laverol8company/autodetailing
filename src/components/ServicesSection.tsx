@@ -80,7 +80,7 @@ export function ServicesSection() {
                 <a href="#quote" className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#2563EB]/30 text-white text-xs font-medium py-2 transition-all">
                   Get Quote <ChevronRight className="h-3.5 w-3.5 text-[#6B7280] group-hover:text-white" />
                 </a>
-                <WhatsAppCTA variant="outline" className="w-full py-2 text-xs justify-center" service={service.title} />
+                <WhatsAppCTA variant="ghost" className="w-full py-2 text-xs justify-center" />
               </div>
             </div>
           ))}

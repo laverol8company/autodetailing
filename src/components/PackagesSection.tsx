@@ -106,7 +106,7 @@ export function PackagesSection() {
                 >
                   Select {pkg.level}
                 </a>
-                <WhatsAppCTA variant="outline" className="w-full justify-center py-2 text-xs" service={`${pkg.level} Package`} />
+                <WhatsAppCTA variant="ghost" className="w-full justify-center py-2 text-xs" />
               </div>
             </div>
           ))}

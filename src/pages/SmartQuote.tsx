@@ -1,134 +1,139 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { calculateQuoteEstimate, QuoteEstimateResult } from '../lib/quoteEstimate';
-import { ChevronRight, ArrowLeft, CheckCircle2, Phone } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { WhatsAppCTA } from '../components/WhatsAppCTA';
 
-const steps = [
-  { id: 'size', question: 'What size is your vehicle?', options: ['Small', 'Medium', 'Large', 'Extra Large'] },
-  { id: 'condition', question: 'What is the current condition?', options: ['Low', 'Medium', 'High'] },
-  { id: 'service', question: 'Which service are you considering?', options: ['Exterior Detailing', 'Interior Detailing', 'Ceramic Coating', 'Paint Correction', 'PPF'] },
+interface Step { id: string; question: string; options: string[]; }
+const STEPS: Step[] = [
+  { id: 'size', question: 'What size is your vehicle?', options: ['Small (Hatchback, Mini)', 'Medium (Sedan, Coupe)', 'Large (SUV, Estate)', 'Extra Large (Van, 4x4)'] },
+  { id: 'condition', question: 'Current paint condition?', options: ['Low — Few visible issues', 'Medium — Visible swirls & marks', 'High — Heavy scratches & fading'] },
+  { id: 'service', question: 'What are you looking for?', options: ['Exterior Detailing', 'Interior Detailing', 'Ceramic Coating', 'Paint Correction', 'PPF / Paint Protection Film'] },
   { id: 'package', question: 'Preferred protection level?', options: ['Essential', 'Premium', 'Signature'] },
 ];
 
+function normaliseSize(s: string): string {
+  if (s.startsWith('Small')) return 'Small';
+  if (s.startsWith('Medium')) return 'Medium';
+  if (s.startsWith('Large')) return 'Large';
+  return 'Extra Large';
+}
+function normaliseCondition(s: string): string {
+  if (s.startsWith('Low')) return 'Low';
+  if (s.startsWith('Medium')) return 'Medium';
+  return 'High';
+}
+
 export default function SmartQuote() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [estimate, setEstimate] = useState<QuoteEstimateResult | null>(null);
 
-  const handleSelect = (val: string) => {
-    const newAnswers = { ...answers, [steps[currentStep].id]: val };
-    setAnswers(newAnswers);
-
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
+  function handleSelect(val: string) {
+    const next = { ...answers, [STEPS[step].id]: val };
+    setAnswers(next);
+    if (step < STEPS.length - 1) {
+      setStep(step + 1);
     } else {
       try {
-        const est = calculateQuoteEstimate({
-          serviceType: newAnswers['service'],
-          vehicleSize: newAnswers['size'] as any,
-          condition: newAnswers['condition'] as any,
-          packageLevel: newAnswers['package'] as any,
+        const result = calculateQuoteEstimate({
+          serviceType: next['service'],
+          vehicleSize: normaliseSize(next['size']) as any,
+          condition: normaliseCondition(next['condition']) as any,
+          packageLevel: next['package'] as any,
         });
-        setEstimate(est);
+        setEstimate(result);
       } catch {
-        setEstimate({
-          estimatedPriceRange: 'Custom Quote Required',
-          estimatedDuration: 'To be determined',
-          note: 'Please contact us directly for an accurate estimate.'
-        });
+        setEstimate({ estimatedPriceRange: 'Custom Quote', estimatedDuration: 'TBD', note: 'Contact us for an accurate estimate.' });
       }
     }
-  };
+  }
 
-  const reset = () => {
-    setEstimate(null);
-    setCurrentStep(0);
-    setAnswers({});
-  };
+  function reset() { setStep(0); setAnswers({}); setEstimate(null); }
+
+  const pct = Math.round(((step + 1) / STEPS.length) * 100);
 
   return (
-    <div className="flex flex-col min-h-[90vh] bg-[#05070A] py-16">
-      <div className="premium-container flex-grow flex items-center justify-center">
-        
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center py-32 px-4">
+      <div className="w-full max-w-xl">
+
         {estimate ? (
-          <div className="smart-flow-card w-full">
-            <div className="flex flex-col items-center justify-center text-center mb-8 border-b border-white/5 pb-8">
-              <div className="h-12 w-12 rounded-full bg-[#2563EB]/20 flex items-center justify-center mb-4">
-                <CheckCircle2 className="h-6 w-6 text-[#2563EB]" />
+          /* ─── RESULT CARD ─── */
+          <div className="quote-card">
+            <div className="flex items-center gap-3 mb-8">
+              <CheckCircle2 className="w-5 h-5 text-[#CFCFCF] flex-shrink-0" />
+              <span className="label-xs">Recommendation ready</span>
+            </div>
+            <h2 className="display-md mb-2">{answers['package']} {answers['service']}</h2>
+            <p className="body-sm mb-10">Based on your {normaliseSize(answers['size'])} vehicle in {normaliseCondition(answers['condition'])} condition.</p>
+
+            <div className="grid grid-cols-2 gap-px bg-[rgba(255,255,255,0.06)] mb-10">
+              <div className="bg-[#050505] p-6">
+                <span className="label-xs block mb-2">Estimated Range</span>
+                <span className="text-white font-black text-2xl">{estimate.estimatedPriceRange}</span>
               </div>
-              <p className="text-[10px] text-[#6B7280] font-bold uppercase tracking-widest mb-2">Recommendation Ready</p>
-              <h2 className="text-3xl font-bold text-white">Your Tailored Plan</h2>
+              <div className="bg-[#050505] p-6">
+                <span className="label-xs block mb-2">Duration</span>
+                <span className="text-white font-semibold text-lg">{estimate.estimatedDuration}</span>
+              </div>
             </div>
 
-            <div className="bg-[#05070A] rounded-xl border border-white/10 p-6 mb-8 text-center shadow-inner">
-              <span className="block text-[10px] text-[#6B7280] uppercase tracking-widest font-semibold mb-2">Recommended Setup</span>
-              <span className="font-bold text-white text-xl block mb-6">{answers['package']} {answers['service']}</span>
-              
-              <div className="grid grid-cols-2 gap-4 divide-x divide-white/5">
-                <div>
-                  <span className="block text-[10px] text-[#6B7280] uppercase tracking-widest font-semibold mb-1">Estimated Value</span>
-                  <span className="text-2xl font-extrabold text-[#2563EB] tracking-tight">{estimate.estimatedPriceRange}</span>
-                </div>
-                <div>
-                  <span className="block text-[10px] text-[#6B7280] uppercase tracking-widest font-semibold mb-1">Duration</span>
-                  <span className="text-base text-[#D8DEE9] font-medium">{estimate.estimatedDuration}</span>
-                </div>
-              </div>
-            </div>
-            
-            <p className="text-xs text-[#9CA3AF] italic text-center mb-10 leading-relaxed max-w-sm mx-auto">
+            <p className="body-sm text-xs italic mb-10 pb-10 border-b border-[rgba(255,255,255,0.06)]">
               * {estimate.note}
             </p>
 
             <div className="flex flex-col gap-3">
-              <Link to="/booking" className="premium-button-primary py-4 w-full justify-center text-[13px] tracking-wide uppercase">
-                Submit Formal Request
+              <Link to="/booking" className="btn-primary justify-center">
+                Request Appointment
               </Link>
-              <a 
-                href={`https://wa.me/something?text=${encodeURIComponent(`Hi, I completed the Smart Quote. I'm looking at ${answers['package']} ${answers['service']} for my ${answers['size']} car.`)}`}
-                target="_blank" rel="noopener noreferrer"
-                className="premium-button-secondary border-none hover:bg-white/5 text-[11px] tracking-wide uppercase group"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#6B7280] group-hover:text-white" /> Continue on WhatsApp
-              </a>
-              <button onClick={reset} className="mt-4 text-[10px] uppercase font-bold tracking-widest text-[#6B7280] hover:text-white transition-colors">
-                Start Over
+              <WhatsAppCTA
+                variant="ghost"
+                className="justify-center"
+                message={`Hi, I completed the Smart Quote. I'm looking for ${answers['package']} ${answers['service']} for my ${normaliseSize(answers['size'])} vehicle.`}
+              />
+              <button onClick={reset} className="btn-text justify-center mt-2">
+                Start over
               </button>
             </div>
           </div>
+
         ) : (
-          <div className="smart-flow-card w-full">
-            <div className="mb-8">
-              <button 
-                onClick={() => currentStep > 0 && setCurrentStep(currentStep - 1)}
-                className={`flex items-center text-[10px] uppercase font-bold tracking-widest mb-6 transition-colors ${currentStep > 0 ? 'text-[#9CA3AF] hover:text-white' : 'text-transparent pointer-events-none'}`}
-              >
-                <ArrowLeft className="w-3 h-3 mr-1" /> Back
-              </button>
-              
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-bold text-[#2563EB] uppercase tracking-widest">Step {currentStep + 1} of {steps.length}</span>
-                <span className="text-[10px] font-bold text-[#6B7280]">{Math.round(((currentStep + 1) / steps.length) * 100)}%</span>
+          /* ─── STEP CARD ─── */
+          <div className="quote-card">
+            {/* Progress */}
+            <div className="mb-10">
+              <div className="flex justify-between items-center mb-3">
+                <span className="label-xs">Step {step + 1} of {STEPS.length}</span>
+                <span className="label-xs">{pct}%</span>
               </div>
-              <div className="w-full bg-[#05070A] border border-white/5 h-1.5 rounded-full overflow-hidden">
-                <div
-                  className="bg-[#2563EB] h-full transition-all duration-500 ease-out"
-                  style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                />
+              <div className="progress-bar-track">
+                <div className="progress-bar-fill" style={{ width: `${pct}%` }} />
               </div>
-              
-              <h3 className="text-2xl md:text-3xl font-extrabold text-white mt-8 leading-tight">{steps[currentStep].question}</h3>
             </div>
 
-            <div className="space-y-3">
-              {steps[currentStep].options.map((opt) => (
+            {/* Back */}
+            {step > 0 && (
+              <button
+                onClick={() => setStep(step - 1)}
+                className="flex items-center gap-2 text-[#8A8A8A] hover:text-white transition-colors text-xs uppercase tracking-widest font-medium mb-8"
+              >
+                <ArrowLeft className="w-3 h-3" /> Back
+              </button>
+            )}
+
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-snug">
+              {STEPS[step].question}
+            </h2>
+
+            <div className="flex flex-col gap-2">
+              {STEPS[step].options.map(opt => (
                 <button
                   key={opt}
                   onClick={() => handleSelect(opt)}
-                  className="w-full flex items-center justify-between text-left px-5 py-4 rounded-xl border border-white/5 bg-[#05070A] hover:border-[#2563EB]/50 hover:bg-[#2563EB]/5 text-white transition-all group shadow-sm"
+                  className="flex items-center justify-between px-5 py-4 bg-[#171717] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.25)] hover:bg-[#232323] text-white text-sm font-medium text-left transition-all duration-200 group"
                 >
-                  <span className="text-sm font-semibold text-[#D8DEE9] group-hover:text-white tracking-wide">{opt}</span>
-                  <ChevronRight className="h-4 w-4 text-[#6B7280] group-hover:text-[#2563EB] transition-colors" />
+                  <span className="text-[#CFCFCF] group-hover:text-white transition-colors">{opt}</span>
+                  <ArrowRight className="w-4 h-4 text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1 transition-all flex-shrink-0" />
                 </button>
               ))}
             </div>

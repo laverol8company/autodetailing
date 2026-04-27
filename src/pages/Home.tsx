@@ -1,149 +1,180 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search, Zap, Calendar, Wrench, Shield, Droplets, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { WhatsAppCTA } from '../components/WhatsAppCTA';
 
-const goals = [
-  { title: "I need a quote", desc: "Get an instant structured estimate.", icon: <Search className="w-5 h-5" />, link: "/smart-quote" },
-  { title: "I know the service", desc: "Browse our signature packages.", icon: <Wrench className="w-5 h-5" />, link: "/services" },
-  { title: "I want to book", desc: "Reserve your slot immediately.", icon: <Calendar className="w-5 h-5" />, link: "/booking" },
-  { title: "I'm not sure", desc: "Let our smart advisor guide you.", icon: <Zap className="w-5 h-5" />, link: "/smart-quote" },
+const PATHS = [
+  { title: 'I Need a Quote', desc: 'Get an instant estimation through our guided 4-step advisor.', to: '/smart-quote', num: '01' },
+  { title: 'I Know the Service', desc: 'Browse our full catalog of detailing and protection services.', to: '/services', num: '02' },
+  { title: 'I Want to Book', desc: 'Request a specific appointment slot directly.', to: '/booking', num: '03' },
+  { title: "I'm Not Sure", desc: 'Answer a few questions — we will recommend the right service.', to: '/smart-quote', num: '04' },
 ];
 
-const servicePreviews = [
-  { title: "Enhance", desc: "Paint Correction & Gloss Restoration", icon: <Sparkles className="w-5 h-5 text-[#2563EB]" /> },
-  { title: "Protect", desc: "Ceramic Coating & PPF Films", icon: <Shield className="w-5 h-5 text-[#2563EB]" /> },
-  { title: "Maintain", desc: "Premium Hand Wash & Interior", icon: <Droplets className="w-5 h-5 text-[#2563EB]" /> },
-  { title: "Restore", desc: "Deep Extraction & Revitalisation", icon: <Wrench className="w-5 h-5 text-[#2563EB]" /> },
+const SERVICES = [
+  { name: 'Enhance', sub: 'Paint Correction & Gloss', examples: ['Paint Correction', 'Gloss Enhancement', 'Panel Preparation'] },
+  { name: 'Protect', sub: 'Coating & Film', examples: ['Ceramic Coating', 'PPF', 'Glass Coating'] },
+  { name: 'Maintain', sub: 'Upkeep & Care', examples: ['Premium Wash', 'Interior Detail', 'Leather Care'] },
+  { name: 'Restore', sub: 'Deep Rehabilitation', examples: ['Interior Extraction', 'Odor Removal', 'Headlight Restoration'] },
 ];
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* 1. CINEMATIC HERO */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden premium-section-dark border-b border-white/5">
-        <div className="subtle-grid-bg absolute inset-0 opacity-100" />
-        <div className="showroom-light-sweep" />
-        <div className="blue-glow" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#05070A] via-[#05070A]/80 to-transparent" />
 
-        <div className="relative z-10 premium-container text-center max-w-4xl pt-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
-            Premium Detailing & Protection<br/>
-            <span className="text-[#D8DEE9] font-light">For Cars That Deserve More</span>
+      {/* ── 1. HERO ──────────────────────────────── */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050505]">
+        <div className="studio-sweep" />
+        {/* Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-transparent pointer-events-none" />
+
+        <div className="relative z-10 site-container pt-32 pb-24">
+          <p className="eyebrow mb-8">Premium Auto Detailing & Protection</p>
+          <h1 className="display-xl mb-8 max-w-4xl">
+            Premium Detailing<br />
+            <span className="text-[#CFCFCF] font-light">&amp; Protection</span><br />
+            Without Compromise.
           </h1>
-          <p className="text-base md:text-lg text-[#9CA3AF] mb-10 max-w-2xl mx-auto font-light">
-            Choose the right service, get a fast estimate, and request an appointment through a guided premium booking system.
+          <p className="body-lead max-w-lg mb-12">
+            Choose the right service, get a fast estimate, and request your appointment through a premium guided system.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/smart-quote" className="premium-button-primary w-full sm:w-auto text-[13px] tracking-wide">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <Link to="/smart-quote" className="btn-primary">
               Get a Quote
             </Link>
-            <Link to="/services" className="premium-button-secondary w-full sm:w-auto text-[13px] tracking-wide">
+            <Link to="/services" className="btn-ghost">
               Explore Services
             </Link>
-          </div>
-          <div className="mt-8">
-            <WhatsAppCTA variant="outline" className="text-xs tracking-wider uppercase border-none text-[#9CA3AF] hover:text-white" />
+            <WhatsAppCTA variant="text" className="mt-2 sm:mt-0" />
           </div>
         </div>
       </section>
 
-      {/* 2. CHOOSE YOUR GOAL */}
-      <section className="premium-section-graphite border-b border-white/5 relative z-20 -mt-16 bg-transparent py-0">
-        <div className="premium-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {goals.map((g, i) => (
-              <Link key={i} to={g.link} className="glass-panel group hover:border-[#2563EB]/40 flex flex-col p-6 shadow-2xl">
-                <div className="h-10 w-10 bg-white/5 rounded-full flex items-center justify-center text-[#2563EB] mb-4 group-hover:scale-110 group-hover:bg-[#2563EB] group-hover:text-white transition-all">
-                  {g.icon}
+      {/* ── 2. CHOOSE YOUR PATH ───────────────────── */}
+      <section className="section-mid">
+        <div className="site-container">
+          <div className="mb-14">
+            <span className="eyebrow">Where to start</span>
+            <h2 className="display-md">Choose your path.</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[rgba(255,255,255,0.06)]">
+            {PATHS.map(p => (
+              <Link key={p.num} to={p.to} className="path-card group bg-[#0D0D0D] hover:bg-[#171717]">
+                <span className="text-[#232323] text-5xl font-black leading-none">{p.num}</span>
+                <div>
+                  <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#CFCFCF] transition-colors">{p.title}</h3>
+                  <p className="body-sm text-xs">{p.desc}</p>
                 </div>
-                <h3 className="text-sm font-bold text-white mb-2">{g.title}</h3>
-                <p className="text-[#9CA3AF] text-xs leading-relaxed flex-grow">{g.desc}</p>
-                <div className="mt-4 flex items-center text-[10px] uppercase tracking-widest text-[#2563EB] font-bold group-hover:block transition-all opacity-0 group-hover:opacity-100 transform translate-x-[-10px] group-hover:translate-x-0">
-                  Select <ArrowRight className="inline-block w-3 h-3 ml-1" />
-                </div>
+                <ArrowRight className="w-4 h-4 text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1 transition-all mt-auto" />
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. SIGNATURE SERVICES PREVIEW */}
-      <section className="premium-section-dark">
-        <div className="premium-container">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+      {/* ── 3. SIGNATURE SERVICES PREVIEW ───────── */}
+      <section className="section-dark border-t border-[rgba(255,255,255,0.06)]">
+        <div className="site-container">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
             <div>
-              <span className="section-eyebrow">Our Discipline</span>
-              <h2 className="section-title">Signature Services</h2>
+              <span className="eyebrow">Our Disciplines</span>
+              <h2 className="display-md">Signature Services.</h2>
             </div>
-            <Link to="/services" className="text-xs uppercase tracking-widest font-bold text-[#2563EB] hover:text-white transition-colors flex items-center gap-2">
-              View All <ArrowRight className="w-4 h-4" />
+            <Link to="/services" className="btn-text whitespace-nowrap">
+              View All Services <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {servicePreviews.map((s, i) => (
-              <Link to="/services" key={i} className="premium-card-dark group">
-                <div className="mb-6">{s.icon}</div>
-                <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
-                <p className="text-sm text-[#9CA3AF] mb-8">{s.desc}</p>
-                <span className="text-[10px] uppercase font-bold text-[#D8DEE9] group-hover:text-[#2563EB] transition-colors">Explore Category →</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[rgba(255,255,255,0.06)]">
+            {SERVICES.map(s => (
+              <Link key={s.name} to="/services" className="service-card group bg-[#050505] hover:bg-[#0D0D0D]">
+                <div className="mb-auto">
+                  <h3 className="text-white font-bold text-xl mb-1 group-hover:text-[#CFCFCF] transition-colors">{s.name}</h3>
+                  <p className="text-[#8A8A8A] text-xs mb-6">{s.sub}</p>
+                  <ul className="flex flex-col gap-1.5">
+                    {s.examples.map(e => (
+                      <li key={e} className="text-[#8A8A8A] text-xs flex items-center gap-2">
+                        <span className="w-3 h-px bg-[#8A8A8A]" />
+                        {e}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-8 pt-6 border-t border-[rgba(255,255,255,0.06)] flex items-center justify-between">
+                  <span className="label-xs">Explore</span>
+                  <ArrowRight className="w-3 h-3 text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 4. PROOF PREVIEW */}
-      <section className="premium-section-graphite border-y border-white/5">
-        <div className="premium-container">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <span className="section-eyebrow">The Proof</span>
-              <h2 className="section-title leading-tight">Perfection is<br/>in the details.</h2>
-              <p className="section-subtitle">We document our transformations so you don't have to guess the outcome. See real vehicles, real problems, and real results.</p>
-              <Link to="/proof" className="premium-button-secondary mt-4">View Case Studies</Link>
+      {/* ── 4. PROOF PREVIEW ─────────────────────── */}
+      <section className="section-charcoal border-t border-[rgba(255,255,255,0.06)]">
+        <div className="site-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <span className="eyebrow">Results</span>
+              <h2 className="display-md mb-6">Perfection is in the details.</h2>
+              <p className="body-lead mb-8">
+                We document every transformation so you can see real vehicles, real problems, and real outcomes before making a decision.
+              </p>
+              <Link to="/proof" className="btn-ghost">
+                View Case Studies
+              </Link>
             </div>
-            <div className="flex-1 relative">
-              <div className="aspect-[4/3] w-full rounded-2xl bg-[#05070A] border border-white/10 overflow-hidden flex items-center justify-center relative group">
-                 {/* Placeholder for Cinematic Before/After Teaser */}
-                 <ImageIcon className="w-16 h-16 text-[#111827]" />
-                 <div className="absolute inset-0 bg-gradient-to-tr from-[#2563EB]/10 to-transparent mix-blend-overlay"></div>
-                 <div className="absolute bottom-6 left-6 right-6 flex justify-between text-[10px] uppercase font-bold tracking-widest text-[#D8DEE9]">
-                    <span>Before</span>
-                    <span>After</span>
-                 </div>
+            <div className="relative">
+              <div className="aspect-[3/2] bg-[#0D0D0D] border border-[rgba(255,255,255,0.08)] flex items-end relative overflow-hidden">
+                {/* Before/After visual placeholder */}
+                <div className="absolute inset-0 flex">
+                  <div className="flex-1 flex items-center justify-center border-r border-[rgba(255,255,255,0.08)]">
+                    <span className="text-[#232323] text-5xl font-black">B</span>
+                  </div>
+                  <div className="flex-1 flex items-center justify-center">
+                    <span className="text-[#232323] text-5xl font-black">A</span>
+                  </div>
+                </div>
+                <div className="relative z-10 w-full flex justify-between items-end px-4 pb-4">
+                  <span className="label-xs text-[#8A8A8A]/60">Before</span>
+                  <span className="label-xs text-[#8A8A8A]/60">After</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. SMART QUOTE PREVIEW */}
-      <section className="premium-section-dark">
-        <div className="premium-container max-w-3xl text-center">
-          <span className="section-eyebrow justify-center">Guided Booking</span>
-          <h2 className="section-title mb-6">Smart Quote Flow</h2>
-          <p className="section-subtitle mx-auto mb-12">
-            Answer a few quick questions. We evaluate your vehicle's condition and automatically route you to the correct structured package with an instant price estimation.
+      {/* ── 5. SMART QUOTE PREVIEW ────────────────── */}
+      <section className="section-dark border-t border-[rgba(255,255,255,0.06)]">
+        <div className="site-container max-w-3xl text-center mx-auto">
+          <span className="eyebrow">Guided System</span>
+          <h2 className="display-md mb-6">Not sure where to start?</h2>
+          <p className="body-lead mb-10">
+            Our Smart Quote advisor guides you through 4 quick questions and returns a recommended service, package, and an instant price estimate.
           </p>
-          <div className="flex items-center justify-center gap-2 md:gap-4 text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-12 flex-wrap">
-            <span className="text-white">Car</span> <ArrowRight className="w-3 h-3" />
-            <span className="text-white">Goal</span> <ArrowRight className="w-3 h-3" />
-            <span className="text-[#2563EB]">Package</span> <ArrowRight className="w-3 h-3" />
+          <div className="flex items-center justify-center gap-4 flex-wrap text-[#8A8A8A] text-xs uppercase tracking-widest font-medium mb-12">
+            <span className="text-white">Car</span>
+            <span>→</span>
+            <span className="text-white">Condition</span>
+            <span>→</span>
+            <span className="text-white">Service</span>
+            <span>→</span>
             <span className="text-white">Quote</span>
           </div>
-          <Link to="/smart-quote" className="premium-button-primary">Start Smart Quote</Link>
+          <Link to="/smart-quote" className="btn-primary">
+            Start Smart Quote
+          </Link>
         </div>
       </section>
 
-      {/* 6. FINAL CTA */}
-      <section className="py-24 bg-[#05070A] border-t border-white/5 relative overflow-hidden">
-        <div className="blue-glow opacity-50" />
-        <div className="relative z-10 premium-container text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">Ready to get your car inspected?</h2>
-          <div className="flex items-center justify-center gap-4">
-             <Link to="/smart-quote" className="premium-button-primary text-sm px-8 py-3.5">Start Smart Quote</Link>
+      {/* ── 6. FINAL CTA ──────────────────────────── */}
+      <section className="py-32 bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
+        <div className="site-container text-center">
+          <h2 className="display-lg mb-4 max-w-2xl mx-auto">Ready to give your car the attention it deserves?</h2>
+          <p className="body-lead mb-10">Book an appointment or start with our Smart Quote for an instant estimate.</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/smart-quote" className="btn-primary">Start Smart Quote</Link>
+            <Link to="/booking" className="btn-ghost">Request Appointment</Link>
           </div>
         </div>
       </section>

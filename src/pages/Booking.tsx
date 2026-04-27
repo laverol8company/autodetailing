@@ -1,165 +1,138 @@
 import { useState } from 'react';
-import { Calendar, Clock, CheckCircle2, ShieldCheck, MapPin, Watch } from 'lucide-react';
+import { CheckCircle2, Clock, MapPin, Shield } from 'lucide-react';
+
+const SERVICES = ['Ceramic Coating (5yr)', 'Paint Correction', 'PPF — Front Impact', 'Maintenance Wash', 'Interior Detail', 'Pre-Sale Preparation'];
+const TIMES = ['Morning (09:00–12:00)', 'Afternoon (12:00–16:00)', 'Late afternoon (16:00–18:00)'];
 
 export default function Booking() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
+  const [status, setStatus] = useState<'idle' | 'pending' | 'done'>('idle');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const required = ['service', 'date', 'time', 'name', 'phone'];
-    const missing = required.filter(f => !(fd.get(f) as string)?.trim());
-    
-    if (missing.length) { 
-      setErrorMsg('Please complete all required fields (*).'); 
-      return; 
-    }
-    
-    setErrorMsg('');
-    setStatus('submitting');
-    setTimeout(() => setStatus('success'), 1200);
-  };
+    const missing = ['service', 'date', 'time', 'name', 'phone'].filter(f => !(fd.get(f) as string)?.trim());
+    if (missing.length) { setError('Please complete all required fields.'); return; }
+    setError('');
+    setStatus('pending');
+    setTimeout(() => setStatus('done'), 1200);
+  }
 
   return (
-    <div className="flex flex-col bg-[#05070A] py-16 md:py-24">
-      <div className="premium-container">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
-          
-          {/* LEFT: Trust / Info Column */}
-          <div className="lg:col-span-5 order-2 lg:order-1">
-            <span className="section-eyebrow">Reservation</span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">Request<br/>Appointment</h1>
-            <p className="text-[#9CA3AF] text-base mb-12 font-light leading-relaxed">
-              We operate strictly by appointment to ensure every vehicle receives uninterrupted, meticulous attention.
+    <div className="bg-[#050505] min-h-screen">
+      <div className="site-container pt-40 pb-24">
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+
+          {/* ─── LEFT: Info ─── */}
+          <div className="lg:col-span-4">
+            <span className="eyebrow">Reserve</span>
+            <h1 className="display-md mb-6">Request an appointment.</h1>
+            <p className="body-lead mb-12">
+              We operate strictly by appointment. Each vehicle receives uninterrupted, meticulous attention from our lead technician.
             </p>
 
-            <div className="space-y-8">
+            <div className="flex flex-col gap-8">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <ShieldCheck className="w-5 h-5 text-[#2563EB]" />
-                </div>
+                <Shield className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-white text-sm font-bold mb-1">What happens next?</h3>
-                  <p className="text-[#9CA3AF] text-xs leading-relaxed">Your request will be reviewed by our lead technician. We'll contact you to confirm the exact date and finalize the details of your package.</p>
+                  <h3 className="text-white text-sm font-semibold mb-1">What comes next</h3>
+                  <p className="body-sm text-xs">We review your request and contact you within 24 hours to confirm availability and finalise the details.</p>
                 </div>
               </div>
-
               <div className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <Watch className="w-5 h-5 text-[#2563EB]" />
-                </div>
+                <Clock className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-white text-sm font-bold mb-1">Secure your slot</h3>
-                  <p className="text-[#9CA3AF] text-xs leading-relaxed">Our calendar fills up weeks in advance, especially for multi-day ceramic and paint correction services.</p>
+                  <h3 className="text-white text-sm font-semibold mb-1">Slots fill up fast</h3>
+                  <p className="body-sm text-xs">Multi-day ceramic and correction services are often booked 2–3 weeks in advance. Submit early.</p>
                 </div>
               </div>
-
               <div className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <MapPin className="w-5 h-5 text-[#2563EB]" />
-                </div>
+                <MapPin className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="text-white text-sm font-bold mb-1">Studio Location</h3>
-                  <p className="text-[#9CA3AF] text-xs leading-relaxed">Premium Auto Sector<br/>Bucharest, Romania</p>
+                  <h3 className="text-white text-sm font-semibold mb-1">Location</h3>
+                  <p className="body-sm text-xs">Premium Auto Sector<br />Bucharest, Romania<br />By appointment only.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: Form Column */}
-          <div className="lg:col-span-7 order-1 lg:order-2">
-            
-            {status === 'success' ? (
-              <div className="glass-panel text-center py-16 flex flex-col items-center justify-center h-full">
-                <div className="h-16 w-16 rounded-full bg-[#2563EB]/10 flex items-center justify-center mb-6">
-                  <CheckCircle2 className="h-8 w-8 text-[#2563EB]" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">Request Submitted</h3>
-                <p className="text-sm text-[#9CA3AF] mb-8 max-w-md mx-auto leading-relaxed">
-                  Your reservation request has been securely lodged in our system. A technician will review your vehicle details and contact you shortly.
+          {/* ─── RIGHT: Form ─── */}
+          <div className="lg:col-span-8">
+            {status === 'done' ? (
+              <div className="card-dark flex flex-col items-center justify-center text-center py-20 min-h-[500px]">
+                <CheckCircle2 className="w-10 h-10 text-[#CFCFCF] mb-6" />
+                <h3 className="text-white text-2xl font-bold mb-3">Request Submitted</h3>
+                <p className="body-sm max-w-sm mx-auto mb-8">
+                  Your request has been sent. Our team will review the details and confirm the appointment with you within 24 hours.
                 </p>
-                <button onClick={() => setStatus('idle')} className="text-[10px] text-[#2563EB] uppercase font-bold tracking-widest hover:text-white transition-colors">
-                  Submit another vehicle
+                <button onClick={() => setStatus('idle')} className="btn-text">
+                  Submit another request
                 </button>
               </div>
             ) : (
-              <div className="glass-panel">
-                <h3 className="text-lg font-bold text-white mb-8 border-b border-white/10 pb-6">Vehicle & Timeslot</h3>
-
-                {errorMsg && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-xs p-4 rounded-md mb-6">{errorMsg}</div>
+              <form onSubmit={handleSubmit} className="card-dark">
+                {error && (
+                  <div className="mb-6 px-4 py-3 border border-[rgba(255,255,255,0.15)] text-[#CFCFCF] text-xs">
+                    {error}
+                  </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Service Selection */}
-                  <div className="p-5 bg-[#05070A] border border-white/5 rounded-xl space-y-5">
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-2">Intent <span className="text-[#2563EB]">*</span></label>
-                      <select name="service" className="w-full bg-[#0B0F14] border border-white/10 rounded-md px-4 py-3 text-[#D8DEE9] text-sm focus:outline-none focus:border-[#2563EB]/50 transition-colors">
-                        <option value="">Select primary service…</option>
-                        <option value="Ceramic Coating">Ceramic Coating</option>
-                        <option value="Paint Correction">Paint Correction</option>
-                        <option value="PPF">Paint Protection Film</option>
-                        <option value="Maintenance Wash">Maintenance Wash</option>
-                      </select>
-                    </div>
+                {/* Service */}
+                <div className="form-field mb-6">
+                  <label className="form-label">Service <span className="text-[#CFCFCF]">*</span></label>
+                  <select name="service" className="form-select">
+                    <option value="">Select service…</option>
+                    {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-2 flex items-center gap-1">
-                          <Calendar className="w-3 h-3" /> Preferred Date <span className="text-[#2563EB]">*</span>
-                        </label>
-                        <input name="date" type="date" className="w-full bg-[#0B0F14] border border-white/10 rounded-md px-4 py-3 text-[#D8DEE9] text-sm focus:outline-none focus:border-[#2563EB]/50 transition-colors" />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-2 flex items-center gap-1">
-                          <Clock className="w-3 h-3" /> Preferred Window <span className="text-[#2563EB]">*</span>
-                        </label>
-                        <select name="time" className="w-full bg-[#0B0F14] border border-white/10 rounded-md px-4 py-3 text-[#D8DEE9] text-sm focus:outline-none focus:border-[#2563EB]/50 transition-colors">
-                          <option value="">Select time…</option>
-                          <option value="Morning">Morning (09:00 - 12:00)</option>
-                          <option value="Afternoon">Afternoon (12:00 - 16:00)</option>
-                        </select>
-                      </div>
-                    </div>
+                {/* Date + Time */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="form-field">
+                    <label className="form-label">Preferred Date <span className="text-[#CFCFCF]">*</span></label>
+                    <input name="date" type="date" className="form-input" />
                   </div>
-
-                  {/* Personal Details */}
-                  <div className="p-5 bg-[#05070A] border border-white/5 rounded-xl space-y-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-2">Full Name <span className="text-[#2563EB]">*</span></label>
-                        <input name="name" type="text" placeholder="John Doe" className="w-full bg-[#0B0F14] border border-white/10 rounded-md px-4 py-3 text-white text-sm focus:outline-none focus:border-[#2563EB]/50 placeholder-[#6B7280] transition-colors" />
-                      </div>
-                      <div>
-                        <label className="block text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-2">Phone <span className="text-[#2563EB]">*</span></label>
-                        <input name="phone" type="tel" placeholder="+1..." className="w-full bg-[#0B0F14] border border-white/10 rounded-md px-4 py-3 text-white text-sm focus:outline-none focus:border-[#2563EB]/50 placeholder-[#6B7280] transition-colors" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-2">Vehicle Details & Notes</label>
-                      <textarea name="message" rows={3} placeholder="Make, model, color, and any specific concerns..." className="w-full bg-[#0B0F14] border border-white/10 rounded-md px-4 py-3 text-white text-sm focus:outline-none focus:border-[#2563EB]/50 placeholder-[#6B7280] resize-none transition-colors" />
-                    </div>
+                  <div className="form-field">
+                    <label className="form-label">Preferred Time <span className="text-[#CFCFCF]">*</span></label>
+                    <select name="time" className="form-select">
+                      <option value="">Select window…</option>
+                      {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
                   </div>
+                </div>
 
-                  <div className="pt-2">
-                    <button disabled={status === 'submitting'} type="submit" className="premium-button-primary w-full justify-center py-4 text-xs tracking-widest uppercase">
-                      {status === 'submitting' ? 'Processing...' : 'Request Appointment'}
-                    </button>
-                    <p className="text-center text-[10px] text-[#6B7280] mt-4 font-medium uppercase tracking-widest">
-                      No payment required until inspection.
-                    </p>
+                {/* Name + Phone */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="form-field">
+                    <label className="form-label">Full Name <span className="text-[#CFCFCF]">*</span></label>
+                    <input name="name" type="text" placeholder="John Doe" className="form-input" />
                   </div>
-                </form>
-              </div>
+                  <div className="form-field">
+                    <label className="form-label">Phone <span className="text-[#CFCFCF]">*</span></label>
+                    <input name="phone" type="tel" placeholder="+40 700..." className="form-input" />
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div className="form-field mb-8">
+                  <label className="form-label">Vehicle & Notes</label>
+                  <textarea name="message" rows={3} placeholder="Make, model, colour, and any specific concerns…" className="form-textarea" />
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <button type="submit" disabled={status === 'pending'} className="btn-primary">
+                    {status === 'pending' ? 'Sending…' : 'Request Appointment'}
+                  </button>
+                  <p className="text-[#8A8A8A] text-[10px] uppercase tracking-widest self-center">
+                    No payment until inspection
+                  </p>
+                </div>
+              </form>
             )}
-            
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   );

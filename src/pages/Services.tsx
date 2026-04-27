@@ -1,120 +1,124 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Shield, Droplets, Wrench } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-const categories = [
+const catalog = [
   {
-    id: "enhance",
-    title: "Enhance",
-    subtitle: "Paint Correction & Refinement",
-    icon: <Sparkles className="w-8 h-8 text-[#2563EB] mb-6" />,
+    id: 'enhance',
+    title: 'Enhance',
+    headline: 'Restore & Reveal True Clarity',
+    desc: 'Remove years of imperfection from your paint. Swirls, scratches, and oxidation eliminated through precision machine polishing.',
     services: [
-      { name: "Paint Correction", desc: "Removes heavy swirl marks, oxidation, and scratches to restore absolute clarity.", price: "From €350", duration: "1–2 Days", bestFor: "Heavy Swirls & Fading" },
-      { name: "Gloss Enhancement", desc: "A single-stage machine polish to amplify gloss and clarity on well-maintained cars.", price: "From €200", duration: "6–8 Hrs", bestFor: "Light Swirls" },
-      { name: "Premium Pre-Sale Detail", desc: "Full interior and exterior refinement to maximize your vehicle's resale value.", price: "From €400", duration: "1 Day", bestFor: "Selling" }
-    ]
+      { name: 'Paint Correction', desc: 'Multi-stage machine polish removing heavy swirl marks, deep scratches, and oxidation. Results in a flawless mirror finish.', price: 'From €350', duration: '1–2 Days', bestFor: 'Heavy Swirls & Fading' },
+      { name: 'Gloss Enhancement', desc: 'Single-stage polish to amplify depth and clarity on well-maintained cars. Significant visual improvement in hours.', price: 'From €200', duration: '6–8 hrs', bestFor: 'Light Swirls' },
+      { name: 'Premium Exterior Detail', desc: 'Thorough exterior decontamination, clay bar treatment, and protective sealant application.', price: 'From €160', duration: '4–6 hrs', bestFor: 'Routine Rejuvenation' },
+    ],
   },
   {
-    id: "protect",
-    title: "Protect",
-    subtitle: "Ceramic & PPF Solutions",
-    icon: <Shield className="w-8 h-8 text-[#2563EB] mb-6" />,
+    id: 'protect',
+    title: 'Protect',
+    headline: 'Preserve the Investment Long-Term',
+    desc: 'Ceramic and film-based protection systems that lock in perfection, repel contamination, and guard against the harshest road conditions.',
     services: [
-      { name: "5-Year Ceramic Coating", desc: "Permanent adhesion protecting paint from UV, chemicals, and minor scratches.", price: "From €800", duration: "2 Days", bestFor: "Long-Term Protection" },
-      { name: "Front Impact PPF", desc: "Clear protective film guarding the bumper, hood, and fenders from stone chips.", price: "From €1,200", duration: "3 Days", bestFor: "Highway Driving" },
-      { name: "Wheels-Off Ceramic", desc: "Deep wheel cleaning and high-temp ceramic application inside the barrels and calipers.", price: "From €250", duration: "1 Day", bestFor: "Brake Dust Resistance" }
-    ]
+      { name: 'Ceramic Coating (5yr)', desc: 'Nano-ceramic protection permanently bonded to paint. Extreme hydrophobics, UV stability, and chemical resistance.', price: 'From €800', duration: '2 Days', bestFor: 'Long-Term Protection' },
+      { name: 'PPF — Front Impact', desc: 'Optically clear polyurethane film protecting the most vulnerable impact zones. Self-healing in sunlight.', price: 'From €1,200', duration: '2–3 Days', bestFor: 'Highway & Stone Chips' },
+      { name: 'Glass & Wheel Coating', desc: 'Dedicated ceramic coating for windscreen clarity and wheel contamination resistance.', price: 'From €250', duration: '1 Day', bestFor: 'Brake Dust & Rain' },
+    ],
   },
   {
-    id: "maintain",
-    title: "Maintain",
-    subtitle: "Regular Upkeep & Care",
-    icon: <Droplets className="w-8 h-8 text-[#2563EB] mb-6" />,
+    id: 'maintain',
+    title: 'Maintain',
+    headline: 'Keep the Finish Immaculate',
+    desc: 'Regular treatments that preserve your coating investment, maintain interior cleanliness, and keep your vehicle in showroom condition.',
     services: [
-      { name: "Signature Maintenance Wash", desc: "Safe, two-bucket hand wash with premium pH-neutral chemicals and air dry.", price: "From €80", duration: "2 Hrs", bestFor: "Regular Care" },
-      { name: "Interior Reset", desc: "Thorough vacuum, hard surface wipe down, and glass purification.", price: "From €120", duration: "3 Hrs", bestFor: "Monthly Refresh" },
-      { name: "Leather Conditioning", desc: "Deep clean and nourishment to prevent cracking and restore matte finish.", price: "From €80", duration: "2 Hrs", bestFor: "Leather Integrity" }
-    ]
+      { name: 'Maintenance Wash', desc: 'Safe two-bucket hand wash with premium pH-neutral detergents. Zero swirl risk. Protection topper applied.', price: 'From €80', duration: '2 hrs', bestFor: 'Weekly / Bi-Weekly' },
+      { name: 'Interior Detail', desc: 'Full vacuum, hard surface wipe-down, glass purification, and air vent cleaning. Leave feeling clean.', price: 'From €120', duration: '3 hrs', bestFor: 'Monthly Refresh' },
+      { name: 'Leather Care', desc: 'pH-balanced deep clean, dye revitalization, and nourishing conditioner to prevent cracking.', price: 'From €90', duration: '2 hrs', bestFor: 'Leather Preservation' },
+    ],
   },
   {
-    id: "restore",
-    title: "Restore",
-    subtitle: "Deep Rehabilitation",
-    icon: <Wrench className="w-8 h-8 text-[#2563EB] mb-6" />,
+    id: 'restore',
+    title: 'Restore',
+    headline: 'Bring Back What Was Lost',
+    desc: 'Deep rehabilitation services for heavily neglected interiors, contaminated surfaces, and vehicles that need a complete reset before sale.',
     services: [
-      { name: "Deep Interior Extraction", desc: "Wet extraction of carpets and seats to remove deep stains and odors.", price: "From €200", duration: "4 Hrs", bestFor: "Spills & Odors" },
-      { name: "Headlight Restoration", desc: "Sanding and polishing oxidized lenses, followed by protective ceramic coating.", price: "From €150", duration: "2 Hrs", bestFor: "Cloudy Lights" },
-      { name: "Engine Bay Detail", desc: "Safe degreasing and dressing of plastics under the hood.", price: "From €100", duration: "2 Hrs", bestFor: "Show Prep" }
-    ]
-  }
+      { name: 'Deep Interior Extraction', desc: 'Hot water extraction of carpets, upholstery, and headlining. Removes embedded stains and organic odors completely.', price: 'From €200', duration: '4–6 hrs', bestFor: 'Spills, Odors, Kids' },
+      { name: 'Headlight Restoration', desc: 'Multi-stage sanding, polishing, and ceramic sealing for oxidized headlights. Restores clarity and safety.', price: 'From €150', duration: '2 hrs', bestFor: 'Cloudy / Yellowed Lights' },
+      { name: 'Pre-Sale Preparation', desc: 'Full interior and exterior refinement to maximize your vehicle\'s presentation and resale value.', price: 'From €350', duration: '1 Day', bestFor: 'Selling / Consignment' },
+    ],
+  },
 ];
 
 export default function Services() {
   return (
-    <div className="flex flex-col bg-[#05070A]">
-      {/* HEADER */}
-      <section className="pt-24 pb-16 border-b border-white/5">
-        <div className="premium-container max-w-3xl pl-4 md:pl-8">
-          <span className="section-eyebrow">Our Disciplines</span>
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6">Mastery<br />In Every Detail.</h1>
-          <p className="text-lg font-light text-[#9CA3AF] leading-relaxed">
-            We don't just wash cars. We categorize our expertise into actionable outcomes: 
-            Enhancing clarity, Protecting investments, Maintaining perfection, and Restoring dignity.
-          </p>
+    <div className="bg-[#050505]">
+
+      {/* Header */}
+      <section className="pt-40 pb-20 border-b border-[rgba(255,255,255,0.06)]">
+        <div className="site-container">
+          <span className="eyebrow">Our Disciplines</span>
+          <h1 className="display-xl max-w-4xl">
+            Mastery in<br />
+            <span className="text-[#CFCFCF] font-light">every detail.</span>
+          </h1>
         </div>
       </section>
 
-      {/* CATEGORIES */}
-      {categories.map((cat, idx) => (
-        <section key={cat.id} className={`py-20 border-b border-white/5 ${idx % 2 !== 0 ? 'bg-[#0B0F14]' : 'bg-[#05070A]'}`}>
-          <div className="premium-container">
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
-              
-              {/* Category Sticky Header */}
-              <div className="lg:w-1/3">
-                <div className="sticky top-32">
-                  {cat.icon}
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{cat.title}</h2>
-                  <p className="text-[#9CA3AF] font-light text-base mb-8">{cat.subtitle}</p>
-                </div>
+      {/* Categories */}
+      {catalog.map((cat, i) => (
+        <section
+          key={cat.id}
+          className={`py-20 md:py-28 border-b border-[rgba(255,255,255,0.06)] ${i % 2 === 1 ? 'bg-[#0D0D0D]' : 'bg-[#050505]'}`}
+        >
+          <div className="site-container">
+            {/* Category intro */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+              <div className="lg:col-span-1">
+                <h2 className="display-md mb-3">{cat.title}</h2>
+                <p className="text-[#CFCFCF] font-light text-sm mb-4">{cat.headline}</p>
+                <p className="body-sm">{cat.desc}</p>
               </div>
-              
-              {/* Service Cards */}
-              <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
-                {cat.services.map((svc, sIdx) => (
-                  <div key={sIdx} className="service-card-premium">
-                    <div className="text-[10px] uppercase font-bold tracking-widest text-[#6B7280] mb-3 border-b border-white/5 pb-2">
-                       Outcome: {svc.bestFor}
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-3">{svc.name}</h3>
-                    <p className="text-[#9CA3AF] text-sm leading-relaxed mb-8 flex-grow font-light">{svc.desc}</p>
-                    
-                    <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
-                      <div>
-                        <span className="block text-[10px] uppercase tracking-widest text-[#6B7280] mb-1">Start at</span>
-                        <span className="text-white font-medium text-sm">{svc.price}</span>
+              <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-px bg-[rgba(255,255,255,0.06)]">
+                {cat.services.map(svc => (
+                  <div key={svc.name} className="service-card bg-[#050505] group flex flex-col">
+                    <div className="flex-grow">
+                      <div className="label-xs mb-4 flex items-center gap-2">
+                        <span className="w-4 h-px bg-[rgba(255,255,255,0.15)]" />
+                        {svc.bestFor}
                       </div>
-                      <div className="text-right">
-                         <span className="block text-[10px] uppercase tracking-widest text-[#6B7280] mb-1">Duration</span>
-                         <span className="text-[#D8DEE9] font-medium text-sm">{svc.duration}</span>
-                      </div>
+                      <h3 className="text-white font-semibold text-base mb-3">{svc.name}</h3>
+                      <p className="body-sm text-xs leading-relaxed">{svc.desc}</p>
                     </div>
-                    
-                    <Link to="/smart-quote" className="mt-6 flex items-center justify-center gap-2 w-full py-3 rounded border border-white/10 hover:border-white/30 text-white text-xs font-semibold uppercase tracking-widest transition-colors">
-                      Get Quote <ArrowRight className="w-3 h-3" />
-                    </Link>
+                    <div className="mt-8 pt-6 border-t border-[rgba(255,255,255,0.06)]">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <span className="label-xs block mb-1">From</span>
+                          <span className="text-white font-semibold text-sm">{svc.price}</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="label-xs block mb-1">Time</span>
+                          <span className="text-[#CFCFCF] text-sm">{svc.duration}</span>
+                        </div>
+                      </div>
+                      <Link to="/smart-quote" className="flex items-center justify-between w-full text-[#8A8A8A] hover:text-white transition-colors text-xs font-medium uppercase tracking-widest group">
+                        <span>Get Quote</span>
+                        <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
         </section>
       ))}
 
-      {/* BOTTOM CTA */}
+      {/* Bottom CTA */}
       <section className="py-24 text-center">
-        <h2 className="text-2xl text-white font-bold mb-6">Need a custom package?</h2>
-        <Link to="/smart-quote" className="premium-button-primary">Build Your Plan</Link>
+        <div className="site-container">
+          <h2 className="display-md mb-4">Need a custom package?</h2>
+          <p className="body-lead mb-8">Our advisor builds a plan tailored to your vehicle and goals.</p>
+          <Link to="/smart-quote" className="btn-primary">Build Your Plan</Link>
+        </div>
       </section>
 
     </div>
