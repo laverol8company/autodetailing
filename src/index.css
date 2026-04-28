@@ -646,3 +646,12 @@ em, .italic-accent {
   .hero-bg-video { animation: none !important; }
   * { animation-duration: 0.01ms !important; }
 }
+
+/* Hide iOS Safari video controls */
+.hero-bg-video video::-webkit-media-controls {
+  display: none !important;
+}
+.hero-bg-video video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

@@ -66,6 +66,23 @@ const STATS = [
 export default function Home() {
   const heroRef = useHeroReveal();
 
+  useEffect(() => {
+    // Control video playback for background cinematic feel & iOS autoplay hack
+    const video = heroRef.current?.querySelector('video');
+    if (video) {
+      video.playbackRate = 0.35;
+      
+      // Force iOS autoplay just in case Low Power Mode or Safari paused it
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was prevented. Can't do much without user interaction,
+          // but we ensure controls are hidden.
+        });
+      }
+    }
+  }, [heroRef]);
+
   return (
     <div className="bg-[var(--black)]">
 
@@ -78,7 +95,7 @@ export default function Home() {
       >
         {/* Background video — Cinematic Edit */}
         <div 
-          className="hero-bg-video"
+          className="hero-bg-video pointer-events-none"
           dangerouslySetInnerHTML={{
             __html: `
               <video
