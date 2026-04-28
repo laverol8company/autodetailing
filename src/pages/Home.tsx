@@ -77,16 +77,21 @@ export default function Home() {
         className="relative min-h-screen flex flex-col justify-end overflow-hidden"
       >
         {/* Background video — Cinematic Edit */}
-        <div className="hero-bg-video">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src="/jdm_vs_euro.mp4"
-            className="w-full h-full object-cover saturate-[0.65] brightness-50"
-          />
-        </div>
+        <div 
+          className="hero-bg-video"
+          dangerouslySetInnerHTML={{
+            __html: `
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                src="/jdm_vs_euro.mp4"
+                class="w-full h-full object-cover saturate-[0.65] brightness-50"
+              ></video>
+            `
+          }}
+        />
 
         {/* Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#000] via-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.3)] z-[1]" />
