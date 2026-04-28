@@ -363,7 +363,7 @@ em, .italic-accent {
    HERO SECTION
    ═══════════════════════════════════════════════════════════ */
 
-.hero-bg-img {
+.hero-bg-video {
   position: absolute;
   inset: 0;
   will-change: transform;
@@ -643,6 +643,6 @@ em, .italic-accent {
     opacity: 1 !important;
     width: auto !important;
   }
-  .hero-bg-img { animation: none !important; }
+  .hero-bg-video { animation: none !important; }
   * { animation-duration: 0.01ms !important; }
 }

@@ -77,16 +77,15 @@ export default function Home() {
         className="relative min-h-screen flex flex-col justify-end overflow-hidden"
       >
         {/* Background video — Cinematic Edit */}
-        <div className="hero-bg-img">
+        <div className="hero-bg-video">
           <video
             autoPlay
             loop
             muted
             playsInline
+            src="/jdm_vs_euro.mp4"
             className="w-full h-full object-cover saturate-[0.65] brightness-50"
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
 
         {/* Overlays */}
