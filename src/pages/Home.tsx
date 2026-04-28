@@ -76,19 +76,22 @@ export default function Home() {
         ref={heroRef}
         className="relative min-h-screen flex flex-col justify-end overflow-hidden"
       >
-        {/* Background image with slow zoom */}
+        {/* Background video — Cinematic Edit */}
         <div className="hero-bg-img">
-          <img
-            src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=1920"
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover saturate-50 brightness-75"
+          >
+            {/* High-quality cinematic car edit placeholder (since no local video was provided, this is a premium placeholder. Can be swapped with actual RR Cullinan edit) */}
+            <source src="https://cdn.coverr.co/videos/coverr-a-black-sports-car-9226/1080p.mp4" type="video/mp4" />
+          </video>
         </div>
 
         {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000] via-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.2)] z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000] via-[rgba(0,0,0,0.6)] to-[rgba(0,0,0,0.3)] z-[1]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.7)] to-transparent z-[1]" />
         <div className="scanlines" />
 
@@ -224,7 +227,7 @@ export default function Home() {
           4. SERVICES — Mansory/Kamikaze full-height panels
           ═══════════════════════════════════════════════════ */}
       <section className="border-t border-[var(--border)]">
-        <div className="site-container pt-16 pb-0">
+        <div className="site-container pb-24">
           <div className="flex items-end justify-between mb-12">
             <FadeUp>
               <p className="type-label mb-3">Disciplines</p>
@@ -236,39 +239,48 @@ export default function Home() {
               </Link>
             </FadeUp>
           </div>
-        </div>
 
-        {/* Service panels grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((s, i) => (
-            <FadeUp key={s.id} delay={i * 0.1}>
-              <Link to="/services" className="service-panel block">
-                {/* Background image */}
-                <div className="service-panel-img">
-                  <img
-                    src={s.img}
-                    alt={s.name}
-                    className="w-full h-full object-cover saturate-[0.7]"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="service-panel-overlay" />
-
-                {/* Content */}
-                <div className="service-panel-content">
-                  <span className="type-label mb-3 block">{s.label}</span>
-                  <h3 className="type-headline text-2xl mb-1">{s.name}</h3>
-                  <p className="type-body text-xs mb-4 opacity-70">{s.sub}</p>
-                  <p className="type-body text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-[200px] mb-6">
-                    {s.desc}
-                  </p>
-                  <div className="flex items-center gap-2 type-label text-[9px]">
-                    Explore <ArrowRight className="w-3 h-3" />
+          {/* Service panels grid - updated to 16:9 cards in 2 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {SERVICES.map((s, i) => (
+              <FadeUp key={s.id} delay={i * 0.1}>
+                <Link
+                  to="/services"
+                  className="block relative overflow-hidden group border border-[var(--border)] hover:border-[var(--border-hover)] transition-colors"
+                  style={{ aspectRatio: '16/9' }}
+                >
+                  {/* Background image */}
+                  <div className="absolute inset-0 transition-transform duration-1000 group-hover:scale-105">
+                    <img
+                      src={s.img}
+                      alt={s.name}
+                      className="w-full h-full object-cover saturate-[0.7]"
+                      style={{ objectPosition: 'center 60%' }}
+                      loading="lazy"
+                    />
                   </div>
-                </div>
-              </Link>
-            </FadeUp>
-          ))}
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.95)] via-[rgba(0,0,0,0.3)] to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
+                    <span className="type-label mb-3 block text-[var(--cyan)]">{s.label}</span>
+                    <h3 className="type-headline text-2xl md:text-3xl mb-2">{s.name}</h3>
+                    <p className="type-body text-sm mb-4 opacity-80">{s.sub}</p>
+                    <div className="h-0 overflow-hidden group-hover:h-[60px] transition-all duration-500 ease-out">
+                      <p className="type-body text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 max-w-sm">
+                        {s.desc}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 type-label text-[10px] mt-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 text-white">
+                      Explore Service <ArrowRight className="w-3 h-3 text-[var(--cyan)]" />
+                    </div>
+                  </div>
+                </Link>
+              </FadeUp>
+            ))}
+          </div>
         </div>
       </section>
 
