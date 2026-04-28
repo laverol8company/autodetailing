@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { MessageCircle, Calendar, Instagram, Youtube } from 'lucide-react';
 
 /* TikTok SVG */
-function TikTokIcon({ size = 16 }: { size?: number }) {
+function TikTokIcon({ size = 15 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.16 8.16 0 004.77 1.53V6.77a4.85 4.85 0 01-1-.08z"/>
@@ -10,14 +10,12 @@ function TikTokIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-/**
- * Otto Kraftor-style floating side dock — WhatsApp, Booking, Socials
- */
+/** Otto Kraftor-style floating side dock */
 export function SideDock() {
   return (
     <div className="side-dock hidden lg:flex" aria-label="Quick contact">
       <a
-        href="https://wa.me/40700000000"
+        href="https://wa.me/380976712147"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp"

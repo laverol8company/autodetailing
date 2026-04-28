@@ -157,8 +157,12 @@ em, .italic-accent {
 
 /* Reveal wrapper — clips text sliding in from bottom */
 .reveal-wrap {
-  overflow: hidden;
   display: block;
+  /* Use overflow:clip (not hidden) to avoid layout shifts.
+     overflowClipMargin lets descenders (g, y, p, j) breathe */
+  overflow: clip;
+  overflow-clip-margin: 6px;
+  padding-bottom: 0.15em;
 }
 
 /* The actual text slides up into view */
@@ -168,6 +172,8 @@ em, .italic-accent {
   opacity: 0;
   transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
               opacity 0.9s ease;
+  /* small padding so descenders don't clip */
+  padding-bottom: 0.05em;
 }
 
 .reveal-text.is-visible {
@@ -298,6 +304,9 @@ em, .italic-accent {
   text-transform: uppercase;
   color: var(--white-dim);
   transition: color 0.25s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .nav-link::after {
@@ -313,8 +322,6 @@ em, .italic-accent {
 
 .nav-link:hover { color: var(--white); }
 .nav-link:hover::after { width: 100%; }
-.nav-link.active { color: var(--white); }
-.nav-link.active::after { width: 100%; }
 
 /* ═══════════════════════════════════════════════════════════
    FLOATING SIDE CONTACT (Otto Kraftor style)

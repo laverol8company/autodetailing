@@ -1,48 +1,45 @@
-import { useEffect, useRef, ReactNode } from 'react';
+import { useEffect, useRef, ReactNode, ElementType } from 'react';
 
 interface RevealTextProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }
 
-/**
- * Carbonov-style text reveal — text slides up from clipped container on scroll.
- * Uses IntersectionObserver for scroll-triggered animation.
- */
-export function RevealText({ children, delay = 0, className = '', as: Tag = 'div' }: RevealTextProps) {
+export function RevealText({ children, delay = 0, className = '', as: TagName = 'div' }: RevealTextProps) {
   const wrapRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
-
     const inner = el.querySelector('.reveal-text') as HTMLElement | null;
     if (!inner) return;
-
-    if (delay) {
-      inner.style.transitionDelay = `${delay}s`;
-    }
-
+    if (delay) inner.style.transitionDelay = `${delay}s`;
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          inner.classList.add('is-visible');
-          obs.unobserve(el);
-        }
+        if (entry.isIntersecting) { inner.classList.add('is-visible'); obs.unobserve(el); }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
-
     obs.observe(el);
     return () => obs.disconnect();
   }, [delay]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = TagName as any;
   return (
-    // @ts-ignore — dynamic tag
-    <Tag ref={wrapRef} className={`reveal-wrap ${className}`}>
-      <span className="reveal-text">{children}</span>
+    <Tag
+      ref={wrapRef}
+      className={`reveal-wrap ${className}`}
+      style={{ paddingBottom: '0.15em', overflow: 'visible' }}
+    >
+      <span
+        className="reveal-text"
+        style={{ display: 'block', paddingBottom: '0.1em' }}
+      >
+        {children}
+      </span>
     </Tag>
   );
 }
@@ -51,36 +48,28 @@ interface FadeUpProps {
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
 }
 
-/**
- * Fade + slide up on scroll entry.
- */
-export function FadeUp({ children, delay = 0, className = '', as: Tag = 'div' }: FadeUpProps) {
+export function FadeUp({ children, delay = 0, className = '', as: TagName = 'div' }: FadeUpProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
     if (delay) el.style.transitionDelay = `${delay}s`;
-
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-visible');
-          obs.unobserve(el);
-        }
+        if (entry.isIntersecting) { el.classList.add('is-visible'); obs.unobserve(el); }
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
-
     obs.observe(el);
     return () => obs.disconnect();
   }, [delay]);
 
-  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = TagName as any;
   return <Tag ref={ref} className={`fade-up ${className}`}>{children}</Tag>;
 }
 
@@ -89,9 +78,6 @@ interface LineRevealProps {
   className?: string;
 }
 
-/**
- * Horizontal line that grows from left on scroll.
- */
 export function LineReveal({ delay = 0, className = '' }: LineRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -99,13 +85,9 @@ export function LineReveal({ delay = 0, className = '' }: LineRevealProps) {
     const el = ref.current;
     if (!el) return;
     if (delay) el.style.transitionDelay = `${delay}s`;
-
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-visible');
-          obs.unobserve(el);
-        }
+        if (entry.isIntersecting) { el.classList.add('is-visible'); obs.unobserve(el); }
       },
       { threshold: 0.1 }
     );
@@ -114,9 +96,6 @@ export function LineReveal({ delay = 0, className = '' }: LineRevealProps) {
   }, [delay]);
 
   return (
-    <div
-      ref={ref}
-      className={`line-reveal h-px bg-[var(--cyan)] ${className}`}
-    />
+    <div ref={ref} className={`line-reveal h-px bg-[var(--cyan)] ${className}`} />
   );
 }

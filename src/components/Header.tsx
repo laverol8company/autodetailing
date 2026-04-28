@@ -5,9 +5,9 @@ import { X, Menu } from 'lucide-react';
 const LINKS = [
   { label: 'Services',    to: '/services' },
   { label: 'Smart Quote', to: '/smart-quote' },
-  { label: 'Our Work',   to: '/proof' },
-  { label: 'Booking',    to: '/booking' },
-  { label: 'Contact',    to: '/contact' },
+  { label: 'Our Work',    to: '/proof' },
+  { label: 'Booking',     to: '/booking' },
+  { label: 'Contact',     to: '/contact' },
 ];
 
 export function Header() {
@@ -32,34 +32,79 @@ export function Header() {
             : 'bg-transparent'
         }`}
       >
-        <div className="site-container flex items-center justify-between h-16 md:h-20">
+        <div className="site-container flex items-center justify-between h-16 md:h-20 min-w-0">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="w-8 h-8 border border-[var(--cyan)] flex items-center justify-center">
-              <span className="font-mono text-[10px] font-bold tracking-widest text-[var(--cyan)]">GC</span>
+          <Link
+            to="/"
+            className="flex items-center gap-3 flex-shrink-0 min-w-0"
+            style={{ textDecoration: 'none' }}
+          >
+            <div className="w-8 h-8 flex-shrink-0 border border-[var(--cyan)] flex items-center justify-center">
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '10px',
+                  fontWeight: 700,
+                  letterSpacing: '0.15em',
+                  color: 'var(--cyan)',
+                  lineHeight: 1,
+                }}
+              >
+                GC
+              </span>
             </div>
-            <span className="hidden sm:block font-body text-xs tracking-[0.2em] uppercase text-white font-medium">
+            <span
+              className="hidden sm:block flex-shrink-0"
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.6875rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: 'white',
+                fontWeight: 500,
+                whiteSpace: 'nowrap',
+              }}
+            >
               General Cars
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop nav — centered */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 flex-shrink-0">
             {LINKS.map(l => (
               <Link
                 key={l.to}
                 to={l.to}
-                className={`nav-link ${location.pathname === l.to ? 'active' : ''}`}
+                className="nav-link"
+                style={location.pathname === l.to ? {
+                  color: 'white',
+                } : {}}
               >
                 {l.label}
+                {location.pathname === l.to && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: '-2px',
+                      left: 0,
+                      width: '100%',
+                      height: '1px',
+                      background: 'var(--cyan)',
+                    }}
+                  />
+                )}
               </Link>
             ))}
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Link to="/booking" className="btn-primary py-2.5 px-6 text-[10px]">
+          <div className="hidden md:flex flex-shrink-0">
+            <Link
+              to="/booking"
+              className="btn-primary"
+              style={{ padding: '0.625rem 1.25rem', fontSize: '0.625rem', whiteSpace: 'nowrap' }}
+            >
               <span>Book Now</span>
             </Link>
           </div>
@@ -67,7 +112,7 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(o => !o)}
-            className="md:hidden w-10 h-10 flex items-center justify-center text-white"
+            className="md:hidden w-10 h-10 flex items-center justify-center text-white flex-shrink-0"
             aria-label="Toggle menu"
           >
             <Menu className="w-5 h-5" />
@@ -97,10 +142,17 @@ export function Header() {
             <Link
               key={l.to}
               to={l.to}
-              style={{ transitionDelay: open ? `${i * 0.07}s` : '0s' }}
-              className={`type-headline transition-all duration-500 ${
+              style={{
+                transitionDelay: open ? `${i * 0.07}s` : '0s',
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 7vw, 3.5rem)',
+                fontWeight: 300,
+                lineHeight: 1.05,
+                color: location.pathname === l.to ? 'var(--cyan)' : 'white',
+              }}
+              className={`transition-all duration-500 hover:text-[var(--cyan)] ${
                 open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
-              } hover:text-[var(--cyan)] transition-colors`}
+              }`}
             >
               {l.label}
             </Link>
