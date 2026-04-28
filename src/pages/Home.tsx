@@ -1,298 +1,363 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { WhatsAppCTA } from '../components/WhatsAppCTA';
-import { MagneticCTA } from '../components/MagneticCTA';
+import { ArrowRight, ArrowDownRight } from 'lucide-react';
+import { RevealText, FadeUp, LineReveal } from '../components/Reveal';
 
-const PATHS = [
-  { title: 'I Need a Quote', desc: 'Get an instant estimate through our guided 4-step advisor.', to: '/smart-quote', num: '01' },
-  { title: 'I Know the Service', desc: 'Browse our full catalog of detailing and protection services.', to: '/services', num: '02' },
-  { title: 'I Want to Book', desc: 'Request a specific appointment slot directly.', to: '/booking', num: '03' },
-  { title: "I'm Not Sure", desc: 'Answer a few questions — we recommend the right service.', to: '/smart-quote', num: '04' },
-];
+/* ── Inline useReveal hook for hero (no IntersectionObserver needed — immediate) ── */
+function useHeroReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    // Trigger all reveal-text elements after mount
+    const items = el.querySelectorAll('.reveal-text, .fade-up, .fade-in');
+    const timer = setTimeout(() => {
+      items.forEach(item => item.classList.add('is-visible'));
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+  return ref;
+}
 
+/* ── Services data ── */
 const SERVICES = [
   {
+    id: 'enhance',
+    label: '01',
     name: 'Enhance',
     sub: 'Paint Correction & Gloss',
-    examples: ['Paint Correction', 'Gloss Enhancement', 'Panel Preparation'],
-    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600&h=400',
+    desc: 'Remove swirls, scratches, and oxidation. Reveal the true depth of your paint.',
+    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1400',
   },
   {
+    id: 'protect',
+    label: '02',
     name: 'Protect',
-    sub: 'Coating & Film',
-    examples: ['Ceramic Coating', 'PPF', 'Glass Coating'],
-    img: 'https://images.unsplash.com/photo-1600706432502-77a0e2e32790?auto=format&fit=crop&q=80&w=600&h=400',
+    sub: 'Ceramic Coating & PPF',
+    desc: 'Multi-year hydrophobic protection that repels water, dirt, and UV damage.',
+    img: 'https://images.unsplash.com/photo-1600706432502-77a0e2e32790?auto=format&fit=crop&q=80&w=1400',
   },
   {
+    id: 'maintain',
+    label: '03',
     name: 'Maintain',
     sub: 'Upkeep & Care',
-    examples: ['Premium Wash', 'Interior Detail', 'Leather Care'],
-    img: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=600&h=400',
+    desc: 'Preserve your investment with meticulous wash protocols and detailing.',
+    img: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=1400',
   },
   {
+    id: 'restore',
+    label: '04',
     name: 'Restore',
     sub: 'Deep Rehabilitation',
-    examples: ['Interior Extraction', 'Odor Removal', 'Headlight Restoration'],
-    img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=400',
+    desc: 'From interior extraction to full exterior rehabilitation — any condition.',
+    img: 'https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?auto=format&fit=crop&q=80&w=1400',
   },
+];
+
+/* ── Stats ── */
+const STATS = [
+  { value: '200+', label: 'Vehicles detailed' },
+  { value: '5yr',  label: 'Coating warranty' },
+  { value: '48h',  label: 'Response time' },
+  { value: '100%', label: 'Appointment-only' },
 ];
 
 export default function Home() {
+  const heroRef = useHeroReveal();
+
   return (
-    <div className="flex flex-col">
+    <div className="bg-[var(--black)]">
 
-      {/* ── 1. HERO ──────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#050505]">
-
-        {/* HERO REAL IMAGE — dark cinematic car */}
-        <div className="absolute inset-0 z-0">
+      {/* ═══════════════════════════════════════════════════
+          1. HERO — Full viewport, cinematic car + massive type
+          ═══════════════════════════════════════════════════ */}
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex flex-col justify-end overflow-hidden"
+      >
+        {/* Background image with slow zoom */}
+        <div className="hero-bg-img">
           <img
             src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=1920"
-            alt="Premium Detailing"
-            className="w-full h-full object-cover opacity-35 kinetic-pan"
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover"
             loading="eager"
           />
-          {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/85 to-[#050505]/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/60" />
         </div>
 
-        {/* Ambient colour orbs */}
-        <div className="ambient-orb-blue" style={{ top: '-10%', right: '-5%' }} />
-        <div className="ambient-orb-violet" style={{ bottom: '-20%', left: '-5%' }} />
+        {/* Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000] via-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.2)] z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(0,0,0,0.7)] to-transparent z-[1]" />
+        <div className="scanlines" />
 
-        {/* FLOATING AMBIENT LINES — clearly visible */}
-        <div className="float-line float-line-1" style={{ top: '30%', left: '5%' }} />
-        <div className="float-line float-line-2" style={{ top: '45%', left: '25%' }} />
-        <div className="float-line float-line-3" style={{ top: '60%', left: '8%' }} />
-        <div className="float-line float-line-4" style={{ top: '75%', left: '20%' }} />
+        {/* Top eyebrow */}
+        <div className="absolute top-24 left-0 right-0 z-[3]">
+          <div className="site-container">
+            <div className="fade-in is-visible flex items-center gap-4">
+              <div className="w-5 h-px bg-[var(--cyan)]" />
+              <span className="type-label">Premium Auto Detailing Studio · Bucharest</span>
+            </div>
+          </div>
+        </div>
 
-        {/* Film grain */}
-        <div className="grain-overlay" />
-        {/* Edge vignette */}
-        <div className="cinematic-vignette" />
+        {/* Main content — bottom aligned */}
+        <div className="relative z-[3] site-container pb-16 md:pb-24">
 
-        <div className="relative z-10 site-container pt-36 pb-24">
-          <p className="eyebrow mb-8 flex items-center gap-3">
-            <span className="w-8 h-px bg-[rgba(255,255,255,0.25)] inline-block" />
-            Premium Auto Detailing & Protection
-          </p>
-
-          <h1 className="display-xl mb-8 max-w-3xl">
-            <span className="emphasis-word">Premium</span> <span className="word-underline">Detailing</span><br />
-            <span className="word-accent">& Protection</span><br />
-            Without <span className="emphasis-word">Compromise.</span>
-          </h1>
-
-          <p className="body-lead max-w-lg mb-12">
-            Choose the right service, get a fast estimate, and request your appointment.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-start gap-4">
-            <MagneticCTA strength={10}>
-              <Link to="/smart-quote" className="btn-primary cta-magnetic">
-                Get a Quote
-              </Link>
-            </MagneticCTA>
-            <Link to="/services" className="btn-ghost">
-              Explore Services
-            </Link>
-            <WhatsAppCTA variant="text" className="mt-2 sm:mt-0" />
+          {/* Giant headline */}
+          <div className="mb-8">
+            <div className="reveal-wrap overflow-hidden">
+              <h1 className="type-hero reveal-text is-visible leading-none">
+                GENERAL
+              </h1>
+            </div>
+            <div className="reveal-wrap overflow-hidden">
+              <span
+                className="type-hero reveal-text is-visible leading-none"
+                style={{
+                  transitionDelay: '0.12s',
+                  fontStyle: 'italic',
+                  color: 'transparent',
+                  WebkitTextStroke: '1px rgba(255,255,255,0.5)',
+                }}
+              >
+                CARS
+              </span>
+            </div>
           </div>
 
-          <div className="ambient-line mt-16 max-w-xs" />
-        </div>
+          {/* Cyan accent line */}
+          <div className="line-reveal is-visible h-px bg-[var(--cyan)] mb-8 max-w-xs" style={{ transitionDelay: '0.3s' }} />
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-          <div className="w-px h-10 bg-gradient-to-b from-transparent to-[rgba(255,255,255,0.30)] animate-bounce" style={{ animationDuration: '2s' }} />
+          {/* Bottom row: description + CTAs */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-sm">
+              <p className="fade-up is-visible type-lead" style={{ transitionDelay: '0.4s' }}>
+                Bespoke detailing &amp; paint protection.<br />
+                <em>Without compromise.</em>
+              </p>
+            </div>
+
+            <div className="fade-up is-visible flex flex-col sm:flex-row gap-3" style={{ transitionDelay: '0.5s' }}>
+              <Link to="/smart-quote" className="btn-primary">
+                <span>Get a Quote</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link to="/services" className="btn-ghost">
+                Our Services
+              </Link>
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="fade-in is-visible absolute bottom-8 right-8 md:right-16 flex flex-col items-center gap-2" style={{ transitionDelay: '0.8s' }}>
+            <span className="type-label text-[9px] rotate-90 origin-center mb-3">Scroll</span>
+            <div className="w-px h-12 bg-gradient-to-b from-[var(--cyan)] to-transparent animate-pulse" />
+          </div>
         </div>
       </section>
 
-      {/* ── 2. CHOOSE YOUR PATH ───────────────────── */}
-      <section className="bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
-        <div className="site-container py-20 md:py-28">
-          <div className="mb-14">
-            <span className="eyebrow">Where to start</span>
-            <h2 className="display-md">Choose your <span className="word-accent">path.</span></h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[rgba(255,255,255,0.06)]">
-            {PATHS.map(p => (
-              <Link
-                key={p.num}
-                to={p.to}
-                className="path-card group bg-[#0D0D0D] hover:bg-[#171717] ambient-border-hover"
+      {/* ═══════════════════════════════════════════════════
+          2. STATS BAR — Otto Kraftor style horizontal counter
+          ═══════════════════════════════════════════════════ */}
+      <section className="border-y border-[var(--border)] bg-[var(--black-2)]">
+        <div className="site-container">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {STATS.map((s, i) => (
+              <FadeUp
+                key={s.label}
+                delay={i * 0.1}
+                className="border-r border-[var(--border)] last:border-r-0 p-8 md:p-10"
               >
-                <span className="text-[#1E1E1E] text-5xl font-black leading-none select-none">{p.num}</span>
-                <div>
-                  <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#CFCFCF] transition-colors">{p.title}</h3>
-                  <p className="body-sm text-xs">{p.desc}</p>
-                </div>
-                <ArrowRight className="w-4 h-4 text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1 transition-all mt-auto" />
-              </Link>
+                <div className="type-hero text-3xl md:text-5xl mb-2 cyan">{s.value}</div>
+                <div className="type-label text-[var(--white-dim)] normal-case tracking-wide text-[10px]">{s.label}</div>
+              </FadeUp>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 3. SIGNATURE SERVICES (with real images) ─ */}
-      <section className="bg-[#050505] border-t border-[rgba(255,255,255,0.06)]">
-        <div className="site-container py-20 md:py-28">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
-            <div>
-              <span className="eyebrow">Our Disciplines</span>
-              <h2 className="display-md">Signature <span className="word-accent">Services.</span></h2>
-            </div>
-            <Link to="/services" className="btn-ghost whitespace-nowrap">
-              View All <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+      {/* ═══════════════════════════════════════════════════
+          3. PHILOSOPHY — Carbonov large-text scroll reveal
+          ═══════════════════════════════════════════════════ */}
+      <section className="py-32 md:py-48">
+        <div className="site-container">
+          <div className="max-w-5xl">
+            <FadeUp>
+              <p className="type-label mb-10">Our Philosophy</p>
+            </FadeUp>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[rgba(255,255,255,0.06)]">
-            {SERVICES.map(s => (
-              <Link
-                key={s.name}
-                to="/services"
-                className="group bg-[#050505] hover:bg-[#0D0D0D] flex flex-col overflow-hidden border border-transparent hover:border-[rgba(255,255,255,0.10)] transition-all"
-              >
-                {/* REAL SERVICE IMAGE */}
-                <div className="relative h-40 md:h-52 overflow-hidden">
+            <RevealText as="h2" className="type-display mb-4">
+              Every car tells
+            </RevealText>
+            <RevealText as="h2" className="type-display mb-4" delay={0.1}>
+              a story.
+            </RevealText>
+            <RevealText as="h2" delay={0.2}>
+              <span className="type-display" style={{ fontStyle: 'italic', color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.35)' }}>
+                We make it
+              </span>
+              <span className="type-display cyan" style={{ fontStyle: 'italic' }}> unforgettable.</span>
+            </RevealText>
+
+            <LineReveal delay={0.6} className="mt-12 mb-12 max-w-xl" />
+
+            <FadeUp delay={0.3} className="max-w-md">
+              <p className="type-lead">
+                We don't rush. We don't cut corners. Each vehicle receives
+                the full attention of our lead technician — a single craftsman,
+                one car at a time.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.45} className="mt-10">
+              <Link to="/proof" className="btn-text">
+                View our work <ArrowDownRight className="w-3.5 h-3.5" />
+              </Link>
+            </FadeUp>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          4. SERVICES — Mansory/Kamikaze full-height panels
+          ═══════════════════════════════════════════════════ */}
+      <section className="border-t border-[var(--border)]">
+        <div className="site-container pt-16 pb-0">
+          <div className="flex items-end justify-between mb-12">
+            <FadeUp>
+              <p className="type-label mb-3">Disciplines</p>
+              <h2 className="type-headline">Our Services</h2>
+            </FadeUp>
+            <FadeUp delay={0.15}>
+              <Link to="/services" className="btn-text">
+                View all <ArrowRight className="w-3 h-3" />
+              </Link>
+            </FadeUp>
+          </div>
+        </div>
+
+        {/* Service panels grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {SERVICES.map((s, i) => (
+            <FadeUp key={s.id} delay={i * 0.1}>
+              <Link to="/services" className="service-panel block">
+                {/* Background image */}
+                <div className="service-panel-img">
                   <img
                     src={s.img}
                     alt={s.name}
-                    className="w-full h-full object-cover brightness-90 saturate-[0.85] group-hover:saturate-100 group-hover:brightness-110 transition-all duration-700 scale-100 group-hover:scale-105"
+                    className="w-full h-full object-cover saturate-[0.7]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
                 </div>
-                <div className="p-5 flex flex-col flex-1">
-                  <h3 className="text-white font-bold text-lg mb-1 group-hover:text-[#CFCFCF] transition-colors">{s.name}</h3>
-                  <p className="text-[#8A8A8A] text-xs mb-4">{s.sub}</p>
-                  <ul className="flex flex-col gap-1.5 mb-auto">
-                    {s.examples.map(e => (
-                      <li key={e} className="text-[#8A8A8A] text-xs flex items-center gap-2">
-                        <span className="w-3 h-px bg-[#8A8A8A]" />
-                        {e}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 pt-4 border-t border-[rgba(255,255,255,0.06)] flex items-center justify-between">
-                    <span className="label-xs">Explore</span>
-                    <ArrowRight className="w-3 h-3 text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1 transition-all" />
+                <div className="service-panel-overlay" />
+
+                {/* Content */}
+                <div className="service-panel-content">
+                  <span className="type-label mb-3 block">{s.label}</span>
+                  <h3 className="type-headline text-2xl mb-1">{s.name}</h3>
+                  <p className="type-body text-xs mb-4 opacity-70">{s.sub}</p>
+                  <p className="type-body text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 max-w-[200px] mb-6">
+                    {s.desc}
+                  </p>
+                  <div className="flex items-center gap-2 type-label text-[9px]">
+                    Explore <ArrowRight className="w-3 h-3" />
                   </div>
                 </div>
               </Link>
-            ))}
-          </div>
+            </FadeUp>
+          ))}
         </div>
       </section>
 
-      {/* ── 4. PROOF PREVIEW ─────────────────────── */}
-      <section className="bg-[#0D0D0D] border-t border-[rgba(255,255,255,0.06)]">
-        <div className="site-container py-20 md:py-28">
+      {/* ═══════════════════════════════════════════════════
+          5. SMART QUOTE CTA — dark editorial strip
+          ═══════════════════════════════════════════════════ */}
+      <section className="py-32 md:py-40 border-t border-[var(--border)] bg-[var(--black-2)]">
+        <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left */}
             <div>
-              <span className="eyebrow">Results</span>
-              <h2 className="display-md mb-6">Perfection is in <span className="word-underline">the details.</span></h2>
-              <p className="body-lead mb-8">
-                Real vehicles, real problems, real outcomes — before you decide.
-              </p>
-              <Link to="/proof" className="btn-ghost">View Case Studies</Link>
+              <FadeUp>
+                <p className="type-label mb-6">Guided Advisor</p>
+              </FadeUp>
+              <RevealText as="h2" className="type-display mb-8">
+                Not sure where<br />to start?
+              </RevealText>
+              <FadeUp delay={0.2}>
+                <p className="type-lead mb-10">
+                  Our 4-step Smart Quote advisor analyses your vehicle's size,
+                  condition, and goals — then recommends the exact service and
+                  gives you an instant price estimate.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.3} className="flex flex-col sm:flex-row gap-4">
+                <Link to="/smart-quote" className="btn-primary">
+                  <span>Start Smart Quote</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link to="/booking" className="btn-ghost">
+                  Book Directly
+                </Link>
+              </FadeUp>
             </div>
-            {/* REAL BEFORE / AFTER WITH REAL IMAGE */}
-            <div className="relative">
-              <div className="aspect-[3/2] border border-[rgba(255,255,255,0.08)] overflow-hidden flex">
-                {/* Before — grayscale, dark */}
-                <div className="flex-1 relative overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1616789916666-4f2f80ed5360?auto=format&fit=crop&q=80&w=600"
-                    alt="Before"
-                    className="absolute inset-0 w-full h-full object-cover brightness-[0.4]"
-                    loading="lazy"
-                  />
-                  <div className="absolute bottom-3 left-3">
-                    <span className="text-[10px] uppercase tracking-widest text-white/40 bg-black/60 px-2 py-1">Before</span>
-                  </div>
-                </div>
-                {/* Divider */}
-                <div className="w-px bg-[rgba(255,255,255,0.15)]" />
-                {/* After — full color */}
-                <div className="flex-1 relative overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1616789916666-4f2f80ed5360?auto=format&fit=crop&q=80&w=600"
-                    alt="After"
-                    className="absolute inset-0 w-full h-full object-cover brightness-95"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/60 to-transparent" />
-                  <div className="absolute bottom-3 right-3">
-                    <span className="text-[10px] uppercase tracking-widest text-white bg-black/60 px-2 py-1">After</span>
-                  </div>
-                </div>
-              </div>
-              <p className="text-[#8A8A8A] text-xs mt-3 text-right">Porsche 911 GT3 · Paint Correction + Ceramic</p>
+
+            {/* Right — steps visual */}
+            <div className="flex flex-col gap-0">
+              {['Vehicle Size', 'Paint Condition', 'Service Type', 'Your Quote'].map((step, i) => (
+                <FadeUp
+                  key={step}
+                  delay={i * 0.1}
+                  className="flex items-center gap-6 border-b border-[var(--border)] py-6"
+                >
+                  <span className="type-label w-6">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="flex-1 h-px bg-[var(--border)]" />
+                  <span className="type-body">{step}</span>
+                </FadeUp>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 5. SMART QUOTE PREVIEW ────────────────── */}
-      <section className="relative bg-[#050505] border-t border-[rgba(255,255,255,0.06)] overflow-hidden">
-        <div className="ambient-orb-ice" style={{ top: '-20%', left: '50%' }} />
-        <div className="float-line float-line-1" style={{ top: '35%', left: '5%', opacity: 0.6 }} />
-        <div className="float-line float-line-3" style={{ top: '65%', left: '20%', opacity: 0.45 }} />
-        <div className="grain-overlay" />
-        <div className="site-container py-20 md:py-28 text-center relative z-10 max-w-3xl mx-auto">
-          <span className="eyebrow">Guided System</span>
-          <h2 className="display-md mb-6">Not sure <span className="word-accent">where to start?</span></h2>
-          <p className="body-lead mb-10">
-            Our <span className="emphasis-word">Smart Quote</span> advisor guides you through 4 quick questions — returning a <span className="word-underline">recommended service</span>, package, and instant price estimate.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-[#8A8A8A] text-xs uppercase tracking-widest font-medium mb-12">
-            {['Car', 'Condition', 'Service', 'Quote'].map((step, i, arr) => (
-              <span key={step} className="flex items-center gap-4">
-                <span className="text-white">{step}</span>
-                {i < arr.length - 1 && <span className="text-[#232323]">→</span>}
-              </span>
-            ))}
-          </div>
-          <MagneticCTA strength={12}>
-            <Link to="/smart-quote" className="btn-primary cta-magnetic">
-              Start Smart Quote
-            </Link>
-          </MagneticCTA>
-        </div>
-      </section>
-
-      {/* ── 6. FINAL CTA ──────────────────────────── */}
-      <section className="relative py-32 overflow-hidden">
-        {/* Real atmospheric car image */}
-        <div className="absolute inset-0 z-0">
+      {/* ═══════════════════════════════════════════════════
+          6. FINAL CTA — Fullscreen image + huge text
+          ═══════════════════════════════════════════════════ */}
+      <section className="relative min-h-[70vh] flex items-center overflow-hidden border-t border-[var(--border)]">
+        <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?auto=format&fit=crop&q=80&w=1920"
-            alt="Final CTA"
+            alt=""
+            aria-hidden
             className="w-full h-full object-cover opacity-20"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-[#0D0D0D]/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-[rgba(0,0,0,0.85)] to-black" />
         </div>
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(180,210,255,0.3), transparent)' }} />
-        <div className="ambient-orb-violet" style={{ bottom: '-30%', right: '-5%', opacity: 0.6 }} />
-        <div className="float-line float-line-4" style={{ top: '30%', left: '0%', opacity: 0.5 }} />
-        <div className="float-line float-line-2" style={{ top: '65%', left: '25%', opacity: 0.4 }} />
-        <div className="site-container text-center relative z-10">
-          <h2 className="display-lg mb-4 max-w-2xl mx-auto">
-            Ready to give your car the <span className="emphasis-word">attention it deserves?</span>
-          </h2>
-          <p className="body-lead mb-10">Book an appointment or start with our Smart Quote for an instant estimate.</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <MagneticCTA strength={10}>
-              <Link to="/smart-quote" className="btn-primary cta-magnetic">Start Smart Quote</Link>
-            </MagneticCTA>
-            <Link to="/booking" className="btn-ghost">Request Appointment</Link>
-          </div>
+
+        {/* Cyan horizontal accent */}
+        <div className="absolute top-0 left-0 right-0 hero-accent-line" />
+
+        <div className="relative z-10 site-container py-24 text-center">
+          <RevealText as="h2" className="type-display max-w-3xl mx-auto mb-8">
+            Ready to give your<br /><em>car the treatment it deserves?</em>
+          </RevealText>
+
+          <FadeUp delay={0.3} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/smart-quote" className="btn-primary">
+              <span>Get a Quote</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/booking" className="btn-ghost">
+              Request Appointment
+            </Link>
+          </FadeUp>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(180,210,255,0.2), transparent)' }} />
+
+        <div className="absolute bottom-0 left-0 right-0 hero-accent-line" />
       </section>
 
     </div>

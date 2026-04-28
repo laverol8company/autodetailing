@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom';
 import { calculateQuoteEstimate, QuoteEstimateResult } from '../lib/quoteEstimate';
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { WhatsAppCTA } from '../components/WhatsAppCTA';
-import { MagneticCTA } from '../components/MagneticCTA';
+import { RevealText, FadeUp } from '../components/Reveal';
 
 interface Step { id: string; question: string; options: string[]; }
 const STEPS: Step[] = [
-  { id: 'size', question: 'What size is your vehicle?', options: ['Small (Hatchback, Mini)', 'Medium (Sedan, Coupe)', 'Large (SUV, Estate)', 'Extra Large (Van, 4x4)'] },
-  { id: 'condition', question: 'Current paint condition?', options: ['Low — Few visible issues', 'Medium — Visible swirls & marks', 'High — Heavy scratches & fading'] },
-  { id: 'service', question: 'What are you looking for?', options: ['Exterior Detailing', 'Interior Detailing', 'Ceramic Coating', 'Paint Correction', 'PPF / Paint Protection Film'] },
-  { id: 'package', question: 'Preferred protection level?', options: ['Essential', 'Premium', 'Signature'] },
+  { id: 'size',      question: 'What size is your vehicle?',       options: ['Small (Hatchback, Mini)', 'Medium (Sedan, Coupe)', 'Large (SUV, Estate)', 'Extra Large (Van, 4x4)'] },
+  { id: 'condition', question: 'Current paint condition?',          options: ['Low — Few visible issues', 'Medium — Visible swirls & marks', 'High — Heavy scratches & fading'] },
+  { id: 'service',   question: 'What are you looking for?',         options: ['Exterior Detailing', 'Interior Detailing', 'Ceramic Coating', 'Paint Correction', 'PPF / Paint Protection Film'] },
+  { id: 'package',   question: 'Preferred protection level?',       options: ['Essential', 'Premium', 'Signature'] },
 ];
 
-function normaliseSize(s: string): string {
-  if (s.startsWith('Small')) return 'Small';
+function normaliseSize(s: string) {
+  if (s.startsWith('Small'))  return 'Small';
   if (s.startsWith('Medium')) return 'Medium';
-  if (s.startsWith('Large')) return 'Large';
+  if (s.startsWith('Large'))  return 'Large';
   return 'Extra Large';
 }
-function normaliseCondition(s: string): string {
-  if (s.startsWith('Low')) return 'Low';
+function normaliseCondition(s: string) {
+  if (s.startsWith('Low'))    return 'Low';
   if (s.startsWith('Medium')) return 'Medium';
   return 'High';
 }
@@ -32,158 +32,146 @@ export default function SmartQuote() {
   const [estimate, setEstimate] = useState<QuoteEstimateResult | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  function scrollCardIntoView() {
-    setTimeout(() => {
-      cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
+  function scrollCard() {
+    setTimeout(() => cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
 
   function handleSelect(val: string) {
     setSelected(val);
     const next = { ...answers, [STEPS[step].id]: val };
     setAnswers(next);
-
     setTimeout(() => {
       if (step < STEPS.length - 1) {
         setStep(step + 1);
         setSelected(null);
-        scrollCardIntoView();
+        scrollCard();
       } else {
         try {
-          const result = calculateQuoteEstimate({
+          setEstimate(calculateQuoteEstimate({
             serviceType: next['service'],
             vehicleSize: normaliseSize(next['size']) as any,
             condition: normaliseCondition(next['condition']) as any,
             packageLevel: next['package'] as any,
-          });
-          setEstimate(result);
+          }));
         } catch {
           setEstimate({ estimatedPriceRange: 'Custom Quote', estimatedDuration: 'TBD', note: 'Contact us for an accurate estimate.' });
         }
-        scrollCardIntoView();
+        scrollCard();
       }
     }, 180);
   }
 
-  function goBack() {
-    setStep(step - 1);
-    setSelected(null);
-    scrollCardIntoView();
-  }
-
-  function reset() { setStep(0); setAnswers({}); setSelected(null); setEstimate(null); scrollCardIntoView(); }
+  function goBack()  { setStep(step - 1); setSelected(null); scrollCard(); }
+  function reset()   { setStep(0); setAnswers({}); setSelected(null); setEstimate(null); scrollCard(); }
 
   const pct = Math.round(((step + 1) / STEPS.length) * 100);
 
   return (
-    <div className="min-h-screen bg-[#050505] relative overflow-hidden flex items-center justify-center py-32 px-4">
-      {/* Ambient background */}
-      <div className="ambient-orb-ice" style={{ top: '10%', right: '-5%' }} />
-      <div className="ambient-orb-violet" style={{ bottom: '5%', left: '-5%' }} />
-      <div className="grain-overlay" />
+    <div className="min-h-screen bg-[var(--black)] flex flex-col">
+      {/* Page hero */}
+      <div className="relative pt-36 pb-20 border-b border-[var(--border)]">
+        <div className="site-container">
+          <FadeUp><p className="type-label mb-6">Instant Estimate</p></FadeUp>
+          <RevealText as="h1" className="type-display mb-4">Smart Quote</RevealText>
+          <RevealText as="p" className="type-lead max-w-md" delay={0.12}>
+            4 questions. 30 seconds. A personalised service recommendation and price range — instantly.
+          </RevealText>
+        </div>
+      </div>
 
-      <div className="relative z-10 w-full max-w-lg" ref={cardRef}>
+      {/* Quiz area */}
+      <div className="flex-1 flex items-start justify-center py-16 px-4">
+        <div ref={cardRef} className="w-full max-w-xl scroll-mt-32">
 
-        {estimate ? (
-          /* ─── RESULT CARD ─── */
-          <div className="quote-card">
-            <div className="flex items-center gap-3 mb-8">
-              <CheckCircle2 className="w-5 h-5 text-[#CFCFCF] flex-shrink-0" />
-              <span className="label-xs">Recommendation ready</span>
-            </div>
-
-            <h2 className="display-md mb-2">{answers['package']} {answers['service']}</h2>
-            <p className="body-sm mb-10">
-              Based on your <span className="text-[#CFCFCF]">{normaliseSize(answers['size'])}</span> vehicle in <span className="text-[#CFCFCF]">{normaliseCondition(answers['condition'])}</span> condition.
-            </p>
-
-            <div className="grid grid-cols-2 gap-px bg-[rgba(255,255,255,0.06)] mb-10">
-              <div className="bg-[#050505] p-6">
-                <span className="label-xs block mb-2">Estimated Range</span>
-                <span className="text-white font-black text-2xl">{estimate.estimatedPriceRange}</span>
+          {estimate ? (
+            /* ── RESULT ── */
+            <div className="card-luxe">
+              <div className="flex items-center gap-3 mb-8">
+                <CheckCircle2 className="w-4 h-4 text-[var(--cyan)]" />
+                <span className="type-label">Recommendation ready</span>
               </div>
-              <div className="bg-[#050505] p-6">
-                <span className="label-xs block mb-2">Duration</span>
-                <span className="text-white font-semibold text-lg">{estimate.estimatedDuration}</span>
+
+              <h2 className="type-headline mb-2 text-2xl">
+                {answers['package']} <em>{answers['service']}</em>
+              </h2>
+              <p className="type-body text-sm mb-10">
+                For your{' '}
+                <span className="text-white">{normaliseSize(answers['size'])}</span> vehicle in{' '}
+                <span className="text-white">{normaliseCondition(answers['condition'])}</span> condition.
+              </p>
+
+              <div className="grid grid-cols-2 border-t border-b border-[var(--border)] mb-10">
+                <div className="py-8 pr-8 border-r border-[var(--border)]">
+                  <span className="type-label block mb-2">Estimated Range</span>
+                  <span className="type-display text-3xl cyan">{estimate.estimatedPriceRange}</span>
+                </div>
+                <div className="py-8 pl-8">
+                  <span className="type-label block mb-2">Duration</span>
+                  <span className="type-display text-2xl">{estimate.estimatedDuration}</span>
+                </div>
               </div>
-            </div>
 
-            <p className="body-sm text-xs italic mb-10 pb-10 border-b border-[rgba(255,255,255,0.06)]">
-              * {estimate.note}
-            </p>
+              <p className="type-body text-xs italic mb-10 opacity-60">* {estimate.note}</p>
 
-            <div className="flex flex-col gap-3">
-              <MagneticCTA strength={10}>
-                <Link to="/booking" className="btn-primary justify-center cta-glow cta-magnetic w-full">
-                  Request Appointment
+              <div className="flex flex-col gap-3">
+                <Link to="/booking" className="btn-primary justify-center w-full">
+                  <span>Request Appointment</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              </MagneticCTA>
-              <WhatsAppCTA
-                variant="ghost"
-                className="justify-center"
-                message={`Hi, I completed the Smart Quote. I'm looking for ${answers['package']} ${answers['service']} for my ${normaliseSize(answers['size'])} vehicle.`}
-              />
-              <button onClick={reset} className="btn-text justify-center mt-2">
-                Start over
-              </button>
-            </div>
-          </div>
-
-        ) : (
-          /* ─── STEP CARD ─── */
-          <div className="quote-card">
-            {/* Progress */}
-            <div className="mb-10">
-              <div className="flex justify-between items-center mb-3">
-                <span className="label-xs">Step {step + 1} of {STEPS.length}</span>
-                <span className="label-xs">{pct}%</span>
-              </div>
-              {/* Progress bar with subtle glow */}
-              <div className="progress-bar-track relative">
-                <div
-                  className="progress-bar-fill"
-                  style={{
-                    width: `${pct}%`,
-                    boxShadow: '0 0 8px rgba(200,230,255,0.3)',
-                  }}
+                <WhatsAppCTA
+                  variant="ghost"
+                  className="justify-center"
+                  message={`Hi, I completed the Smart Quote. I'm looking for ${answers['package']} ${answers['service']} for my ${normaliseSize(answers['size'])} vehicle.`}
                 />
+                <button onClick={reset} className="btn-text justify-center mt-2">
+                  Start over
+                </button>
               </div>
             </div>
 
-            {/* Back */}
-            {step > 0 && (
-              <button
-                onClick={goBack}
-                className="flex items-center gap-2 text-[#8A8A8A] hover:text-white transition-colors text-xs uppercase tracking-widest font-medium mb-8"
-              >
-                <ArrowLeft className="w-3 h-3" /> Back
-              </button>
-            )}
+          ) : (
+            /* ── STEP ── */
+            <div className="card-luxe">
+              {/* Progress */}
+              <div className="mb-12">
+                <div className="flex justify-between items-center mb-4">
+                  <span className="type-label">Step {step + 1} of {STEPS.length}</span>
+                  <span className="type-label text-[var(--white-dim)]">{pct}%</span>
+                </div>
+                <div className="progress-track">
+                  <div className="progress-fill" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
 
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 leading-snug">
-              {STEPS[step].question}
-            </h2>
-
-            <div className="flex flex-col gap-2">
-              {STEPS[step].options.map(opt => (
+              {step > 0 && (
                 <button
-                  key={opt}
-                  onClick={() => handleSelect(opt)}
-                  disabled={selected !== null}
-                  className={`flex items-center justify-between px-5 py-4 border text-white text-sm font-medium text-left transition-all duration-200 group ${
-                    selected === opt
-                      ? 'step-selected'
-                      : 'bg-[#171717] border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.25)] hover:bg-[#232323]'
-                  }`}
+                  onClick={goBack}
+                  className="btn-text mb-8"
                 >
-                  <span className="text-[#CFCFCF] group-hover:text-white transition-colors">{opt}</span>
-                  <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-all ${selected === opt ? 'text-white translate-x-1' : 'text-[#8A8A8A] group-hover:text-white group-hover:translate-x-1'}`} />
+                  <ArrowLeft className="w-3 h-3" /> Back
                 </button>
-              ))}
-            </div>
-          </div>
-        )}
+              )}
 
+              <h2 className="type-headline text-xl md:text-2xl mb-8 leading-snug">
+                {STEPS[step].question}
+              </h2>
+
+              <div className="flex flex-col gap-2">
+                {STEPS[step].options.map(opt => (
+                  <button
+                    key={opt}
+                    onClick={() => handleSelect(opt)}
+                    disabled={selected !== null}
+                    className={`step-option ${selected === opt ? 'selected' : ''}`}
+                  >
+                    <span>{opt}</span>
+                    <ArrowRight className="w-4 h-4 flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

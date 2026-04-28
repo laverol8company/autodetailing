@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { CheckCircle2, Clock, MapPin, Shield } from 'lucide-react';
-import { MagneticCTA } from '../components/MagneticCTA';
+import { RevealText, FadeUp } from '../components/Reveal';
 
 const SERVICES = ['Ceramic Coating (5yr)', 'Paint Correction', 'PPF — Front Impact', 'Maintenance Wash', 'Interior Detail', 'Pre-Sale Preparation'];
 const TIMES = ['Morning (09:00–12:00)', 'Afternoon (12:00–16:00)', 'Late afternoon (16:00–18:00)'];
+
+const INFO = [
+  { Icon: Shield, title: 'What comes next', body: 'We review your request and contact you within 24 hours to confirm availability and finalise details.' },
+  { Icon: Clock,  title: 'Slots fill up fast', body: 'Multi-day ceramic and correction services are booked 2–3 weeks in advance. Submit early.' },
+  { Icon: MapPin, title: 'Location', body: 'Premium Auto Sector\nBucharest, Romania\nBy appointment only.' },
+];
 
 export default function Booking() {
   const [status, setStatus] = useState<'idle' | 'pending' | 'done'>('idle');
@@ -20,125 +26,124 @@ export default function Booking() {
   }
 
   return (
-    <div className="bg-[#050505] min-h-screen">
-      <div className="site-container pt-40 pb-24">
+    <div className="bg-[var(--black)] min-h-screen">
 
+      {/* Page hero */}
+      <div className="relative pt-36 pb-20 border-b border-[var(--border)]">
+        <div className="site-container">
+          <FadeUp><p className="type-label mb-6">Reserve</p></FadeUp>
+          <RevealText as="h1" className="type-display mb-4">Request an</RevealText>
+          <RevealText as="h1" className="type-display" delay={0.1}><em>Appointment.</em></RevealText>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="site-container py-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
 
-          {/* ─── LEFT: Info ─── */}
-          <div className="lg:col-span-4 relative">
-            <div className="absolute -inset-x-8 -top-40 bottom-12 overflow-hidden z-0 hidden lg:block opacity-30 mix-blend-luminosity">
-              <img src="https://images.unsplash.com/photo-1550340499-a6c60fc8287c?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover" alt="Booking" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/70 to-[#050505]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]" />
-            </div>
-            
-            <div className="relative z-10">
-              <span className="eyebrow">Reserve</span>
-              <h1 className="display-md mb-6">Request an appointment.</h1>
-              <p className="body-lead mb-12">
-                We operate strictly by appointment. Each vehicle receives uninterrupted, meticulous attention from our lead technician.
+          {/* Left info */}
+          <div className="lg:col-span-4">
+            <FadeUp>
+              <p className="type-lead mb-12">
+                We operate strictly by appointment. Each vehicle receives uninterrupted,
+                meticulous attention from our lead technician.
               </p>
-
-              <div className="flex flex-col gap-8">
-                <div className="flex gap-4">
-                  <Shield className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="text-white text-sm font-semibold mb-1">What comes next</h3>
-                    <p className="body-sm text-xs">We review your request and contact you within 24 hours to confirm availability and finalise the details.</p>
+            </FadeUp>
+            <div className="flex flex-col gap-10">
+              {INFO.map(({ Icon, title, body }, i) => (
+                <FadeUp key={title} delay={i * 0.1}>
+                  <div className="flex gap-5">
+                    <div className="w-8 h-8 border border-[var(--cyan)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Icon className="w-3.5 h-3.5 text-[var(--cyan)]" />
+                    </div>
+                    <div>
+                      <h3 className="text-white text-sm font-medium mb-2">{title}</h3>
+                      <p className="type-body text-xs whitespace-pre-line">{body}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <Clock className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="text-white text-sm font-semibold mb-1">Slots fill up fast</h3>
-                    <p className="body-sm text-xs">Multi-day ceramic and correction services are often booked 2–3 weeks in advance. Submit early.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <MapPin className="w-5 h-5 text-[#CFCFCF] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="text-white text-sm font-semibold mb-1">Location</h3>
-                    <p className="body-sm text-xs">Premium Auto Sector<br />Bucharest, Romania<br />By appointment only.</p>
-                  </div>
-                </div>
-              </div>
+                </FadeUp>
+              ))}
             </div>
           </div>
 
-          {/* ─── RIGHT: Form ─── */}
+          {/* Right form */}
           <div className="lg:col-span-8">
             {status === 'done' ? (
-              <div className="card-dark flex flex-col items-center justify-center text-center py-20 min-h-[500px]">
-                <CheckCircle2 className="w-10 h-10 text-[#CFCFCF] mb-6" />
-                <h3 className="text-white text-2xl font-bold mb-3">Request Submitted</h3>
-                <p className="body-sm max-w-sm mx-auto mb-8">
-                  Your request has been sent. Our team will review the details and confirm the appointment with you within 24 hours.
+              <div className="card-luxe flex flex-col items-center justify-center text-center py-24 min-h-[500px]">
+                <div className="w-12 h-12 border border-[var(--cyan)] flex items-center justify-center mb-8">
+                  <CheckCircle2 className="w-5 h-5 text-[var(--cyan)]" />
+                </div>
+                <h3 className="type-headline text-2xl mb-4">Request Submitted</h3>
+                <p className="type-body max-w-sm mx-auto mb-10">
+                  Your request has been sent. We'll confirm the appointment within 24 hours.
                 </p>
                 <button onClick={() => setStatus('idle')} className="btn-text">
                   Submit another request
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="card-dark">
+              <form onSubmit={handleSubmit} className="card-luxe">
+
                 {error && (
-                  <div className="mb-6 px-4 py-3 border border-[rgba(255,255,255,0.15)] text-[#CFCFCF] text-xs">
+                  <div className="mb-8 px-4 py-3 border border-[rgba(255,100,100,0.3)] text-[rgba(255,150,150,0.8)] text-xs type-mono">
                     {error}
                   </div>
                 )}
 
-                {/* Service */}
-                <div className="form-field mb-6">
-                  <label className="form-label">Service <span className="text-[#CFCFCF]">*</span></label>
-                  <select name="service" className="form-select">
-                    <option value="">Select service…</option>
-                    {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
 
-                {/* Date + Time */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {/* Service */}
+                  <div className="form-field md:col-span-2">
+                    <label className="form-label">Service *</label>
+                    <select name="service" className="form-select">
+                      <option value="">Select service…</option>
+                      {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Date */}
                   <div className="form-field">
-                    <label className="form-label">Preferred Date <span className="text-[#CFCFCF]">*</span></label>
+                    <label className="form-label">Preferred Date *</label>
                     <input name="date" type="date" className="form-input" />
                   </div>
+
+                  {/* Time */}
                   <div className="form-field">
-                    <label className="form-label">Preferred Time <span className="text-[#CFCFCF]">*</span></label>
+                    <label className="form-label">Preferred Time *</label>
                     <select name="time" className="form-select">
                       <option value="">Select window…</option>
                       {TIMES.map(t => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
-                </div>
 
-                {/* Name + Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {/* Name */}
                   <div className="form-field">
-                    <label className="form-label">Full Name <span className="text-[#CFCFCF]">*</span></label>
+                    <label className="form-label">Full Name *</label>
                     <input name="name" type="text" placeholder="John Doe" className="form-input" />
                   </div>
+
+                  {/* Phone */}
                   <div className="form-field">
-                    <label className="form-label">Phone <span className="text-[#CFCFCF]">*</span></label>
-                    <input name="phone" type="tel" placeholder="+40 700..." className="form-input" />
+                    <label className="form-label">Phone *</label>
+                    <input name="phone" type="tel" placeholder="+40 700…" className="form-input" />
+                  </div>
+
+                  {/* Notes */}
+                  <div className="form-field md:col-span-2">
+                    <label className="form-label">Vehicle & Notes</label>
+                    <textarea name="message" rows={3} placeholder="Make, model, colour, and any specific concerns…" className="form-textarea" />
                   </div>
                 </div>
 
-                {/* Message */}
-                <div className="form-field mb-8">
-                  <label className="form-label">Vehicle & Notes</label>
-                  <textarea name="message" rows={3} placeholder="Make, model, colour, and any specific concerns…" className="form-textarea" />
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <MagneticCTA strength={10}>
-                    <button type="submit" disabled={status === 'pending'} className="btn-primary cta-magnetic px-10">
-                      {status === 'pending' ? 'Sending…' : 'Request Appointment'}
-                    </button>
-                  </MagneticCTA>
-                  <p className="text-[#8A8A8A] text-[10px] uppercase tracking-widest self-center">
+                <div className="flex flex-col sm:flex-row items-start gap-6 mt-12 pt-8 border-t border-[var(--border)]">
+                  <button type="submit" disabled={status === 'pending'} className="btn-primary">
+                    <span>{status === 'pending' ? 'Sending…' : 'Request Appointment'}</span>
+                  </button>
+                  <p className="type-label text-[var(--white-dim)] self-center text-[9px]">
                     No payment until inspection
                   </p>
                 </div>
+
               </form>
             )}
           </div>

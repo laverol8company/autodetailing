@@ -1,152 +1,168 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { RevealText, FadeUp, LineReveal } from '../components/Reveal';
 
-const catalog = [
+const CATEGORIES = [
   {
     id: 'enhance',
-    title: 'Enhance',
-    headline: 'Restore & Reveal True Clarity',
-    desc: 'Remove years of imperfection from your paint. Swirls, scratches, oxidation eliminated through precision machine polishing.',
-    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1200&h=500',
+    label: '01',
+    name: 'Enhance',
+    tagline: 'Paint Correction & Gloss Refinement',
+    desc: 'We remove the evidence of time — swirl marks, light scratches, and oxidation — restoring your paint to a mirror-perfect finish.',
+    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1400',
     services: [
-      { name: 'Paint Correction', desc: 'Multi-stage machine polish removing heavy swirl marks, deep scratches, and oxidation.', price: 'From €350', duration: '1–2 Days', bestFor: 'Heavy Swirls & Fading' },
-      { name: 'Gloss Enhancement', desc: 'Single-stage polish to amplify depth and clarity on well-maintained cars.', price: 'From €200', duration: '6–8 hrs', bestFor: 'Light Swirls' },
-      { name: 'Premium Exterior Detail', desc: 'Decontamination, clay bar treatment, and protective sealant application.', price: 'From €160', duration: '4–6 hrs', bestFor: 'Routine Rejuvenation' },
+      { name: 'Single Stage Polish', detail: 'Removes light swirls & restores gloss', price: 'from €180' },
+      { name: 'Two Stage Correction', detail: 'Eliminates 80%+ of defects', price: 'from €350' },
+      { name: 'Full Paint Correction', detail: 'Complete defect removal + prep', price: 'from €650' },
+      { name: 'Gloss Enhancement', detail: 'Panel refinement without full correction', price: 'from €120' },
     ],
   },
   {
     id: 'protect',
-    title: 'Protect',
-    headline: 'Preserve the Investment Long-Term',
-    desc: 'Ceramic and film-based protection systems that lock in perfection and guard against the harshest road conditions.',
-    img: 'https://images.unsplash.com/photo-1600706432502-77a0e2e32790?auto=format&fit=crop&q=80&w=1200&h=500',
+    label: '02',
+    name: 'Protect',
+    tagline: 'Ceramic Coating & Paint Film',
+    desc: 'Nano-ceramic and polymer protection that bonds to your clear coat — repelling contaminants, UV, and the elements for years.',
+    img: 'https://images.unsplash.com/photo-1600706432502-77a0e2e32790?auto=format&fit=crop&q=80&w=1400',
     services: [
-      { name: 'Ceramic Coating (5yr)', desc: 'Nano-ceramic protection permanently bonded to paint. Extreme hydrophobics and UV stability.', price: 'From €800', duration: '2 Days', bestFor: 'Long-Term Protection' },
-      { name: 'PPF — Front Impact', desc: 'Optically clear film protecting the most vulnerable impact zones. Self-healing in sunlight.', price: 'From €1,200', duration: '2–3 Days', bestFor: 'Highway & Stone Chips' },
-      { name: 'Glass & Wheel Coating', desc: 'Dedicated ceramic for windscreen clarity and wheel contamination resistance.', price: 'From €250', duration: '1 Day', bestFor: 'Brake Dust & Rain' },
+      { name: 'Entry Ceramic (1yr)', detail: 'Hydrophobic base protection', price: 'from €280' },
+      { name: 'Premium Ceramic (3yr)', detail: '9H hardness, deep gloss', price: 'from €550' },
+      { name: 'Signature Ceramic (5yr)', detail: 'Maximum protection, warranty', price: 'from €950' },
+      { name: 'PPF Front Impact', detail: 'Self-healing film on high-impact zones', price: 'from €800' },
     ],
   },
   {
     id: 'maintain',
-    title: 'Maintain',
-    headline: 'Keep the Finish Immaculate',
-    desc: 'Regular treatments that preserve your coating investment and keep your vehicle in showroom condition.',
-    img: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=1200&h=500',
+    label: '03',
+    name: 'Maintain',
+    tagline: 'Preservation & Upkeep',
+    desc: 'Between sessions, your car deserves the same meticulous care. Our maintenance protocols keep protection active and paint flawless.',
+    img: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=1400',
     services: [
-      { name: 'Maintenance Wash', desc: 'Safe two-bucket hand wash with premium pH-neutral detergents. Zero swirl risk.', price: 'From €80', duration: '2 hrs', bestFor: 'Weekly / Bi-Weekly' },
-      { name: 'Interior Detail', desc: 'Full vacuum, hard surface wipe-down, glass purification, and air vent cleaning.', price: 'From €120', duration: '3 hrs', bestFor: 'Monthly Refresh' },
-      { name: 'Leather Care', desc: 'pH-balanced deep clean, dye revitalization, and nourishing conditioner.', price: 'From €90', duration: '2 hrs', bestFor: 'Leather Preservation' },
+      { name: 'Signature Wash', detail: 'Safe two-bucket wash + dry + dressing', price: 'from €80' },
+      { name: 'Full Interior Detail', detail: 'Deep clean, leather & fabric care', price: 'from €180' },
+      { name: 'Maintenance Package', detail: 'Quarterly upkeep + inspection', price: 'from €240' },
+      { name: 'Decontamination', detail: 'Iron & tar removal, clay bar', price: 'from €120' },
     ],
   },
   {
     id: 'restore',
-    title: 'Restore',
-    headline: 'Bring Back What Was Lost',
-    desc: 'Deep rehabilitation for heavily neglected interiors, contaminated surfaces, and vehicles needing a complete reset.',
-    img: 'https://images.unsplash.com/photo-1562141961-b8e6b67b3e5e?auto=format&fit=crop&q=80&w=1200&h=500',
+    label: '04',
+    name: 'Restore',
+    tagline: 'Deep Rehabilitation',
+    desc: 'When a vehicle has been neglected or damaged, we bring it back. Interior extraction, odour elimination, full rehabilitation.',
+    img: 'https://images.unsplash.com/photo-1611821064430-0d40291d0f0b?auto=format&fit=crop&q=80&w=1400',
     services: [
-      { name: 'Deep Interior Extraction', desc: 'Hot water extraction of carpets and upholstery. Removes embedded stains and organic odors.', price: 'From €200', duration: '4–6 hrs', bestFor: 'Spills, Odors, Kids' },
-      { name: 'Headlight Restoration', desc: 'Multi-stage sanding, polishing, and ceramic sealing for oxidized headlights.', price: 'From €150', duration: '2 hrs', bestFor: 'Cloudy / Yellowed Lights' },
-      { name: 'Pre-Sale Preparation', desc: 'Full interior and exterior refinement to maximize presentation and resale value.', price: 'From €350', duration: '1 Day', bestFor: 'Selling / Consignment' },
+      { name: 'Interior Extraction', detail: 'Seat, carpet & panel deep clean', price: 'from €220' },
+      { name: 'Odour Elimination', detail: 'Ozone + enzyme treatment', price: 'from €160' },
+      { name: 'Headlight Restoration', detail: 'UV polish + sealant', price: 'from €80' },
+      { name: 'Pre-Sale Preparation', detail: 'Full inspection + detail package', price: 'from €350' },
     ],
   },
 ];
 
 export default function Services() {
   return (
-    <div className="bg-[#050505]">
+    <div className="bg-[var(--black)]">
 
-      {/* Header hero */}
-      <section className="relative pt-40 pb-20 border-b border-[rgba(255,255,255,0.06)] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=1920"
-            alt="Premium Detailing"
-            className="w-full h-full object-cover opacity-25"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
-          <div className="grain-overlay" />
-        </div>
-        <div className="site-container relative z-10">
-          <span className="eyebrow">Our Disciplines</span>
-          <h1 className="display-xl max-w-4xl">
-            Mastery in<br />
-            <span className="text-[#CFCFCF] font-light">every detail.</span>
-          </h1>
+      {/* Page header */}
+      <section className="relative pt-40 pb-24 border-b border-[var(--border)] overflow-hidden">
+        <div className="site-container">
+          <FadeUp>
+            <p className="type-label mb-6">What We Do</p>
+          </FadeUp>
+          <RevealText as="h1" className="type-display max-w-3xl">
+            Bespoke Services
+          </RevealText>
+          <RevealText as="h1" className="type-display max-w-3xl mb-10" delay={0.1}>
+            <em>for demanding clients.</em>
+          </RevealText>
+          <LineReveal delay={0.4} className="max-w-xs mb-10" />
+          <FadeUp delay={0.3} className="max-w-lg">
+            <p className="type-lead">
+              Four disciplines. One standard — flawless.
+              Every service is performed by appointment with full technician dedication.
+            </p>
+          </FadeUp>
         </div>
       </section>
 
-      {/* Categories */}
-      {catalog.map((cat, i) => (
+      {/* Service categories — full-bleed alternating */}
+      {CATEGORIES.map((cat, i) => (
         <section
           key={cat.id}
-          className={`border-b border-[rgba(255,255,255,0.06)] ${i % 2 === 1 ? 'bg-[#0D0D0D]' : 'bg-[#050505]'}`}
+          id={cat.id}
+          className="border-b border-[var(--border)]"
         >
-          {/* Real category image banner */}
-          <div className="relative h-48 md:h-64 overflow-hidden">
+          {/* Image banner */}
+          <div className="relative h-[50vh] min-h-[360px] overflow-hidden">
             <img
               src={cat.img}
-              alt={cat.title}
-              className="w-full h-full object-cover opacity-60 saturate-[0.85]"
-              loading="lazy"
+              alt={cat.name}
+              className="w-full h-full object-cover saturate-75"
+              loading={i === 0 ? 'eager' : 'lazy'}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
-            <div className="absolute inset-0 flex items-end">
-              <div className="site-container pb-6">
-                <h2 className="display-md text-white">{cat.title}</h2>
-                <p className="text-[#CFCFCF] font-light text-sm mt-1">{cat.headline}</p>
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-[var(--black)] via-[rgba(0,0,0,0.4)] to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--black)] via-transparent to-transparent" />
+
+            {/* Category title overlay */}
+            <div className="absolute bottom-0 left-0 site-container pb-10">
+              <span className="type-label mb-2 block">{cat.label}</span>
+              <h2 className="type-display text-4xl md:text-6xl">{cat.name}</h2>
             </div>
           </div>
 
-          <div className="site-container py-12 md:py-16">
-            <p className="body-sm max-w-xl mb-10">{cat.desc}</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[rgba(255,255,255,0.06)]">
-              {cat.services.map(svc => (
-                <div key={svc.name} className="service-card bg-[#050505] group flex flex-col">
-                  <div className="flex-grow">
-                    <div className="label-xs mb-4 flex items-center gap-2">
-                      <span className="w-4 h-px bg-[rgba(255,255,255,0.15)]" />
-                      {svc.bestFor}
-                    </div>
-                    <h3 className="text-white font-semibold text-base mb-3">{svc.name}</h3>
-                    <p className="body-sm text-xs leading-relaxed">{svc.desc}</p>
-                  </div>
-                  <div className="mt-8 pt-6 border-t border-[rgba(255,255,255,0.06)]">
-                    <div className="flex items-center justify-between mb-4">
+          {/* Details */}
+          <div className="site-container py-16 md:py-20">
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              {/* Left */}
+              <FadeUp>
+                <p className="type-label mb-4">{cat.tagline}</p>
+                <p className="type-lead mb-8">{cat.desc}</p>
+                <Link to="/booking" className="btn-primary">
+                  <span>Book This Service</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </FadeUp>
+
+              {/* Right — service list */}
+              <div>
+                {cat.services.map((svc, si) => (
+                  <FadeUp key={svc.name} delay={si * 0.08}>
+                    <div className="flex items-start justify-between py-5 border-b border-[var(--border)] group">
                       <div>
-                        <span className="label-xs block mb-1">From</span>
-                        <span className="text-white font-semibold text-sm">{svc.price}</span>
+                        <h3 className="text-white text-sm font-medium mb-1 group-hover:text-[var(--cyan)] transition-colors">
+                          {svc.name}
+                        </h3>
+                        <p className="type-body text-xs">{svc.detail}</p>
                       </div>
-                      <div className="text-right">
-                        <span className="label-xs block mb-1">Time</span>
-                        <span className="text-[#CFCFCF] text-sm">{svc.duration}</span>
-                      </div>
+                      <span className="type-label ml-6 whitespace-nowrap text-[10px]">{svc.price}</span>
                     </div>
-                    <Link to="/smart-quote" className="flex items-center justify-between w-full text-[#8A8A8A] hover:text-white transition-colors text-xs font-medium uppercase tracking-widest group">
-                      <span>Get Quote</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                  </FadeUp>
+                ))}
+              </div>
             </div>
           </div>
         </section>
       ))}
 
       {/* Bottom CTA */}
-      <section className="py-24 text-center">
-        <div className="site-container">
-          <h2 className="display-md mb-4">Need a custom package?</h2>
-          <p className="body-lead mb-8">Our advisor builds a plan tailored to your vehicle and goals.</p>
-          <Link to="/smart-quote" className="btn-primary">Build Your Plan</Link>
+      <section className="py-32">
+        <div className="site-container text-center">
+          <RevealText as="h2" className="type-display mb-10">
+            Not sure which service?
+          </RevealText>
+          <FadeUp delay={0.2} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/smart-quote" className="btn-primary">
+              <span>Start Smart Quote</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link to="/booking" className="btn-ghost">
+              Book Consultation
+            </Link>
+          </FadeUp>
         </div>
       </section>
-
     </div>
   );
 }

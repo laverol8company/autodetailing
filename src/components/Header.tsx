@@ -1,13 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { X, Menu } from 'lucide-react';
 
-const NAV = [
-  { label: 'Services', to: '/services' },
+const LINKS = [
+  { label: 'Services',    to: '/services' },
   { label: 'Smart Quote', to: '/smart-quote' },
-  { label: 'Booking', to: '/booking' },
-  { label: 'Proof', to: '/proof' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Our Work',   to: '/proof' },
+  { label: 'Booking',    to: '/booking' },
+  { label: 'Contact',    to: '/contact' },
 ];
 
 export function Header() {
@@ -16,109 +16,99 @@ export function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const handler = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => setOpen(false), [location.pathname]);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#050505]/95 backdrop-blur-md border-b border-[rgba(255,255,255,0.06)]' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'bg-[rgba(0,0,0,0.92)] backdrop-blur-md border-b border-[var(--border)]'
+            : 'bg-transparent'
         }`}
       >
-        <div className="site-container flex items-center justify-between h-20">
+        <div className="site-container flex items-center justify-between h-16 md:h-20">
 
-          {/* Brand */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group flex-shrink-0">
-            <div className="w-8 h-8 bg-white flex items-center justify-center">
-              <span className="text-black font-black text-[11px] tracking-tighter">GC</span>
+            <div className="w-8 h-8 border border-[var(--cyan)] flex items-center justify-center">
+              <span className="font-mono text-[10px] font-bold tracking-widest text-[var(--cyan)]">GC</span>
             </div>
-            <span className="text-white font-semibold text-sm tracking-widest uppercase hidden sm:block">
+            <span className="hidden sm:block font-body text-xs tracking-[0.2em] uppercase text-white font-medium">
               General Cars
             </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-10">
-            {NAV.map(n => (
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {LINKS.map(l => (
               <Link
-                key={n.to}
-                to={n.to}
-                className={`nav-link ${location.pathname === n.to ? 'active' : ''}`}
+                key={l.to}
+                to={l.to}
+                className={`nav-link ${location.pathname === l.to ? 'active' : ''}`}
               >
-                {n.label}
+                {l.label}
               </Link>
             ))}
           </nav>
 
-          {/* Desktop Right */}
-          <div className="hidden md:flex items-center gap-6">
-            <Link to="/system-preview" className="label-xs text-[#8A8A8A]/50 hover:text-[#8A8A8A] transition-colors">
-              Owner
-            </Link>
-            <Link to="/smart-quote" className="btn-primary text-xs px-6 py-3">
-              Get a Quote
+          {/* Desktop CTA */}
+          <div className="hidden md:block">
+            <Link to="/booking" className="btn-primary py-2.5 px-6 text-[10px]">
+              <span>Book Now</span>
             </Link>
           </div>
 
-          {/* Mobile Toggle */}
+          {/* Mobile hamburger */}
           <button
-            onClick={() => setOpen(v => !v)}
-            className="md:hidden text-white p-2 -mr-2"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen(o => !o)}
+            className="md:hidden w-10 h-10 flex items-center justify-center text-white"
+            aria-label="Toggle menu"
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <Menu className="w-5 h-5" />
           </button>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile fullscreen overlay */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-[200] bg-black flex flex-col transition-all duration-500 ${
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Backdrop */}
-        <div className="absolute inset-0 bg-[#050505]" onClick={() => setOpen(false)} />
-        
-        {/* Drawer content */}
-        <div className="absolute top-20 left-0 right-0 bottom-0 flex flex-col px-6 pt-8 pb-12 gap-0">
-          {NAV.map((n, i) => (
+        <div className="site-container flex items-center justify-between h-16">
+          <span className="type-label cyan">Menu</span>
+          <button
+            onClick={() => setOpen(false)}
+            className="w-10 h-10 flex items-center justify-center text-white"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <nav className="flex flex-col justify-center flex-1 site-container gap-8 pb-20">
+          {LINKS.map((l, i) => (
             <Link
-              key={n.to}
-              to={n.to}
-              className={`text-2xl font-semibold text-white py-4 border-b border-[rgba(255,255,255,0.06)] block transition-opacity ${
-                open ? 'opacity-100' : 'opacity-0'
-              }`}
-              style={{ transitionDelay: open ? `${i * 60}ms` : '0ms' }}
+              key={l.to}
+              to={l.to}
+              style={{ transitionDelay: open ? `${i * 0.07}s` : '0s' }}
+              className={`type-headline transition-all duration-500 ${
+                open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-6'
+              } hover:text-[var(--cyan)] transition-colors`}
             >
-              {n.label}
+              {l.label}
             </Link>
           ))}
-          <Link
-            to="/system-preview"
-            className="text-base text-[#8A8A8A] py-4 border-b border-[rgba(255,255,255,0.06)] block"
-          >
-            System Preview
+          <Link to="/booking" className="btn-primary mt-4 w-fit">
+            <span>Book Now</span>
           </Link>
-          <div className="mt-auto flex flex-col gap-3 pt-8">
-            <Link to="/smart-quote" className="btn-primary justify-center">
-              Get a Quote
-            </Link>
-            <a
-              href="https://wa.me/something"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost justify-center"
-            >
-              WhatsApp
-            </a>
-          </div>
-        </div>
+        </nav>
       </div>
     </>
   );
