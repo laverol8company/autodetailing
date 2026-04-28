@@ -83,10 +83,9 @@ export default function Home() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover saturate-50 brightness-75"
+            className="w-full h-full object-cover saturate-[0.65] brightness-50"
           >
-            {/* High-quality cinematic car edit placeholder (since no local video was provided, this is a premium placeholder. Can be swapped with actual RR Cullinan edit) */}
-            <source src="https://cdn.coverr.co/videos/coverr-a-black-sports-car-9226/1080p.mp4" type="video/mp4" />
+            <source src="/hero-video.mp4" type="video/mp4" />
           </video>
         </div>
 
