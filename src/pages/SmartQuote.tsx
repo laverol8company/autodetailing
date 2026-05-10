@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+
 import { supabase } from '../lib/supabase';
 import { calculateQuoteEstimate, QuoteEstimateResult } from '../lib/quoteEstimate';
 import { ArrowLeft, ArrowRight, CheckCircle2, User, Phone, Calendar, MessageSquare } from 'lucide-react';
@@ -48,11 +48,11 @@ function getReasonNote(answers: Record<string, string>): string {
   }
   if (svc === 'Paint Correction') {
     if (cond === 'High') return 'Given the visible scratches and heavy swirls, a full two-stage correction is necessary to fully restore paint clarity.';
-    return 'A single-stage polish will remove the light marks and restore your paint\\'s natural depth and gloss.';
+    return "A single-stage polish will remove the light marks and restore your paint's natural depth and gloss.";
   }
   if (svc === 'PPF / Paint Protection Film') return 'PPF provides self-healing, impact-resistant protection. Essential for daily-driven or performance vehicles.';
   if (svc === 'Interior Detailing') return 'A thorough extraction and conditioning treatment will refresh every surface, fabric, and leather panel in your vehicle.';
-  return 'Based on your vehicle\\'s size and condition, this is the most suitable package for the outcome you\\'re looking for.';
+  return "Based on your vehicle's size and condition, this is the most suitable package for the outcome you're looking for.";
 }
 
 export default function SmartQuote() {
