@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 import { calculateQuoteEstimate, QuoteEstimateResult } from '../lib/quoteEstimate';
 import { ArrowLeft, ArrowRight, CheckCircle2, User, Phone, Calendar, MessageSquare } from 'lucide-react';
 import { WhatsAppCTA } from '../components/WhatsAppCTA';
@@ -82,10 +83,42 @@ export default function SmartQuote() {
     }, 180);
   }
 
-  function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleContactSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setContactStatus('sending');
-    setTimeout(() => setContactStatus('sent'), 1000);
+
+    const formData = new FormData(e.currentTarget);
+    const fullName = formData.get('name') as string;
+    const phone = formData.get('phone') as string;
+    const preferredDate = formData.get('date') as string;
+    const notes = formData.get('message') as string;
+
+    try {
+      const { error } = await supabase
+        .from('leads_autodetailing_test')
+        .insert([
+          {
+            name: fullName,
+            phone: phone,
+            preferred_date: preferredDate || null,
+            notes: notes || null,
+            vehicle_size: answers['size'],
+            paint_condition: answers['condition'],
+            service_type: answers['service'],
+            package_level: answers['package'],
+            estimated_price: estimate?.estimatedPriceRange || 'Custom Quote',
+            estimated_duration: estimate?.estimatedDuration || 'TBD',
+            status: 'new'
+          }
+        ]);
+
+      if (error) throw error;
+      setContactStatus('sent');
+    } catch (err) {
+      console.error('Error saving lead:', err);
+      alert('Something went wrong. Please try again.');
+      setContactStatus('idle');
+    }
   }
 
   function goBack()  { setStep(step - 1); setSelected(null); scrollCard(); }
